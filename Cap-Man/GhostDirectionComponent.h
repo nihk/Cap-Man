@@ -3,5 +3,6 @@ class GhostDirectionComponent {
 public:
 	GhostDirectionComponent();
 	~GhostDirectionComponent();
+
 };
 
