@@ -3,7 +3,7 @@
 #include "Sprite.h"
 #include "Drawable.h"
 
-class Rectangle;
+class Rect;
 class Renderer;
 
 class Animation 
@@ -12,18 +12,16 @@ public:
 	Animation(int spriteIntervalMillis);
 	~Animation();
 
-	// TODO: unique_ptr instead?
 	void addSprite(Sprite sprite) { mSprites.push_back(sprite); }
 
 	void reset();
 	void update(float delta);
-	void draw(Renderer& renderer, const Rectangle& dest) override;
+	void draw(Renderer& renderer, const Rect& dest) override;
 
 private:
 	unsigned mSpriteIntervalMillis;
 	unsigned mTimeSpentBetweenSpriteChange;
 	unsigned mCurrentSpriteIndex;
-	// TODO: unique_ptr?
 	std::vector<Sprite> mSprites;
 };
 

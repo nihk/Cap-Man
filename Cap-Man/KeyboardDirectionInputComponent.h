@@ -1,5 +1,5 @@
 #pragma once
-#include "Globals.h"
+#include "Constants.h"
 #include "DirectionInputComponent.h"
 
 class Keyboard;

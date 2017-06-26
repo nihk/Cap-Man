@@ -7,11 +7,6 @@ Animation::Animation(int spriteIntervalMillis)
 }
 
 Animation::~Animation() {
-	//for (auto& sprite : mSprites) {
-	//	delete sprite;
-	//}
-
-	//mSprites.clear();
 }
 
 void Animation::reset() {
@@ -28,6 +23,6 @@ void Animation::update(float delta) {
 	}
 }
 
-void Animation::draw(Renderer& renderer, const Rectangle& dest) {
+void Animation::draw(Renderer& renderer, const Rect& dest) {
 	mSprites[mCurrentSpriteIndex].draw(renderer, dest);
 }

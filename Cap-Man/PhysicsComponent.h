@@ -1,19 +1,19 @@
 #pragma once
 #include "Component.h"
-#include "Rectangle.h"
+#include "Rect.h"
 
 class PhysicsComponent 
 	: public Component<PhysicsComponent> {
 public:
 	PhysicsComponent(int x, int y, int w, int h);
-	PhysicsComponent(Rectangle rectangle);
+	PhysicsComponent(Rect rect);
 	~PhysicsComponent();
 
-	Rectangle rectangle() const { return mRectangle; }
-	void setRectangle(Rectangle rectangle) { mRectangle = rectangle; }
+	Rect rect() const { return mRect; }
+	void setRect(Rect rect) { mRect = rect; }
 	void moveBy(int dx, int dy);
 
 private:
-	Rectangle mRectangle;
+	Rect mRect;
 };
 

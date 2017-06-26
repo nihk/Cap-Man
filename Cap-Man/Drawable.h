@@ -1,11 +1,11 @@
 #pragma once
 
 class Renderer;
-class Rectangle;
+class Rect;
 
 class Drawable {
 public:
 	virtual ~Drawable() = default;
 
-	virtual void draw(Renderer& renderer, const Rectangle& dest) = 0;
+	virtual void draw(Renderer& renderer, const Rect& dest) = 0;
 };

@@ -150,8 +150,10 @@
     <ClCompile Include="CollisionComponent.cpp" />
     <ClCompile Include="Color.cpp" />
     <ClCompile Include="ColorGraphicsComponent.cpp" />
+    <ClCompile Include="DirectionAnimationSystem.cpp" />
     <ClCompile Include="DrawSystem.cpp" />
     <ClCompile Include="Game.cpp" />
+    <ClCompile Include="GameEntities.cpp" />
     <ClCompile Include="GameEvents.cpp" />
     <ClCompile Include="GhostDirectionComponent.cpp" />
     <ClCompile Include="Keyboard.cpp" />
@@ -162,11 +164,12 @@
     <ClCompile Include="MoveSystem.cpp" />
     <ClCompile Include="PhysicsComponent.cpp" />
     <ClCompile Include="Point.cpp" />
-    <ClCompile Include="Rectangle.cpp" />
+    <ClCompile Include="Rect.cpp" />
     <ClCompile Include="Renderer.cpp" />
     <ClCompile Include="SpeedSystem.cpp" />
     <ClCompile Include="Sprite.cpp" />
     <ClCompile Include="SpriteGraphicsComponent.cpp" />
+    <ClCompile Include="SpriteRepository.cpp" />
     <ClCompile Include="Surface.cpp" />
     <ClCompile Include="System.cpp" />
     <ClCompile Include="TestAnimation.cpp" />
@@ -188,12 +191,13 @@
     <ClInclude Include="ColorGraphicsComponent.h" />
     <ClInclude Include="Component.h" />
     <ClInclude Include="ComponentStore.h" />
+    <ClInclude Include="DirectionAnimationSystem.h" />
     <ClInclude Include="DirectionInputComponent.h" />
     <ClInclude Include="Drawable.h" />
     <ClInclude Include="DrawSystem.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="GhostDirectionComponent.h" />
-    <ClInclude Include="Globals.h" />
+    <ClInclude Include="Constants.h" />
     <ClInclude Include="GraphicsComponent.h" />
     <ClInclude Include="Keyboard.h" />
     <ClInclude Include="KeyboardDirectionInputComponent.h" />
@@ -202,11 +206,12 @@
     <ClInclude Include="MoveSystem.h" />
     <ClInclude Include="PhysicsComponent.h" />
     <ClInclude Include="Point.h" />
-    <ClInclude Include="Rectangle.h" />
+    <ClInclude Include="Rect.h" />
     <ClInclude Include="Renderer.h" />
     <ClInclude Include="SpeedSystem.h" />
     <ClInclude Include="Sprite.h" />
     <ClInclude Include="SpriteGraphicsComponent.h" />
+    <ClInclude Include="SpriteRepository.h" />
     <ClInclude Include="Surface.h" />
     <ClInclude Include="System.h" />
     <ClInclude Include="Texture.h" />
@@ -221,6 +226,10 @@
   </ItemGroup>
   <ItemGroup>
     <Xml Include="capman_map.xml" />
+    <Xml Include="capman_spriteatlas.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="capman_spritesheet.png" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

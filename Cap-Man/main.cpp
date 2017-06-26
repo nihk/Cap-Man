@@ -4,7 +4,7 @@
 #include <SDL.h>
 #include "catch.hpp"
 #include "Game.h"
-#include "Globals.h"
+#include "Constants.h"
 
 int main(int argc, char** argv) {
 	if (Testing::IS_UNIT_TESTING) {

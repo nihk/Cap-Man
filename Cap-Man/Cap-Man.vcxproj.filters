@@ -72,9 +72,6 @@
     <ClCompile Include="Window.cpp">
       <Filter>Source Files\Wrappers for SDL</Filter>
     </ClCompile>
-    <ClCompile Include="Rectangle.cpp">
-      <Filter>Source Files\Wrappers for SDL</Filter>
-    </ClCompile>
     <ClCompile Include="Point.cpp">
       <Filter>Source Files\Wrappers for SDL</Filter>
     </ClCompile>
@@ -141,6 +138,18 @@
     <ClCompile Include="GhostDirectionComponent.cpp">
       <Filter>Source Files\Components</Filter>
     </ClCompile>
+    <ClCompile Include="SpriteRepository.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Rect.cpp">
+      <Filter>Source Files\Wrappers for SDL</Filter>
+    </ClCompile>
+    <ClCompile Include="GameEntities.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="DirectionAnimationSystem.cpp">
+      <Filter>Source Files\Systems</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="UID.h">
@@ -164,9 +173,6 @@
     <ClInclude Include="ComponentStore.h">
       <Filter>Header Files\Components</Filter>
     </ClInclude>
-    <ClInclude Include="Globals.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Game.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -180,9 +186,6 @@
       <Filter>Header Files\Wrappers for SDL</Filter>
     </ClInclude>
     <ClInclude Include="Window.h">
-      <Filter>Header Files\Wrappers for SDL</Filter>
-    </ClInclude>
-    <ClInclude Include="Rectangle.h">
       <Filter>Header Files\Wrappers for SDL</Filter>
     </ClInclude>
     <ClInclude Include="Point.h">
@@ -257,10 +260,30 @@
     <ClInclude Include="GhostDirectionComponent.h">
       <Filter>Header Files\Components</Filter>
     </ClInclude>
+    <ClInclude Include="SpriteRepository.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Constants.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Rect.h">
+      <Filter>Header Files\Wrappers for SDL</Filter>
+    </ClInclude>
+    <ClInclude Include="DirectionAnimationSystem.h">
+      <Filter>Header Files\Systems</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Xml Include="capman_map.xml">
       <Filter>Resource Files</Filter>
     </Xml>
+    <Xml Include="capman_spriteatlas.xml">
+      <Filter>Resource Files</Filter>
+    </Xml>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="capman_spritesheet.png">
+      <Filter>Resource Files</Filter>
+    </Image>
   </ItemGroup>
 </Project>

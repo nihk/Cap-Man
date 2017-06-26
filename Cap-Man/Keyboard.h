@@ -1,6 +1,6 @@
 #pragma once
 #include <cstdint>
-#include "Globals.h"
+#include "Constants.h"
 
 // Not a wrapper of an SDL struct per se, but does initialize
 // it's mKeys member via an SDL function

@@ -16,11 +16,11 @@ void Surface::setColorKey(const Color& color) const {
 }
 
 int Surface::width() const {
-	return mSdlSurface ? mSdlSurface->w : -1;
+	return mSdlSurface->w;
 }
 
 int Surface::height() const {
-	return mSdlSurface ? mSdlSurface->h : -1;
+	return mSdlSurface->h;
 }
 
 Surface::~Surface() {

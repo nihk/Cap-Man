@@ -1,5 +1,5 @@
 #include "Color.h"
-#include "Globals.h"
+#include "Constants.h"
 
 Color::Color() 
 	: Color(Colors::BLACK) {

@@ -1,6 +1,6 @@
 #include <iostream>
 #include "Map.h"
-#include "Globals.h"
+#include "Constants.h"
 #include "tinyxml2.h"
 
 const std::string Map::ROOT_XML_TAG = "map";
@@ -17,7 +17,7 @@ const std::string Map::ITEM_KEY_ATTR = "key";
 const std::string Map::ITEM_VALUE_ATTR = "value";
 
 Map::Map() 
-	: mActiveScale(Scale::SMALL)
+	: mActiveScale(Scale::MEDIUM)
 	, mRows(-1)
 	, mColumns(-1) {
 }
@@ -123,15 +123,18 @@ int Map::getMapElement(int x, int y) {
 	return mLayout.at(index);
 }
 
+//Point Map::getStartLocation(StartLocation startLocation) const {
+//}
+
 int Map::indexOf(int element) {
 	// TODO
 	return -1;
 }
 
-int Map::width() const {
+int Map::widthPixels() const {
 	return mScales.at(mActiveScale) * mColumns;
 }
 
-int Map::height() const {
+int Map::heightPixels() const {
 	return mScales.at(mActiveScale) * mRows;
 }

@@ -1,14 +1,22 @@
 #include "SpriteGraphicsComponent.h"
 #include "Renderer.h"
 
-SpriteGraphicsComponent::SpriteGraphicsComponent(Animation animation)
-	: mAnimation(animation) {
+SpriteGraphicsComponent::SpriteGraphicsComponent(std::unordered_map<AnimationStates::AnimationState, Animation> animations, int initialState)
+	: mAnimations(animations)
+	, mState(initialState) {
 }
 
 SpriteGraphicsComponent::~SpriteGraphicsComponent() {
 }
 
-void SpriteGraphicsComponent::draw(Renderer& renderer, const Rectangle& dest) {
-	mAnimation.draw(renderer, dest);
+void SpriteGraphicsComponent::update(float delta, int state) {
+	if (mState != state) {
+		mState = state;
+	}
+	mAnimations.at(mState).update(delta);
+}
+
+void SpriteGraphicsComponent::draw(Renderer& renderer, const Rect& dest) {
+	mAnimations.at(mState).draw(renderer, dest);
 }
 

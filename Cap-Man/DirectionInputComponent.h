@@ -1,6 +1,6 @@
 #pragma once
 #include "Component.h"
-#include "Globals.h"
+#include "Constants.h"
 
 class DirectionInputComponent
 	: public Component<DirectionInputComponent> {

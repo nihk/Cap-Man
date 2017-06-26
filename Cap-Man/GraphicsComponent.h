@@ -2,7 +2,7 @@
 
 #include "Component.h"
 #include "Renderer.h"
-#include "Rectangle.h"
+#include "Rect.h"
 #include "Drawable.h"
 
 class GraphicsComponent
@@ -12,6 +12,7 @@ public:
 	GraphicsComponent() = default;
 	~GraphicsComponent() = default;
 
-	void draw(Renderer& renderer, const Rectangle& dest) override { /* Stub */ }
+	virtual void update(float delta, int state) { /* stub */}
+	void draw(Renderer& renderer, const Rect& dest) override { /* Stub */ }
 };
 

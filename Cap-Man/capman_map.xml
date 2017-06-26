@@ -9,12 +9,12 @@
 	<legend>
 		<item key="0" value="empty_space" />
 		<item key="1" value="wall" />
-		<item key="2" value="pacman_start" />
-		<item key="3" value="inky_start" />
-		<item key="4" value="blinky_start" />
-		<item key="5" value="pinky_start" />
-		<item key="6" value="clyde_start" />
-		<item key="7" value="ghost_gate" />
+		<item key="2" value="capManStart" />
+		<item key="3" value="inkyStart" />
+		<item key="4" value="blinkyStart" />
+		<item key="5" value="pinkyStart" />
+		<item key="6" value="clydeStart" />
+		<item key="7" value="ghostGate" />
 		<item key="8" value="pellet" />
 		<item key="9" value="powerup" />
 	</legend>

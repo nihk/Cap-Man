@@ -1,17 +1,20 @@
 #pragma once
 #include "GraphicsComponent.h"
 #include "Animation.h"
+#include <unordered_map>
+#include "DirectionInputComponent.h"
 
 class SpriteGraphicsComponent
 	: public GraphicsComponent {
 public:
-	// TODO: unique_ptr instead?
-	SpriteGraphicsComponent(Animation animation);
+	SpriteGraphicsComponent(std::unordered_map<AnimationStates::AnimationState, Animation> animations, int initialState);
 	~SpriteGraphicsComponent();
 
-	void draw(Renderer& renderer, const Rectangle& dest) override;
+	void update(float delta, int state) override;
+	void draw(Renderer& renderer, const Rect& dest) override;
 
 private:
-	Animation mAnimation;
+	std::unordered_map<int, Animation> mAnimations;
+	int mState;
 };
 

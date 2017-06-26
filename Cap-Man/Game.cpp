@@ -1,7 +1,7 @@
 #include <iostream>
 #include <SDL.h>
 #include "Game.h"
-#include "Globals.h"
+#include "Constants.h"
 #include <SDL_image.h>
 #include "VelocityComponent.h"
 #include "PhysicsComponent.h"
@@ -12,6 +12,7 @@
 #include "DrawSystem.h"
 #include "ColorGraphicsComponent.h"
 #include "KeyboardDirectionInputComponent.h"
+#include "DirectionAnimationSystem.h"
 
 Game::Game()
 	: mShouldQuit(false) {
@@ -63,7 +64,7 @@ bool Game::initialize() {
 		return false;
 	}
 
-	if (!mWindow.initialize(mMap.width(), mMap.height())) {
+	if (!mWindow.initialize(mMap.widthPixels(), mMap.heightPixels())) {
 		std::cerr << "Error: Failed to initialize window: " << SDL_GetError() << std::endl;
 		return false;
 	}
@@ -78,13 +79,17 @@ bool Game::initialize() {
 		return false;
 	}
 
+	if (!mSpriteRepository.initialize(mRenderer, Metadata::SPRITES_FILENAME, Metadata::SPRITE_ATLAS_FILENAME)) {
+		std::cerr << "Error: Failed to initialize sprite repository: " << std::endl;
+		return false;
+	}
+
 	load();
 
 	return true;
 }
 
 void Game::load() {
-	// TODO: Move this into a factory class
 	mManager.createComponentStore<DirectionInputComponent>();
 	mManager.createComponentStore<VelocityComponent>();
 	mManager.createComponentStore<PhysicsComponent>();
@@ -93,16 +98,13 @@ void Game::load() {
 	// Order matters here
 	mManager.addSystem(std::make_shared<SpeedSystem>(mManager));
 	mManager.addSystem(std::make_shared<MoveSystem>(mManager));
+	mManager.addSystem(std::make_shared<DirectionAnimationSystem>(mManager));
 	mManager.addSystem(std::make_shared<DrawSystem>(mManager, mRenderer));
 
-	int pacman = mManager.createEntity();
-
-	mManager.addComponent(pacman, KeyboardDirectionInputComponent(mKeyboard, Directions::RIGHT));
-	mManager.addComponent(pacman, VelocityComponent(Velocity(GameConstants::CHARACTER_SPEED, 0.0f), GameConstants::CHARACTER_SPEED));
-	mManager.addComponent(pacman, PhysicsComponent(50, 50, mMap.unitFactor(), mMap.unitFactor()));
-	mManager.addComponent(pacman, ColorGraphicsComponent(Colors::MAGENTA));
-
-	mManager.registerEntity(pacman);
+	if (!createEntities()) {
+		std::cerr << "Error: Failed to create entities: " << std::endl;
+		return;
+	}
 }
 
 void Game::update(float delta) {
@@ -115,7 +117,7 @@ void Game::update(float delta) {
 }
 
 void Game::unload() {
-	// Stub
+	// TODO: Remove all entities from mManager
 }
 
 void Game::shutdown() {

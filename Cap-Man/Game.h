@@ -7,6 +7,7 @@
 #include "Color.h"
 #include "Keyboard.h"
 #include "Map.h"
+#include "SpriteRepository.h"
 
 class Game {
 public:
@@ -26,15 +27,17 @@ private:
 
 	Manager		mManager;
 	Map			mMap;
+	SpriteRepository	mSpriteRepository;
 
 	bool		initialize();
 	void		load();
+	bool		createEntities();
 	void		unload();
 	void		shutdown();
 	void		onQuit();
 	void		update(float delta);
 
-	// TODO: Can/should these be wrapped efficiently into their own class(es)?
+	// TODO: Can/should these be wrapped into their own class(es)?
 	void		processEvents();
 	void		onKeyDown(const SDL_KeyboardEvent* kbe);
 	void		onKeyUp(const SDL_KeyboardEvent* kbe);

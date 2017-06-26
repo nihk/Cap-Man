@@ -1,5 +1,5 @@
 #include "Window.h"
-#include "Globals.h"
+#include "Constants.h"
 #include <SDL.h>
 
 Window::Window() 

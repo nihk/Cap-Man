@@ -17,5 +17,5 @@ void DrawSystem::updateEntity(float delta, int entity) {
 	PhysicsComponent& physicsComponent = mManager.getComponent<PhysicsComponent>(entity);
 	GraphicsComponent& graphicsComponent = mManager.getComponent<GraphicsComponent>(entity);
 
-	graphicsComponent.draw(mRenderer, physicsComponent.rectangle());
+	graphicsComponent.draw(mRenderer, physicsComponent.rect());
 }

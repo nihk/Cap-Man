@@ -19,14 +19,14 @@ Directions::Direction KeyboardDirectionInputComponent::direction() {
 
 	switch (recentKeyDown) {
 		case Keys::UP:
-		case Keys::W:		mDirection = Directions::UP;		break;
+		case Keys::W:		mDirection = Directions::UP;	break;
 		case Keys::DOWN:
 		case Keys::S:		mDirection = Directions::DOWN;	break;
 		case Keys::LEFT:
 		case Keys::A:		mDirection = Directions::LEFT;	break;
 		case Keys::RIGHT:
 		case Keys::D:		mDirection = Directions::RIGHT;	break;
-		default:													break;
+		default:											break;
 	}
 
 	return mDirection;
