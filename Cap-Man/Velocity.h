@@ -2,6 +2,7 @@
 class Velocity {
 public:
 	Velocity();
+	Velocity(int vx, int vy);
 	Velocity(float vx, float vy);
 	Velocity(const Velocity& vec);
 	~Velocity();

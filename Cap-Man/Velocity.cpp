@@ -4,6 +4,10 @@ Velocity::Velocity()
 	: Velocity(0.0f, 0.0f) {
 }
 
+Velocity::Velocity(int vx, int vy) 
+	: Velocity(static_cast<float>(vx), static_cast<float>(vy)) {
+}
+
 Velocity::Velocity(float vx, float vy)
 	: mVelocityX(vx)
 	, mVelocityY(vy) {

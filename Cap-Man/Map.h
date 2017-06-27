@@ -9,7 +9,7 @@
 // locality.
 class Map {
 public:
-	enum class Scale { SMALL, MEDIUM, LARGE };
+	enum class Scale { SMALL, LARGE };
 	enum class StartLocation { CAP_MAN, INKY, BLINKY, PINKY, CLYDE };
 
 	Map();
@@ -26,14 +26,14 @@ public:
 	int heightPixels() const;
 	void setScale(Scale scale) { mActiveScale = scale; }
 	Scale scale() const { return mActiveScale; }
-	int unitFactor() const { return mScales.at(mActiveScale); }
+	int unitPixels(int numUnits) const;
 
 private:
 	static const std::string ROOT_XML_TAG;
-	static const std::string UNITS_FACTOR_XML_TAG;
-	static const std::string SMALL_FACTOR_XML_TAG;
-	static const std::string MEDIUM_FACTOR_XML_TAG;
-	static const std::string LARGE_FACTOR_XML_TAG;
+	static const std::string UNIT_PIXEL_SIZE_XML_TAG;
+	static const std::string UNIT_SCALE_XML_TAG;
+	static const std::string SMALL_SCALE_XML_TAG;
+	static const std::string LARGE_SCALE_XML_TAG;
 	static const std::string LAYOUT_XML_TAG;
 	static const std::string LAYOUT_ROWS_ATTR;
 	static const std::string LAYOUT_COLUMNS_ATTR;
@@ -43,6 +43,7 @@ private:
 	static const std::string ITEM_VALUE_ATTR;
 
 	std::unordered_map<int, std::string> mLegend;
+	int mUnitPixelSize;
 	std::unordered_map<Scale, int> mScales;
 	Scale mActiveScale;
 	std::vector<int> mLayout;

@@ -4,10 +4,10 @@
 #include "tinyxml2.h"
 
 const std::string Map::ROOT_XML_TAG = "map";
-const std::string Map::UNITS_FACTOR_XML_TAG = "unitsFactor";
-const std::string Map::SMALL_FACTOR_XML_TAG = "small";
-const std::string Map::MEDIUM_FACTOR_XML_TAG = "medium";
-const std::string Map::LARGE_FACTOR_XML_TAG = "large";
+const std::string Map::UNIT_PIXEL_SIZE_XML_TAG = "unitPixelSize";
+const std::string Map::UNIT_SCALE_XML_TAG = "unitScale";
+const std::string Map::SMALL_SCALE_XML_TAG = "small";
+const std::string Map::LARGE_SCALE_XML_TAG = "large";
 const std::string Map::LAYOUT_XML_TAG = "layout";
 const std::string Map::LAYOUT_ROWS_ATTR = "rows";
 const std::string Map::LAYOUT_COLUMNS_ATTR = "columns";
@@ -16,8 +16,9 @@ const std::string Map::ITEM_XML_TAG = "item";
 const std::string Map::ITEM_KEY_ATTR = "key";
 const std::string Map::ITEM_VALUE_ATTR = "value";
 
-Map::Map() 
-	: mActiveScale(Scale::MEDIUM)
+Map::Map()
+	: mUnitPixelSize(-1)
+	, mActiveScale(Scale::SMALL)
 	, mRows(-1)
 	, mColumns(-1) {
 }
@@ -39,44 +40,43 @@ bool Map::initialize(std::string fileName) {
 		return false;
 	}
 
-	tinyxml2::XMLElement* unitsFactor = root->FirstChildElement(UNITS_FACTOR_XML_TAG.data());
-	if (!unitsFactor) {
+	tinyxml2::XMLElement* unitPixelSize = root->FirstChildElement(UNIT_PIXEL_SIZE_XML_TAG.data());
+	if (!unitPixelSize) {
 		xmlDocument.PrintError();
-		std::cout << "Cannot find element <" << UNITS_FACTOR_XML_TAG << "> in " << fileName << std::endl;
+		std::cout << "Cannot find element <" << UNIT_PIXEL_SIZE_XML_TAG << "> in " << fileName << std::endl;
 		return false;
 	}
 
-	tinyxml2::XMLElement* smallFactor = unitsFactor->FirstChildElement(SMALL_FACTOR_XML_TAG.data());
-	if (!unitsFactor) {
+	tinyxml2::XMLElement* unitScale = unitPixelSize->NextSiblingElement(UNIT_SCALE_XML_TAG.data());
+	if (!unitScale) {
 		xmlDocument.PrintError();
-		std::cout << "Cannot find element <" << SMALL_FACTOR_XML_TAG << "> in " << fileName << std::endl;
+		std::cout << "Cannot find element <" << UNIT_SCALE_XML_TAG << "> in " << fileName << std::endl;
 		return false;
 	}
 
-	tinyxml2::XMLElement* mediumFactor = smallFactor->NextSiblingElement(MEDIUM_FACTOR_XML_TAG.data());
-	if (!unitsFactor) {
+	tinyxml2::XMLElement* smallFactor = unitScale->FirstChildElement(SMALL_SCALE_XML_TAG.data());
+	if (!smallFactor) {
 		xmlDocument.PrintError();
-		std::cout << "Cannot find element <" << MEDIUM_FACTOR_XML_TAG << "> in " << fileName << std::endl;
+		std::cout << "Cannot find element <" << SMALL_SCALE_XML_TAG << "> in " << fileName << std::endl;
 		return false;
 	}
 
-	tinyxml2::XMLElement* largeFactor = mediumFactor->NextSiblingElement(LARGE_FACTOR_XML_TAG.data());
-	if (!unitsFactor) {
+	tinyxml2::XMLElement* largeFactor = smallFactor->NextSiblingElement(LARGE_SCALE_XML_TAG.data());
+	if (!largeFactor) {
 		xmlDocument.PrintError();
-		std::cout << "Cannot find element <" << LARGE_FACTOR_XML_TAG << "> in " << fileName << std::endl;
+		std::cout << "Cannot find element <" << LARGE_SCALE_XML_TAG << "> in " << fileName << std::endl;
 		return false;
 	}
 
 	// Parse the scaling factor sizes
-	int small, medium, large;
+	int small, large;
+	unitPixelSize->QueryIntText(&mUnitPixelSize);
 	smallFactor->QueryIntText(&small);
-	mediumFactor->QueryIntText(&medium);
 	largeFactor->QueryIntText(&large);
 	mScales.insert_or_assign(Scale::SMALL, small);
-	mScales.insert_or_assign(Scale::MEDIUM, medium);
 	mScales.insert_or_assign(Scale::LARGE, large);
 
-	tinyxml2::XMLElement* layout = unitsFactor->NextSiblingElement(LAYOUT_XML_TAG.data());
+	tinyxml2::XMLElement* layout = unitScale->NextSiblingElement(LAYOUT_XML_TAG.data());
 	if (!layout) {
 		xmlDocument.PrintError();
 		std::cout << "Cannot find element <" << LAYOUT_XML_TAG << "> in " << fileName << std::endl;
@@ -132,9 +132,13 @@ int Map::indexOf(int element) {
 }
 
 int Map::widthPixels() const {
-	return mScales.at(mActiveScale) * mColumns;
+	return unitPixels(mColumns);
 }
 
 int Map::heightPixels() const {
-	return mScales.at(mActiveScale) * mRows;
+	return unitPixels(mRows);
+}
+
+int Map::unitPixels(int numUnits) const {
+	return numUnits * mScales.at(mActiveScale) * mUnitPixelSize;
 }

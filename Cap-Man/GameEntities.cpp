@@ -47,10 +47,12 @@ bool Game::createEntities() {
 	death.addSprite(mSpriteRepository.findSprite("capman_death10"));
 	death.addSprite(mSpriteRepository.findSprite("capman_death11"));
 	capManAnimations.insert_or_assign(AnimationStates::DEATH, death);
+	Velocity velocity(mMap.unitPixels(GameConstants::CHARACTER_UNITS_SPEED), 0);
+	float speed = static_cast<float>(mMap.unitPixels(GameConstants::CHARACTER_UNITS_SPEED));
 
 	mManager.addComponent(capMan, KeyboardDirectionInputComponent(mKeyboard, Directions::RIGHT));
-	mManager.addComponent(capMan, VelocityComponent(Velocity(GameConstants::CHARACTER_SPEED, 0.0f), GameConstants::CHARACTER_SPEED));
-	mManager.addComponent(capMan, PhysicsComponent(50, 50, mMap.unitFactor(), mMap.unitFactor()));
+	mManager.addComponent(capMan, VelocityComponent(velocity, speed));
+	mManager.addComponent(capMan, PhysicsComponent(50, 50, mMap.unitPixels(1), mMap.unitPixels(1)));
 	mManager.addComponent(capMan, SpriteGraphicsComponent(capManAnimations, AnimationStates::WALK_RIGHT));
 	mManager.registerEntity(capMan);
 

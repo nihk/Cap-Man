@@ -37,7 +37,7 @@ namespace Colors {
 }
 
 namespace Metadata {
-	const float FPS = 60.0f;
+	const float FPS = 30.0f;
 	const int MAX_FRAME_SKIPS = 6;
 
 	const std::string SPRITES_FILENAME = "capman_spritesheet.png";
@@ -47,16 +47,9 @@ namespace Metadata {
 }
 
 namespace GameConstants {
-	const float CHARACTER_SPEED = 125.0f;  // px/s TODO: Change to units/second, int
+	// TODO: Minimum movement speed at 60fps is 60px/s. Need to make an FPS independent velocity that can travel under 60px/s
+	const int CHARACTER_UNITS_SPEED = 4;  // units/sec
 	const int ANIMATION_FRAME_INTERVAL = 50;  // ms
-}
-
-namespace XmlConstants {
-	const std::string CAP_MAN = "capMan";
-	const std::string BLINKY = "blinky";
-	const std::string PINKY = "pinky";
-	const std::string INKY = "inky";
-	const std::string CLYDE = "clyde";
 }
 
 namespace AnimationStates {
