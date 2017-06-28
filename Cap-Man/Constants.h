@@ -37,29 +37,37 @@ namespace Colors {
 }
 
 namespace Metadata {
-	const float FPS = 30.0f;
-	const int MAX_FRAME_SKIPS = 6;
+	static const float FPS = 30.0f;
+	static const int MAX_FRAME_SKIPS = 6;
 
-	const std::string SPRITES_FILENAME = "capman_spritesheet.png";
-	const std::string SPRITE_ATLAS_FILENAME = "capman_spriteatlas.xml";
-	const std::string MAP_FILENAME = "capman_map.xml";
-	const std::string GAME_TITLE = "Cap-Man";
+	static const std::string SPRITES_FILENAME = "capman_spritesheet.png";
+	static const std::string SPRITE_ATLAS_FILENAME = "capman_spriteatlas.xml";
+	static const std::string MAP_FILENAME = "capman_map.xml";
+	static const std::string GAME_TITLE = "Cap-Man";
 }
 
 namespace GameConstants {
 	// TODO: Minimum movement speed at 60fps is 60px/s. Need to make an FPS independent velocity that can travel under 60px/s
-	const int CHARACTER_UNITS_SPEED = 4;  // units/sec
-	const int ANIMATION_FRAME_INTERVAL = 50;  // ms
+	static const int CHARACTER_UNITS_SPEED = 4;  // units/sec
+	static const int ANIMATION_FRAME_INTERVAL = 50;  // ms
+}
+
+namespace MapUniqueCharacterKeys {
+	static const int CAP_MAN = 2;
+	static const int INKY = 3;
+	static const int BLINKY = 4;
+	static const int PINKY = 5;
+	static const int CLYDE = 6;
 }
 
 namespace AnimationStates {
 	typedef int AnimationState;
 
-	const AnimationState DEFAULT = Directions::NONE;
-	const AnimationState WALK_LEFT = Directions::LEFT;
-	const AnimationState WALK_RIGHT = Directions::RIGHT;
-	const AnimationState WALK_DOWN = Directions::DOWN;
-	const AnimationState WALK_UP = Directions::UP;
-	const AnimationState DEATH = 1 << 4;
-	const AnimationState VULNERABLE = 1 << 5;
+	static const AnimationState DEFAULT = Directions::NONE;
+	static const AnimationState WALK_LEFT = Directions::LEFT;
+	static const AnimationState WALK_RIGHT = Directions::RIGHT;
+	static const AnimationState WALK_DOWN = Directions::DOWN;
+	static const AnimationState WALK_UP = Directions::UP;
+	static const AnimationState DEATH = 1 << 4;
+	static const AnimationState VULNERABLE = 1 << 5;
 }

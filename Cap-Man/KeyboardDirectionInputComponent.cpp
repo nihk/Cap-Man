@@ -6,6 +6,10 @@ KeyboardDirectionInputComponent::KeyboardDirectionInputComponent(Keyboard& keybo
 	, mDirection(startingDirection) {
 }
 
+KeyboardDirectionInputComponent::KeyboardDirectionInputComponent(const KeyboardDirectionInputComponent& other)
+	: KeyboardDirectionInputComponent(other.mKeyboard, other.mDirection) {
+}
+
 KeyboardDirectionInputComponent::~KeyboardDirectionInputComponent() {
 }
 

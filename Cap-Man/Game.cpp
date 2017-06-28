@@ -13,6 +13,8 @@
 #include "ColorGraphicsComponent.h"
 #include "KeyboardDirectionInputComponent.h"
 #include "DirectionAnimationSystem.h"
+#include "WallPathingSystem.h"
+#include "WallPathingComponent.h"
 
 Game::Game()
 	: mShouldQuit(false) {
@@ -94,10 +96,12 @@ void Game::load() {
 	mManager.createComponentStore<VelocityComponent>();
 	mManager.createComponentStore<PhysicsComponent>();
 	mManager.createComponentStore<GraphicsComponent>();
+	mManager.createComponentStore<WallPathingComponent>();
 
 	// Order matters here
 	mManager.addSystem(std::make_shared<SpeedSystem>(mManager));
 	mManager.addSystem(std::make_shared<MoveSystem>(mManager));
+	mManager.addSystem(std::make_shared<WallPathingSystem>(mManager));
 	mManager.addSystem(std::make_shared<DirectionAnimationSystem>(mManager));
 	mManager.addSystem(std::make_shared<DrawSystem>(mManager, mRenderer));
 

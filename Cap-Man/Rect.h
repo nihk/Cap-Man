@@ -2,7 +2,7 @@
 #include <SDL.h>
 #include "Point.h"
 
-// TODO: This should probably wrap floats for the x/y coords instead of ints. Otherwise it can only
+// TODO: This should probably wrap floats, too for the x/y coords instead of ints. Otherwise it can only
 // successfully move at a minimum of 1 pixel per game-time update.
 class Rect 
 	: public Wrapper<SDL_Rect> {

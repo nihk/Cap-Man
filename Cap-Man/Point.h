@@ -2,6 +2,7 @@
 #include <SDL.h>
 #include "Wrapper.h"
 
+// TODO: Wrap floats, too?
 class Point 
 	: public Wrapper<SDL_Point> {
 public:

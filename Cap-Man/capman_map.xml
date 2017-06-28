@@ -7,15 +7,15 @@
 	<!-- This is the map's layout represented as a one-liner -->
 	<layout rows="23" columns="21">000000000000000000000011111111111111111110018888888818888888810019118111818111811910018888888808888888810018118181111181811810018888188818881888810011118111010111811110000018100060001810000111118101171101811111000008001345100800000111118101111101811111000018100000001810000011118101111101811110018888888818888888810018118111818111811810019818888828888818910011818181111181818110018888188818881888810018111111818111111810018888888808888888810011111111111111111110000000000000000000000</layout>
 	<legend>
-		<item key="0" value="empty_space" />
-		<item key="1" value="wall" />
-		<item key="2" value="capManStart" />
-		<item key="3" value="inkyStart" />
-		<item key="4" value="blinkyStart" />
-		<item key="5" value="pinkyStart" />
-		<item key="6" value="clydeStart" />
-		<item key="7" value="ghostGate" />
-		<item key="8" value="pellet" />
-		<item key="9" value="powerup" />
+		<item key="empty_space" value="0" />
+		<item key="wall" value="1" />
+		<item key="capManStart" value="2" />
+		<item key="inkyStart" value="3" />
+		<item key="blinkyStart" value="4" />
+		<item key="pinkyStart" value="5" />
+		<item key="clydeStart" value="6" />
+		<item key="ghostGate" value="7" />
+		<item key="pellet" value="8" />
+		<item key="powerup" value="9" />
 	</legend>
 </map>

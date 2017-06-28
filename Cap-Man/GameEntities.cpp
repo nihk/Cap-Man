@@ -4,6 +4,7 @@
 #include "VelocityComponent.h"
 #include "KeyboardDirectionInputComponent.h"
 #include "SpriteGraphicsComponent.h"
+#include "WallPathingComponent.h"
 
 bool Game::createEntities() {
 	// Cap-Man
@@ -50,10 +51,14 @@ bool Game::createEntities() {
 	Velocity velocity(mMap.unitPixels(GameConstants::CHARACTER_UNITS_SPEED), 0);
 	float speed = static_cast<float>(mMap.unitPixels(GameConstants::CHARACTER_UNITS_SPEED));
 
+	int capManStart = mMap.indexOf(MapUniqueCharacterKeys::CAP_MAN);
+	Point startPoint = mMap.getMapLocation(capManStart, true /* scaleUnitsToPixels */);
+
 	mManager.addComponent(capMan, KeyboardDirectionInputComponent(mKeyboard, Directions::RIGHT));
 	mManager.addComponent(capMan, VelocityComponent(velocity, speed));
-	mManager.addComponent(capMan, PhysicsComponent(50, 50, mMap.unitPixels(1), mMap.unitPixels(1)));
+	mManager.addComponent(capMan, PhysicsComponent(startPoint.x(), startPoint.y(), mMap.unitPixels(1), mMap.unitPixels(1)));
 	mManager.addComponent(capMan, SpriteGraphicsComponent(capManAnimations, AnimationStates::WALK_RIGHT));
+	mManager.addComponent(capMan, WallPathingComponent(mMap));
 	mManager.registerEntity(capMan);
 
 	return true;

@@ -26,6 +26,8 @@ Map::Map()
 Map::~Map() {
 }
 
+// TODO: This classes calculation logic needs to be less dumbified
+
 bool Map::initialize(std::string fileName) {
 	tinyxml2::XMLDocument xmlDocument;
 	if (xmlDocument.LoadFile(fileName.data()) != tinyxml2::XML_NO_ERROR) {
@@ -109,8 +111,8 @@ bool Map::initialize(std::string fileName) {
 
 	// Parse the items
 	while (item != nullptr) {
-		int key = item->IntAttribute(ITEM_KEY_ATTR.data());
-		std::string value = item->Attribute(ITEM_VALUE_ATTR.data());
+		std::string key = item->Attribute(ITEM_KEY_ATTR.data());
+		int value = item->IntAttribute(ITEM_VALUE_ATTR.data());
 		mLegend.insert_or_assign(key, value);
 		item = item->NextSiblingElement(ITEM_XML_TAG.data());
 	}
@@ -123,11 +125,31 @@ int Map::getMapElement(int x, int y) {
 	return mLayout.at(index);
 }
 
+Point Map::getStartLocation(StartLocation startLocation) const {
+	// TODO
+	return Point();
+}
+
 //Point Map::getStartLocation(StartLocation startLocation) const {
 //}
 
+// TODO: Refactor this to be less stupid
+Point Map::getMapLocation(int layoutIndex, bool scaleUnitsToPixels) const {
+	// e.g. width = 21, height = 23
+	// if layoutIndex = 50, then it should be at x = 8 and y = 2
+	int x = (layoutIndex % mColumns) * (scaleUnitsToPixels ? unitPixels(1) : 1);
+	int y = layoutIndex / mRows * (scaleUnitsToPixels ? unitPixels(1) : 1);
+
+	return Point(x, y);
+}
+
 int Map::indexOf(int element) {
-	// TODO
+	for (size_t i = 0; i < mLayout.size(); ++i) {
+		if (mLayout.at(i) == element) {
+			return i;
+		}
+	}
+
 	return -1;
 }
 

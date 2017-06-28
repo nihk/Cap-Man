@@ -8,6 +8,7 @@ class KeyboardDirectionInputComponent
 	: public DirectionInputComponent {
 public:
 	KeyboardDirectionInputComponent(Keyboard& keyboard, Directions::Direction startingDirection);
+	KeyboardDirectionInputComponent(const KeyboardDirectionInputComponent& other);
 	~KeyboardDirectionInputComponent();
 
 	KeyboardDirectionInputComponent& operator=(const KeyboardDirectionInputComponent& other);

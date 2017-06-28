@@ -18,7 +18,8 @@ public:
 	bool initialize(std::string fileName);
 
 	int getMapElement(int x, int y);
-	//Point getStartLocation(StartLocation startLocation) const;
+	Point getStartLocation(StartLocation startLocation) const;
+	Point getMapLocation(int layoutIndex, bool scaleUnitsToPixels) const;
 	int indexOf(int element);
 	int rows() const { return mRows; }
 	int columns() const { return mColumns; }
@@ -42,7 +43,7 @@ private:
 	static const std::string ITEM_KEY_ATTR;
 	static const std::string ITEM_VALUE_ATTR;
 
-	std::unordered_map<int, std::string> mLegend;
+	std::unordered_map<std::string, int> mLegend;
 	int mUnitPixelSize;
 	std::unordered_map<Scale, int> mScales;
 	Scale mActiveScale;
