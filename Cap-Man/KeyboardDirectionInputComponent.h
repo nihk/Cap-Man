@@ -13,7 +13,7 @@ public:
 	KeyboardDirectionInputComponent& operator=(const KeyboardDirectionInputComponent& other);
 
 	Directions::Direction direction() override;
-	void cancelInput() override { mKeyboard.setRecentKeyDown(Keys::NONE); }
+	void cancelInput() override { mKeyboard.setRecentKeyDown(Keys::STOP); }
 
 private:
 	Keyboard& mKeyboard;

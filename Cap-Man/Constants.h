@@ -10,7 +10,7 @@ namespace Testing {
 namespace Keys {
 	typedef int Key;
 
-	static const Key NONE = -1;
+	static const Key STOP = 0;
 	static const Key UP = SDL_SCANCODE_UP;
 	static const Key DOWN = SDL_SCANCODE_DOWN;
 	static const Key LEFT = SDL_SCANCODE_LEFT;
