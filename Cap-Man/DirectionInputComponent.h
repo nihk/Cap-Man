@@ -9,5 +9,6 @@ public:
 	~DirectionInputComponent() = default;
 
 	virtual Directions::Direction direction() { return Directions::NONE; }
+	virtual void cancelInput() { /* stub */}
 };
 

@@ -18,7 +18,7 @@ const std::string Map::ITEM_VALUE_ATTR = "value";
 
 Map::Map()
 	: mUnitPixelSize(-1)
-	, mActiveScale(Scale::SMALL)
+	, mActiveScale(Scale::LARGE)
 	, mRows(-1)
 	, mColumns(-1) {
 }
@@ -27,6 +27,7 @@ Map::~Map() {
 }
 
 // TODO: This classes calculation logic needs to be less dumbified
+// TODO: Make a map of <Point, int>
 
 bool Map::initialize(std::string fileName) {
 	tinyxml2::XMLDocument xmlDocument;
@@ -120,8 +121,8 @@ bool Map::initialize(std::string fileName) {
 	return true;
 }
 
-int Map::getMapElement(int x, int y) {
-	int index = x + y * mRows;
+int Map::getMapElement(int x, int y) const {
+	int index = x + y * mColumns;
 	return mLayout.at(index);
 }
 
@@ -133,12 +134,22 @@ Point Map::getStartLocation(StartLocation startLocation) const {
 //Point Map::getStartLocation(StartLocation startLocation) const {
 //}
 
+int Map::getMapLocation(Point location, bool scaleUnitsToPixels) const {
+	if (scaleUnitsToPixels) {
+		scaleUpToUnits(location);
+	}
+
+	return location.x() + location.y() * mColumns;
+}
+
 // TODO: Refactor this to be less stupid
 Point Map::getMapLocation(int layoutIndex, bool scaleUnitsToPixels) const {
-	// e.g. width = 21, height = 23
-	// if layoutIndex = 50, then it should be at x = 8 and y = 2
-	int x = (layoutIndex % mColumns) * (scaleUnitsToPixels ? unitPixels(1) : 1);
-	int y = layoutIndex / mRows * (scaleUnitsToPixels ? unitPixels(1) : 1);
+	int x = layoutIndex % mColumns;
+	int y = layoutIndex / mColumns;
+
+	if (scaleUnitsToPixels) {
+		scaleUpToUnits(x, y);
+	}
 
 	return Point(x, y);
 }
@@ -161,6 +172,72 @@ int Map::heightPixels() const {
 	return unitPixels(mRows);
 }
 
+int Map::singleUnitPixels() const {
+	return unitPixels(1);
+}
+
 int Map::unitPixels(int numUnits) const {
 	return numUnits * mScales.at(mActiveScale) * mUnitPixelSize;
+}
+
+int Map::getNeighbourElement(Point location, bool scalePixelsToUnits, Directions::Direction direction) const {
+	if (scalePixelsToUnits) {
+		scaleDownToUnits(location);
+	}
+
+	switch (direction) {
+		case Directions::UP: {
+			if (location.y() == 0) {
+				return MapLayoutElements::INVALID;
+			}
+			location.setY(location.y() - 1);
+			break;
+		}
+		case Directions::RIGHT: {
+			if (location.x() == mColumns - 1) {
+				return MapLayoutElements::INVALID;
+			}
+			location.setX(location.x() + 1);
+			break;
+		}
+		case Directions::DOWN: {
+			if (location.y() == mRows - 1) {
+				return MapLayoutElements::INVALID;
+			}
+			location.setY(location.y() + 1);
+			break;
+		}
+		case Directions::LEFT: {
+			if (location.x() == 0) {
+				return MapLayoutElements::INVALID;
+			}
+			location.setX(location.x() - 1);
+			break;
+		}
+		default: {
+			return MapLayoutElements::INVALID;
+		}
+	}
+
+	return getMapElement(location.x(), location.y());
+}
+
+void Map::scaleUpToUnits(int& x, int& y) const {
+	x *= singleUnitPixels();
+	y *= singleUnitPixels();
+}
+
+void Map::scaleUpToUnits(Point& point) const {
+	point.setX(point.x() * singleUnitPixels());
+	point.setY(point.y() * singleUnitPixels());
+}
+
+void Map::scaleDownToUnits(int& x, int& y) const {
+	x /= singleUnitPixels();
+	y /= singleUnitPixels();
+}
+
+void Map::scaleDownToUnits(Point& point) const {
+	point.setX(point.x() / singleUnitPixels());
+	point.setY(point.y() / singleUnitPixels());
 }

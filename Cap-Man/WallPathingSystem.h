@@ -1,13 +1,22 @@
 #pragma once
 
 #include "System.h"
+#include "DirectionInputComponent.h"
+#include "Rect.h"
+
+class Map;
 
 class WallPathingSystem 
 	: public System {
 public:
-	WallPathingSystem(Manager& manager);
+	WallPathingSystem(Manager& manager, Map& map);
 	~WallPathingSystem();
 
 	void updateEntity(float delta, int entity) override;
+
+private:
+	void getNeighbourElementsByDirection(Directions::Direction direction, Rect rect, int& neighbourElement1, int& neighbourElement2) const;
+
+	Map& mMap;
 };
 

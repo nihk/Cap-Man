@@ -10,6 +10,7 @@ namespace Testing {
 namespace Keys {
 	typedef int Key;
 
+	static const Key NONE = -1;
 	static const Key UP = SDL_SCANCODE_UP;
 	static const Key DOWN = SDL_SCANCODE_DOWN;
 	static const Key LEFT = SDL_SCANCODE_LEFT;
@@ -52,12 +53,18 @@ namespace GameConstants {
 	static const int ANIMATION_FRAME_INTERVAL = 50;  // ms
 }
 
-namespace MapUniqueCharacterKeys {
+namespace MapLayoutElements {
+	static const int INVALID = -1;
+	static const int NOTHING = 0;
+	static const int WALL = 1;
 	static const int CAP_MAN = 2;
 	static const int INKY = 3;
 	static const int BLINKY = 4;
 	static const int PINKY = 5;
 	static const int CLYDE = 6;
+	static const int GHOST_GATE = 7;
+	static const int PELLET = 8;
+	static const int POWERUP = 9;
 }
 
 namespace AnimationStates {

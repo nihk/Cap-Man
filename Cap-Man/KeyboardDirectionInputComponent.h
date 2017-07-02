@@ -1,8 +1,7 @@
 #pragma once
 #include "Constants.h"
 #include "DirectionInputComponent.h"
-
-class Keyboard;
+#include "Keyboard.h"
 
 class KeyboardDirectionInputComponent 
 	: public DirectionInputComponent {
@@ -14,6 +13,7 @@ public:
 	KeyboardDirectionInputComponent& operator=(const KeyboardDirectionInputComponent& other);
 
 	Directions::Direction direction() override;
+	void cancelInput() override { mKeyboard.setRecentKeyDown(Keys::NONE); }
 
 private:
 	Keyboard& mKeyboard;

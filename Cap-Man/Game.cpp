@@ -14,7 +14,7 @@
 #include "KeyboardDirectionInputComponent.h"
 #include "DirectionAnimationSystem.h"
 #include "WallPathingSystem.h"
-#include "WallPathingComponent.h"
+#include "DirectionValidatorComponent.h"
 
 Game::Game()
 	: mShouldQuit(false) {
@@ -96,12 +96,12 @@ void Game::load() {
 	mManager.createComponentStore<VelocityComponent>();
 	mManager.createComponentStore<PhysicsComponent>();
 	mManager.createComponentStore<GraphicsComponent>();
-	mManager.createComponentStore<WallPathingComponent>();
+	mManager.createComponentStore<DirectionValidatorComponent>();
 
 	// Order matters here
 	mManager.addSystem(std::make_shared<SpeedSystem>(mManager));
+	mManager.addSystem(std::make_shared<WallPathingSystem>(mManager, mMap));
 	mManager.addSystem(std::make_shared<MoveSystem>(mManager));
-	mManager.addSystem(std::make_shared<WallPathingSystem>(mManager));
 	mManager.addSystem(std::make_shared<DirectionAnimationSystem>(mManager));
 	mManager.addSystem(std::make_shared<DrawSystem>(mManager, mRenderer));
 

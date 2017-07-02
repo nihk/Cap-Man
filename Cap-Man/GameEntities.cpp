@@ -4,12 +4,31 @@
 #include "VelocityComponent.h"
 #include "KeyboardDirectionInputComponent.h"
 #include "SpriteGraphicsComponent.h"
-#include "WallPathingComponent.h"
+#include "DirectionValidatorComponent.h"
+#include "ColorGraphicsComponent.h"
 
 bool Game::createEntities() {
+	// Draw order:
+	// ghosts > cap-man > walls == pellets == powerups
+
+	// Walls
+	const std::vector<int>& layout = mMap.getLayout();
+	size_t size = layout.size();
+
+	for (size_t i = 0; i < size; ++i) {
+		if (layout.at(i) == MapLayoutElements::WALL) {
+			int wall = mManager.createEntity();
+			Point wallLocation = mMap.getMapLocation(i, true /* scaleUnitsToPixels */);
+			mManager.addComponent(wall, PhysicsComponent(wallLocation.x(), wallLocation.y(), mMap.singleUnitPixels(), mMap.singleUnitPixels()));
+			mManager.addComponent(wall, ColorGraphicsComponent(Colors::WHITE));
+			mManager.registerEntity(wall);
+		}
+	}
+
 	// Cap-Man
 	int capMan = mManager.createEntity();
 
+	// TODO: Don't conflate Directions with AnimationStates
 	std::unordered_map<int, Animation> capManAnimations;
 	Animation walkLeft(GameConstants::ANIMATION_FRAME_INTERVAL);
 	walkLeft.addSprite(mSpriteRepository.findSprite("capman_closed"));
@@ -51,14 +70,14 @@ bool Game::createEntities() {
 	Velocity velocity(mMap.unitPixels(GameConstants::CHARACTER_UNITS_SPEED), 0);
 	float speed = static_cast<float>(mMap.unitPixels(GameConstants::CHARACTER_UNITS_SPEED));
 
-	int capManStart = mMap.indexOf(MapUniqueCharacterKeys::CAP_MAN);
+	int capManStart = mMap.indexOf(MapLayoutElements::CAP_MAN);
 	Point startPoint = mMap.getMapLocation(capManStart, true /* scaleUnitsToPixels */);
 
-	mManager.addComponent(capMan, KeyboardDirectionInputComponent(mKeyboard, Directions::RIGHT));
+	mManager.addComponent(capMan, KeyboardDirectionInputComponent(mKeyboard, Directions::LEFT));
 	mManager.addComponent(capMan, VelocityComponent(velocity, speed));
-	mManager.addComponent(capMan, PhysicsComponent(startPoint.x(), startPoint.y(), mMap.unitPixels(1), mMap.unitPixels(1)));
-	mManager.addComponent(capMan, SpriteGraphicsComponent(capManAnimations, AnimationStates::WALK_RIGHT));
-	mManager.addComponent(capMan, WallPathingComponent(mMap));
+	mManager.addComponent(capMan, PhysicsComponent(startPoint.x(), startPoint.y(), mMap.singleUnitPixels(), mMap.singleUnitPixels()));
+	mManager.addComponent(capMan, SpriteGraphicsComponent(capManAnimations, AnimationStates::WALK_LEFT));
+	mManager.addComponent(capMan, DirectionValidatorComponent());
 	mManager.registerEntity(capMan);
 
 	return true;

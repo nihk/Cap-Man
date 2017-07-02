@@ -30,7 +30,7 @@ Directions::Direction KeyboardDirectionInputComponent::direction() {
 		case Keys::A:		mDirection = Directions::LEFT;	break;
 		case Keys::RIGHT:
 		case Keys::D:		mDirection = Directions::RIGHT;	break;
-		default:											break;
+		default:			/* mDirection = Directions::NONE;	*/ break;
 	}
 
 	return mDirection;

@@ -173,12 +173,13 @@
     <ClCompile Include="Surface.cpp" />
     <ClCompile Include="System.cpp" />
     <ClCompile Include="TestAnimation.cpp" />
+    <ClCompile Include="TestMap.cpp" />
     <ClCompile Include="Texture.cpp" />
     <ClCompile Include="tinyxml2.cpp" />
     <ClCompile Include="UID.cpp" />
     <ClCompile Include="Velocity.cpp" />
     <ClCompile Include="VelocityComponent.cpp" />
-    <ClCompile Include="WallPathingComponent.cpp" />
+    <ClCompile Include="DirectionValidatorComponent.cpp" />
     <ClCompile Include="WallPathingSystem.cpp" />
     <ClCompile Include="Window.cpp" />
   </ItemGroup>
@@ -219,7 +220,7 @@
     <ClInclude Include="UID.h" />
     <ClInclude Include="Velocity.h" />
     <ClInclude Include="VelocityComponent.h" />
-    <ClInclude Include="WallPathingComponent.h" />
+    <ClInclude Include="DirectionValidatorComponent.h" />
     <ClInclude Include="WallPathingSystem.h" />
     <ClInclude Include="Window.h" />
     <ClInclude Include="Wrapper.h" />
