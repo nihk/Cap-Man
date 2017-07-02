@@ -121,20 +121,20 @@ bool Map::initialize(std::string fileName) {
 	return true;
 }
 
-int Map::getMapElement(int x, int y) const {
+int Map::mapElement(int x, int y) const {
 	int index = x + y * mColumns;
 	return mLayout.at(index);
 }
 
-Point Map::getStartLocation(StartLocation startLocation) const {
+Point Map::startLocation(StartLocation startLocation) const {
 	// TODO
 	return Point();
 }
 
-//Point Map::getStartLocation(StartLocation startLocation) const {
+//Point Map::startLocation(StartLocation startLocation) const {
 //}
 
-int Map::getMapLocation(Point location, bool scaleUnitsToPixels) const {
+int Map::mapLocation(Point location, bool scaleUnitsToPixels) const {
 	if (scaleUnitsToPixels) {
 		scaleUpToUnits(location);
 	}
@@ -143,7 +143,7 @@ int Map::getMapLocation(Point location, bool scaleUnitsToPixels) const {
 }
 
 // TODO: Refactor this to be less stupid
-Point Map::getMapLocation(int layoutIndex, bool scaleUnitsToPixels) const {
+Point Map::mapLocation(int layoutIndex, bool scaleUnitsToPixels) const {
 	int x = layoutIndex % mColumns;
 	int y = layoutIndex / mColumns;
 
@@ -180,7 +180,7 @@ int Map::unitPixels(int numUnits) const {
 	return numUnits * mScales.at(mActiveScale) * mUnitPixelSize;
 }
 
-int Map::getNeighbourElement(Point location, bool scalePixelsToUnits, Directions::Direction direction) const {
+int Map::neighbourElement(Point location, bool scalePixelsToUnits, Directions::Direction direction) const {
 	if (scalePixelsToUnits) {
 		scaleDownToUnits(location);
 	}
@@ -219,7 +219,7 @@ int Map::getNeighbourElement(Point location, bool scalePixelsToUnits, Directions
 		}
 	}
 
-	return getMapElement(location.x(), location.y());
+	return mapElement(location.x(), location.y());
 }
 
 void Map::scaleUpToUnits(int& x, int& y) const {

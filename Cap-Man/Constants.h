@@ -32,9 +32,10 @@ namespace Directions {
 }
 
 namespace Colors {
-	static const Color BLACK(0x00, 0x00, 0x00, 0xFF);
-	static const Color WHITE(0xFF, 0xFF, 0xFF, 0xFF);
-	static const Color MAGENTA(0xFF, 0x00, 0xFF, 0xFF);
+	static const Color BLACK(0x00, 0x00, 0x00);
+	static const Color WHITE(0xFF, 0xFF, 0xFF);
+	static const Color MAGENTA(0xFF, 0x00, 0xFF);
+	static const Color BEIGE(0xF8, 0xB0, 0x90);
 }
 
 namespace Metadata {
@@ -48,14 +49,13 @@ namespace Metadata {
 }
 
 namespace GameConstants {
-	// TODO: Minimum movement speed at 60fps is 60px/s. Need to make an FPS independent velocity that can travel under 60px/s
 	static const int CHARACTER_UNITS_SPEED = 4;  // units/sec
-	static const int ANIMATION_FRAME_INTERVAL = 50;  // ms
+	static const int ANIMATION_FRAME_INTERVAL = 66;  // ms
 }
 
 namespace MapLayoutElements {
 	static const int INVALID = -1;
-	static const int NOTHING = 0;
+	static const int EMPTY_NAVIGABLE_SPACE = 0;
 	static const int WALL = 1;
 	static const int CAP_MAN = 2;
 	static const int INKY = 3;
@@ -76,5 +76,10 @@ namespace AnimationStates {
 	static const AnimationState WALK_DOWN = Directions::DOWN;
 	static const AnimationState WALK_UP = Directions::UP;
 	static const AnimationState DEATH = 1 << 4;
-	static const AnimationState VULNERABLE = 1 << 5;
+	static const AnimationState DEATH_LEFT = 1 << 5;
+	static const AnimationState DEATH_RIGHT = 1 << 6;
+	static const AnimationState DEATH_UP = 1 << 7;
+	static const AnimationState DEATH_DOWN = 1 << 8;
+	static const AnimationState VULNERABLE = 1 << 9;
+	static const AnimationState VULNERABLE_EXPIRING = 1 << 10;
 }

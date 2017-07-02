@@ -1,4 +1,6 @@
 <sprites>
+	<texture name="background_walls" 		x="336" 	y="0" 	w="336" 	h="368" />
+  
 	<texture name="capman_left1" 		x="0" 	y="0" 	w="16" 	h="16" />
 	<texture name="capman_left2" 		x="20" 	y="0" 	w="16" 	h="16" />
 	<texture name="capman_right1" 		x="0" 	y="20" 	w="16" 	h="16" />

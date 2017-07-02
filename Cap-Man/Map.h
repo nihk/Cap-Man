@@ -18,11 +18,11 @@ public:
 
 	bool initialize(std::string fileName);
 
-	int getMapElement(int x, int y) const;
-	Point getStartLocation(StartLocation startLocation) const;
-	int getMapLocation(Point location, bool scaleUnitsToPixels) const;
-	Point getMapLocation(int layoutIndex, bool scaleUnitsToPixels) const;
-	const std::vector<int>& getLayout() const { return mLayout; }
+	int mapElement(int x, int y) const;
+	Point startLocation(StartLocation startLocation) const;
+	int mapLocation(Point location, bool scaleUnitsToPixels) const;
+	Point mapLocation(int layoutIndex, bool scaleUnitsToPixels) const;
+	const std::vector<int>& layout() const { return mLayout; }
 	int indexOf(int element);
 	int rows() const { return mRows; }
 	int columns() const { return mColumns; }
@@ -30,9 +30,10 @@ public:
 	int heightPixels() const;
 	void setScale(Scale scale) { mActiveScale = scale; }
 	Scale scale() const { return mActiveScale; }
+	int scaleMultiplier() const { return mScales.at(mActiveScale); }
 	int singleUnitPixels() const;
 	int unitPixels(int numUnits) const;
-	int getNeighbourElement(Point location, bool scalePixelsToUnits, Directions::Direction direction) const;
+	int neighbourElement(Point location, bool scalePixelsToUnits, Directions::Direction direction) const;
 
 private:
 	static const std::string ROOT_XML_TAG;

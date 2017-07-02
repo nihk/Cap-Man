@@ -15,6 +15,7 @@ public:
 	void updateEntity(float delta, int entity) override;
 
 private:
+	static bool isElementWallOrInvalid(int element);
 	void getNeighbourElementsByDirection(Directions::Direction direction, Rect rect, int& neighbourElement1, int& neighbourElement2) const;
 
 	Map& mMap;

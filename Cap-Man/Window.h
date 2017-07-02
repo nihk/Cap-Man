@@ -15,6 +15,8 @@ public:
 	// NB: This doesn't affect mSdlWindow. Is used instead for updates after an SDL_Event window resize
 	void setDimens(int w, int h) { mWidth = w; mHeight = h; }
 
+	int width() const { return mWidth; }
+	int height() const { return mHeight; }
 	const SDL_Window* data() const override { return mSdlWindow; }
 	SDL_Window* mutableData() override { return mSdlWindow; }
 

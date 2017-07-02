@@ -1,5 +1,9 @@
 #include "Animation.h"
 
+Animation::Animation() 
+	: Animation(0) {
+}
+
 Animation::Animation(int spriteIntervalMillis)
 	: mSpriteIntervalMillis(spriteIntervalMillis)
 	, mTimeSpentBetweenSpriteChange(0)

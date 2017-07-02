@@ -1,8 +1,7 @@
 #include "WallPathingSystem.h"
 #include "VelocityComponent.h"
 #include "PhysicsComponent.h"
-#include "DirectionValidatorComponent.h"
-#include "CollisionComponent.h"
+#include "LastValidDirectionComponent.h"
 #include "Manager.h"
 #include "Map.h"
 
@@ -11,7 +10,7 @@ WallPathingSystem::WallPathingSystem(Manager& manager, Map& map)
 		, mMap(map) {
 	insertRequiredComponent(PhysicsComponent::ID);
 	insertRequiredComponent(VelocityComponent::ID);
-	insertRequiredComponent(DirectionValidatorComponent::ID);
+	insertRequiredComponent(LastValidDirectionComponent::ID);
 	insertRequiredComponent(DirectionInputComponent::ID);
 }
 
@@ -21,9 +20,10 @@ WallPathingSystem::~WallPathingSystem() {
 void WallPathingSystem::updateEntity(float delta, int entity) {
 	DirectionInputComponent& directionInputComponent = mManager.getComponent<DirectionInputComponent>(entity);
 	PhysicsComponent& physicsComponent = mManager.getComponent<PhysicsComponent>(entity);
-	DirectionValidatorComponent& directionValidatorComponent = mManager.getComponent<DirectionValidatorComponent>(entity);
+	LastValidDirectionComponent& lastValidDirectionComponent = mManager.getComponent<LastValidDirectionComponent>(entity);
 	VelocityComponent& velocityComponent = mManager.getComponent<VelocityComponent>(entity);
 
+	// Hit a wall
 	if (!velocityComponent.isMoving()) {
 		return;
 	}
@@ -36,48 +36,36 @@ void WallPathingSystem::updateEntity(float delta, int entity) {
 
 	getNeighbourElementsByDirection(direction, rect, neighbourElement1, neighbourElement2);
 
-	// TODO: Wrap this into a method
-	if (neighbourElement1 == MapLayoutElements::WALL
-			|| neighbourElement1 == MapLayoutElements::INVALID
-			|| neighbourElement2 == MapLayoutElements::WALL
-			|| neighbourElement2 == MapLayoutElements::INVALID) {
-		Directions::Direction lastKnownValidDirection = directionValidatorComponent.lastKnownValidDirection();
+	// Current direction will hit a wall, so keep going in the last known valid one instead
+	if (isElementWallOrInvalid(neighbourElement1)
+			|| isElementWallOrInvalid(neighbourElement2)) {
+		Directions::Direction lastKnownValidDirection = lastValidDirectionComponent.lastKnownValidDirection();
 
 		int prevValidDirectionNeighbourElement1;
 		int prevValidDirectionNeighbourElement2;
 
 		getNeighbourElementsByDirection(lastKnownValidDirection, rect, prevValidDirectionNeighbourElement1, prevValidDirectionNeighbourElement2);
 
-		// TODO: Wrap this into a method
-		if (prevValidDirectionNeighbourElement1 == MapLayoutElements::WALL 
-				|| prevValidDirectionNeighbourElement1 == MapLayoutElements::INVALID
-				|| prevValidDirectionNeighbourElement2 == MapLayoutElements::WALL
-				|| prevValidDirectionNeighbourElement2 == MapLayoutElements::INVALID) {
-			// TODO: Move to method: VelocityComponent.stopMovement();
-			velocityComponent.setVelocity(0.0f, 0.0f);
-			// TODO: Clean this up or rethink its logic
-			//directionInputComponent.cancelInput();
-			//directionValidatorComponent.setLastKnownValidDirection(Directions::NONE);
+		// Both the attempted direction and current direction hit a wall, so stop moving and invalidate that direction
+		if (isElementWallOrInvalid(prevValidDirectionNeighbourElement1)
+				|| isElementWallOrInvalid(prevValidDirectionNeighbourElement2)) {
+			velocityComponent.stopMovement();
+			directionInputComponent.cancelInput();
 		} else {
-			// FIXME: Move this logic to velocityComponent itself!
-			float speed = velocityComponent.speed();
-
-			float vx = 0.0f;
-			float vy = 0.0f;
-
-			switch (lastKnownValidDirection) {
-				case Directions::UP:		vy -= speed;	break;
-				case Directions::DOWN:		vy += speed;	break;
-				case Directions::LEFT:		vx -= speed;	break;
-				case Directions::RIGHT:		vx += speed;	break;
-				default:									break;
-			}
-
-			velocityComponent.setVelocity(vx, vy);
+			// Keep moving in the last known valid direction. The character will keep moving in
+			// this direction until a wall is hit or the attempted current direction from
+			// directionInputComponent becomes valid
+			velocityComponent.setVelocityFromDirection(lastKnownValidDirection);
 		}
 	} else {
-		directionValidatorComponent.setLastKnownValidDirection(direction);
+		// Current direction was valid; update the last known valid to be that
+		lastValidDirectionComponent.setLastKnownValidDirection(direction);
 	}
+}
+
+bool WallPathingSystem::isElementWallOrInvalid(int element) {
+	return element == MapLayoutElements::WALL
+		|| element == MapLayoutElements::INVALID;
 }
 
 void WallPathingSystem::getNeighbourElementsByDirection(Directions::Direction direction, Rect rect, int& neighbourElement1, int& neighbourElement2) const {
@@ -90,8 +78,8 @@ void WallPathingSystem::getNeighbourElementsByDirection(Directions::Direction di
 			bottomRight.setX(bottomRight.x() - 1);
 			bottomRight.setY(bottomRight.y() - 1);
 
-			neighbourElement1 = mMap.getNeighbourElement(bottomLeft, true, direction);
-			neighbourElement2 = mMap.getNeighbourElement(bottomRight, true, direction);
+			neighbourElement1 = mMap.neighbourElement(bottomLeft, true, direction);
+			neighbourElement2 = mMap.neighbourElement(bottomRight, true, direction);
 			break;
 		}
 		case Directions::RIGHT: {
@@ -100,8 +88,8 @@ void WallPathingSystem::getNeighbourElementsByDirection(Directions::Direction di
 			// Don't overlap with where the next tile starts, on the right/bottom
 			bottomLeft.setY(bottomLeft.y() - 1);
 
-			neighbourElement1 = mMap.getNeighbourElement(topLeft, true, direction);
-			neighbourElement2 = mMap.getNeighbourElement(bottomLeft, true, direction);
+			neighbourElement1 = mMap.neighbourElement(topLeft, true, direction);
+			neighbourElement2 = mMap.neighbourElement(bottomLeft, true, direction);
 			break;
 		}
 		case Directions::DOWN: {
@@ -110,8 +98,8 @@ void WallPathingSystem::getNeighbourElementsByDirection(Directions::Direction di
 			// Don't overlap with where the next tile starts, on the right/bottom
 			topRight.setX(topRight.x() - 1);
 
-			neighbourElement1 = mMap.getNeighbourElement(topRight, true, direction);
-			neighbourElement2 = mMap.getNeighbourElement(topLeft, true, direction);
+			neighbourElement1 = mMap.neighbourElement(topRight, true, direction);
+			neighbourElement2 = mMap.neighbourElement(topLeft, true, direction);
 			break;
 		}
 		case Directions::LEFT: {
@@ -122,8 +110,8 @@ void WallPathingSystem::getNeighbourElementsByDirection(Directions::Direction di
 			bottomRight.setX(bottomRight.x() - 1);
 			bottomRight.setY(bottomRight.y() - 1);
 
-			neighbourElement1 = mMap.getNeighbourElement(topRight, true, direction);
-			neighbourElement2 = mMap.getNeighbourElement(bottomRight, true, direction);
+			neighbourElement1 = mMap.neighbourElement(topRight, true, direction);
+			neighbourElement2 = mMap.neighbourElement(bottomRight, true, direction);
 			break;
 		}
 		default: {

@@ -14,7 +14,7 @@
 #include "KeyboardDirectionInputComponent.h"
 #include "DirectionAnimationSystem.h"
 #include "WallPathingSystem.h"
-#include "DirectionValidatorComponent.h"
+#include "LastValidDirectionComponent.h"
 
 Game::Game()
 	: mShouldQuit(false) {
@@ -86,19 +86,22 @@ bool Game::initialize() {
 		return false;
 	}
 
-	load();
+	if (!load()) {
+		std::cerr << "Error: Failed to load entities: " << std::endl;
+		return false;
+	}
 
 	return true;
 }
 
-void Game::load() {
+bool Game::load() {
 	mManager.createComponentStore<DirectionInputComponent>();
 	mManager.createComponentStore<VelocityComponent>();
 	mManager.createComponentStore<PhysicsComponent>();
 	mManager.createComponentStore<GraphicsComponent>();
-	mManager.createComponentStore<DirectionValidatorComponent>();
+	mManager.createComponentStore<LastValidDirectionComponent>();
 
-	// Order matters here
+	// NB: The systems are updated in the order they are added here!
 	mManager.addSystem(std::make_shared<SpeedSystem>(mManager));
 	mManager.addSystem(std::make_shared<WallPathingSystem>(mManager, mMap));
 	mManager.addSystem(std::make_shared<MoveSystem>(mManager));
@@ -107,8 +110,10 @@ void Game::load() {
 
 	if (!createEntities()) {
 		std::cerr << "Error: Failed to create entities: " << std::endl;
-		return;
+		return false;
 	}
+
+	return true;
 }
 
 void Game::update(float delta) {

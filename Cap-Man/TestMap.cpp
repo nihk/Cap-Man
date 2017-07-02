@@ -10,11 +10,11 @@ TEST_CASE("Map 1d index to Point and vice versa is computed") {
 	REQUIRE(map.columns() == 21);
 	REQUIRE(map.rows() == 23);
 
-	Point loc1 = map.getMapLocation(20, false);
-	Point loc2 = map.getMapLocation(21, false);
+	Point loc1 = map.mapLocation(20, false);
+	Point loc2 = map.mapLocation(21, false);
 
-	int loc1index = map.getMapLocation(loc1, false);
-	int loc2index = map.getMapLocation(loc2, false);
+	int loc1index = map.mapLocation(loc1, false);
+	int loc2index = map.mapLocation(loc2, false);
 
 	REQUIRE(loc1.x() == 20);
 	REQUIRE(loc1.y() == 0);

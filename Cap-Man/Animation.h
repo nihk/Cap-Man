@@ -9,6 +9,7 @@ class Renderer;
 class Animation 
 	: public Drawable {
 public:
+	Animation();
 	Animation(int spriteIntervalMillis);
 	~Animation();
 
@@ -19,6 +20,7 @@ public:
 	void draw(Renderer& renderer, const Rect& dest) override;
 
 private:
+	// Ideally this should be some factor of the delta update millis
 	unsigned mSpriteIntervalMillis;
 	unsigned mTimeSpentBetweenSpriteChange;
 	unsigned mCurrentSpriteIndex;

@@ -150,7 +150,10 @@
     <ClCompile Include="TestMap.cpp">
       <Filter>Source Files\Tests</Filter>
     </ClCompile>
-    <ClCompile Include="DirectionValidatorComponent.cpp">
+    <ClCompile Include="LastValidDirectionComponent.cpp">
+      <Filter>Source Files\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="PointGranterComponent.cpp">
       <Filter>Source Files\Components</Filter>
     </ClCompile>
   </ItemGroup>
@@ -272,7 +275,10 @@
     <ClInclude Include="GhostDirectionInputComponent.h">
       <Filter>Header Files\Components</Filter>
     </ClInclude>
-    <ClInclude Include="DirectionValidatorComponent.h">
+    <ClInclude Include="LastValidDirectionComponent.h">
+      <Filter>Header Files\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="PointGranterComponent.h">
       <Filter>Header Files\Components</Filter>
     </ClInclude>
   </ItemGroup>

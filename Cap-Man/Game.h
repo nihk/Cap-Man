@@ -30,7 +30,7 @@ private:
 	SpriteRepository	mSpriteRepository;
 
 	bool		initialize();
-	void		load();
+	bool load();
 	bool		createEntities();
 	void		unload();
 	void		shutdown();
