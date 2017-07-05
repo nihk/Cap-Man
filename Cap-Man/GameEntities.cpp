@@ -6,8 +6,9 @@
 #include "SpriteGraphicsComponent.h"
 #include "LastValidDirectionComponent.h"
 #include "ColorGraphicsComponent.h"
-#include "GhostDirectionInputComponent.h"
+#include "RetreatComponent.h"
 
+// TODO: Move metadata to XML so this method is less bloated
 bool Game::createEntities() {
 	// Draw order: walls == pellets == powerups < cap-man < ghosts
 
@@ -24,8 +25,10 @@ bool Game::createEntities() {
 		mManager.addComponent(background, PhysicsComponent(0, 0, mWindow.width(), mWindow.height()));
 		mManager.addComponent(background, SpriteGraphicsComponent(backgroundAnimations, AnimationStates::DEFAULT));
 		mManager.registerEntity(background);
+	}
 
-		// Pellets
+	// Pellets
+	{
 		int pelletSideLength = mMap.singleUnitPixels() / 4;
 		int pelletPadding = (mMap.singleUnitPixels() - pelletSideLength) / 2;
 		for (size_t i = 0; i < layout.size(); ++i) {
@@ -185,7 +188,7 @@ bool Game::createEntities() {
 
 			int ghostStart;
 
-			// TODO: Refactor
+			// TODO: Refactor. Perhaps indexOf takes a string?
 			if (ghostName == ghostNames.at(0)) {
 				ghostStart = mMap.indexOf(MapLayoutElements::INKY);
 			} else if (ghostName == ghostNames.at(1)) {
@@ -199,6 +202,7 @@ bool Game::createEntities() {
 			Point startPoint = mMap.mapLocation(ghostStart, true /* scaleUnitsToPixels */);
 
 			// TODO: incorporate Ghost input component
+			mManager.addComponent(ghost, RetreatComponent(mMap));
 			mManager.addComponent(ghost, VelocityComponent(velocity, speed));
 			mManager.addComponent(ghost, PhysicsComponent(startPoint.x(), startPoint.y(), mMap.singleUnitPixels(), mMap.singleUnitPixels()));
 			mManager.addComponent(ghost, SpriteGraphicsComponent(ghostAnimations, AnimationStates::WALK_LEFT));

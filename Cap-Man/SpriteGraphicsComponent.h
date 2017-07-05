@@ -7,6 +7,7 @@
 class SpriteGraphicsComponent
 	: public GraphicsComponent {
 public:
+	// TODO: add an addAnimation() method instead of passing this to the ctor?
 	SpriteGraphicsComponent(std::unordered_map<AnimationStates::AnimationState, Animation> animations, int initialState);
 	~SpriteGraphicsComponent();
 

@@ -15,6 +15,8 @@
 #include "DirectionAnimationSystem.h"
 #include "WallPathingSystem.h"
 #include "LastValidDirectionComponent.h"
+#include "GhostDeathRetreatSystem.h"
+#include "RetreatComponent.h"
 
 Game::Game()
 	: mShouldQuit(false) {
@@ -82,12 +84,12 @@ bool Game::initialize() {
 	}
 
 	if (!mSpriteRepository.initialize(mRenderer, Metadata::SPRITES_FILENAME, Metadata::SPRITE_ATLAS_FILENAME)) {
-		std::cerr << "Error: Failed to initialize sprite repository: " << std::endl;
+		std::cerr << "Error: Failed to initialize sprite repository" << std::endl;
 		return false;
 	}
 
 	if (!load()) {
-		std::cerr << "Error: Failed to load entities: " << std::endl;
+		std::cerr << "Error: Failed to load entities" << std::endl;
 		return false;
 	}
 
@@ -100,9 +102,11 @@ bool Game::load() {
 	mManager.createComponentStore<PhysicsComponent>();
 	mManager.createComponentStore<GraphicsComponent>();
 	mManager.createComponentStore<LastValidDirectionComponent>();
+	mManager.createComponentStore<RetreatComponent>();
 
 	// NB: The systems are updated in the order they are added here!
 	mManager.addSystem(std::make_shared<SpeedSystem>(mManager));
+	mManager.addSystem(std::make_shared<GhostDeathRetreatSystem>(mManager));
 	mManager.addSystem(std::make_shared<WallPathingSystem>(mManager, mMap));
 	mManager.addSystem(std::make_shared<MoveSystem>(mManager));
 	mManager.addSystem(std::make_shared<DirectionAnimationSystem>(mManager));

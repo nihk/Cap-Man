@@ -147,7 +147,6 @@
   <ItemGroup>
     <ClCompile Include="Animation.cpp" />
     <ClCompile Include="BreadcrumbTrailComponent.cpp" />
-    <ClCompile Include="CollisionComponent.cpp" />
     <ClCompile Include="Color.cpp" />
     <ClCompile Include="ColorGraphicsComponent.cpp" />
     <ClCompile Include="DirectionAnimationSystem.cpp" />
@@ -155,7 +154,8 @@
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="GameEntities.cpp" />
     <ClCompile Include="GameEvents.cpp" />
-    <ClCompile Include="GhostDirectionInputComponent.cpp" />
+    <ClCompile Include="GhostDeathRetreatSystem.cpp" />
+    <ClCompile Include="RetreatComponent.cpp" />
     <ClCompile Include="Keyboard.cpp" />
     <ClCompile Include="KeyboardDirectionInputComponent.cpp" />
     <ClCompile Include="main.cpp" />
@@ -188,7 +188,6 @@
     <ClInclude Include="Animation.h" />
     <ClInclude Include="BreadcrumbTrailComponent.h" />
     <ClInclude Include="catch.hpp" />
-    <ClInclude Include="CollisionComponent.h" />
     <ClInclude Include="Color.h" />
     <ClInclude Include="ColorGraphicsComponent.h" />
     <ClInclude Include="Component.h" />
@@ -199,7 +198,8 @@
     <ClInclude Include="DrawSystem.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="Constants.h" />
-    <ClInclude Include="GhostDirectionInputComponent.h" />
+    <ClInclude Include="GhostDeathRetreatSystem.h" />
+    <ClInclude Include="RetreatComponent.h" />
     <ClInclude Include="GraphicsComponent.h" />
     <ClInclude Include="Keyboard.h" />
     <ClInclude Include="KeyboardDirectionInputComponent.h" />
@@ -229,7 +229,9 @@
   </ItemGroup>
   <ItemGroup>
     <Xml Include="capman_map.xml" />
-    <Xml Include="capman_spriteatlas.xml" />
+    <Xml Include="capman_spriteatlas.xml">
+      <SubType>Designer</SubType>
+    </Xml>
   </ItemGroup>
   <ItemGroup>
     <Image Include="capman_spritesheet.png" />

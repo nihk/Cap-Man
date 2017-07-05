@@ -2,7 +2,8 @@
 #include "Map.h"
 
 LastValidDirectionComponent::LastValidDirectionComponent()
-	: mLastKnownValidDirection(Directions::NONE) {
+	// TODO: Rethink this once the conflation of direction and animation is resolved
+	: mLastKnownValidDirection(Directions::LEFT) {
 }
 
 LastValidDirectionComponent::~LastValidDirectionComponent() {
