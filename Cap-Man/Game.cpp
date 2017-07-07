@@ -121,16 +121,16 @@ bool Game::load() {
 }
 
 void Game::update(float delta) {
-	mRenderer.setDrawColor(mBackgroundColor);
-	mRenderer.clear();
+	//mRenderer.setDrawColor(mBackgroundColor);
+	//mRenderer.clear();
 
 	mManager.updateSystems(delta);
 
-	mRenderer.present();
+	//mRenderer.present();
 }
 
 void Game::unload() {
-	// TODO: Remove all entities from mManager
+	mManager.clear();
 }
 
 void Game::shutdown() {

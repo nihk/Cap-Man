@@ -127,7 +127,7 @@ bool Game::createEntities() {
 		mManager.addComponent(capMan, VelocityComponent(velocity, speed));
 		mManager.addComponent(capMan, PhysicsComponent(startPoint.x(), startPoint.y(), mMap.singleUnitPixels(), mMap.singleUnitPixels()));
 		mManager.addComponent(capMan, SpriteGraphicsComponent(capManAnimations, AnimationStates::WALK_LEFT));
-		mManager.addComponent(capMan, LastValidDirectionComponent());
+		mManager.addComponent(capMan, LastValidDirectionComponent(Directions::LEFT));
 		mManager.registerEntity(capMan);
 	}
 
@@ -201,12 +201,12 @@ bool Game::createEntities() {
 
 			Point startPoint = mMap.mapLocation(ghostStart, true /* scaleUnitsToPixels */);
 
-			// TODO: incorporate Ghost input component
 			mManager.addComponent(ghost, RetreatComponent(mMap));
+			mManager.addComponent(ghost, DirectionInputComponent(Directions::LEFT));
 			mManager.addComponent(ghost, VelocityComponent(velocity, speed));
 			mManager.addComponent(ghost, PhysicsComponent(startPoint.x(), startPoint.y(), mMap.singleUnitPixels(), mMap.singleUnitPixels()));
 			mManager.addComponent(ghost, SpriteGraphicsComponent(ghostAnimations, AnimationStates::WALK_LEFT));
-			mManager.addComponent(ghost, LastValidDirectionComponent());
+			mManager.addComponent(ghost, LastValidDirectionComponent(Directions::LEFT));
 			mManager.registerEntity(ghost);
 		}
 	}

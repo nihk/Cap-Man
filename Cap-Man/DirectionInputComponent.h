@@ -5,10 +5,15 @@
 class DirectionInputComponent
 	: public Component<DirectionInputComponent> {
 public:
-	DirectionInputComponent() = default;
-	~DirectionInputComponent() = default;
+	DirectionInputComponent();
+	DirectionInputComponent(Directions::Direction startingDirection);
+	~DirectionInputComponent();
 
-	virtual Directions::Direction direction() { return Directions::NONE; }
-	virtual void cancelInput() { /* do nothing */}
+	virtual Directions::Direction direction() { return mDirection; }
+	virtual void setDirection(Directions::Direction direction) { mDirection = direction; }
+	virtual void setNoDirection() { setDirection(Directions::NONE); }
+
+protected:
+	Directions::Direction mDirection;
 };
 

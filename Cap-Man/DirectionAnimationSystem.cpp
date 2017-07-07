@@ -27,6 +27,7 @@ void DirectionAnimationSystem::updateEntity(float delta, int entity) {
 	// TODO: This is wonky logic and conflates direction with state
 	if (direction == Directions::NONE) {
 		delta = 0.0f;
-	}
+	} 
+
 	graphicsComponent.update(delta, prevValidDirection);
 }

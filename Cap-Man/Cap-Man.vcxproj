@@ -150,6 +150,7 @@
     <ClCompile Include="Color.cpp" />
     <ClCompile Include="ColorGraphicsComponent.cpp" />
     <ClCompile Include="DirectionAnimationSystem.cpp" />
+    <ClCompile Include="DirectionInputComponent.cpp" />
     <ClCompile Include="DrawSystem.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="GameEntities.cpp" />

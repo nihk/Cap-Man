@@ -10,6 +10,7 @@ class LastValidDirectionComponent
 	: public Component<LastValidDirectionComponent> {
 public:
 	LastValidDirectionComponent();
+	LastValidDirectionComponent(Directions::Direction initialValidDirection);
 	~LastValidDirectionComponent();
 
 	Directions::Direction lastKnownValidDirection() const { return mLastKnownValidDirection; }

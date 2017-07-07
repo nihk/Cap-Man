@@ -50,7 +50,7 @@ void WallPathingSystem::updateEntity(float delta, int entity) {
 		if (isElementWallOrInvalid(prevValidDirectionNeighbourElement1)
 				|| isElementWallOrInvalid(prevValidDirectionNeighbourElement2)) {
 			velocityComponent.stopMovement();
-			directionInputComponent.cancelInput();
+			directionInputComponent.setNoDirection();
 		} else {
 			// Keep moving in the last known valid direction. The character will keep moving in
 			// this direction until a wall is hit or the attempted current direction from

@@ -13,6 +13,14 @@ DrawSystem::DrawSystem(Manager& manager, Renderer& renderer)
 DrawSystem::~DrawSystem() {
 }
 
+size_t DrawSystem::updateEntities(float delta) {
+	mRenderer.clear();
+	size_t numUpdatedEntities = System::updateEntities(delta);
+	mRenderer.present();
+
+	return numUpdatedEntities;
+}
+
 void DrawSystem::updateEntity(float delta, int entity) {
 	PhysicsComponent& physicsComponent = mManager.getComponent<PhysicsComponent>(entity);
 	GraphicsComponent& graphicsComponent = mManager.getComponent<GraphicsComponent>(entity);

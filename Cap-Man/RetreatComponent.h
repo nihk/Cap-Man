@@ -12,6 +12,7 @@ public:
 	RetreatComponent& operator=(const RetreatComponent& other);
 
 	void calculateRetreatPath(Point start, Point end);
+	bool reachedEnd() const { return mReachedEnd; }
 
 private:
 	void initOrResetTraversalMap();
@@ -23,5 +24,6 @@ private:
 	Map& mMap;
 	std::vector<std::vector<int>> mTraversalMap;
 	int mTraverseValue;
+	bool mReachedEnd;
 };
 

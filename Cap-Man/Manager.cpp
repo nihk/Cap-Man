@@ -25,7 +25,7 @@ int Manager::createEntity() {
 size_t Manager::registerEntity(int entity) {
 	size_t numAssociatedSystems = 0;
 
-	auto& entityComponents = findEntityComponents(entity);
+	std::set<int>& entityComponents = findEntityComponents(entity);
 
 	// Cycle through all systems to check which ones can be registered by the entity
 	for (auto& system : mSystems) {
@@ -51,6 +51,12 @@ size_t Manager::unregisterEntity(int entity) {
 	}
 
 	return numSystemsUnregisteredFrom;
+}
+
+void Manager::clear() {
+	mEntityComponents.clear();
+	mComponentStores.clear();
+	mSystems.clear();
 }
 
 size_t Manager::updateSystems(float delta) {

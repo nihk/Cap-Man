@@ -54,6 +54,7 @@ public:
 	size_t			registerEntity(int entity);
 	size_t			unregisterEntity(int entity);
 	size_t			updateSystems(float delta);
+	void			clear();
 
 private:
 	std::set<int>&	findEntityComponents(int entity);

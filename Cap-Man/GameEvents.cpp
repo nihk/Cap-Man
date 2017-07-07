@@ -43,6 +43,9 @@ void Game::onKeyDown(const SDL_KeyboardEvent* kbe) {
 
 	if (key == SDL_SCANCODE_ESCAPE) {
 		mShouldQuit = true;
+	} else if (key == SDL_SCANCODE_R) {
+		unload();
+		load();
 	}
 }
 

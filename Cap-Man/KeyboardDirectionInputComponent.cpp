@@ -2,8 +2,9 @@
 #include "Keyboard.h"
 
 KeyboardDirectionInputComponent::KeyboardDirectionInputComponent(Keyboard& keyboard, Directions::Direction startingDirection)
-	: mKeyboard(keyboard) 
-	, mDirection(startingDirection) {
+		: DirectionInputComponent(startingDirection)
+		, mKeyboard(keyboard) {
+	KeyboardDirectionInputComponent::setDirection(startingDirection);
 }
 
 KeyboardDirectionInputComponent::KeyboardDirectionInputComponent(const KeyboardDirectionInputComponent& other)
@@ -35,4 +36,8 @@ Directions::Direction KeyboardDirectionInputComponent::direction() {
 	}
 
 	return mDirection;
+}
+
+void KeyboardDirectionInputComponent::setDirection(Directions::Direction direction) {
+	mKeyboard.setRecentKeyDown(direction);
 }

@@ -27,6 +27,7 @@ RetreatComponent& RetreatComponent::operator=(const RetreatComponent& other) {
 
 void RetreatComponent::initOrResetTraversalMap() {
 	mTraverseValue = TRAVERSE_START_VALUE;
+	mReachedEnd = false;
 
 	for (int i = 0; i < mMap.rows(); ++i) {
 		std::vector<int> row;
@@ -57,6 +58,8 @@ void RetreatComponent::calculateRetreatPath(Point start, Point end) {
 }
 
 // TODO: This pathfinding algorithm is TERRIBLE. It's costly and doesn't end with an optimal path. Find a better one: e.g. Dijkstra's
+// http://bryukh.com/labyrinth-algorithms/
+// http://www.cokeandcode.com/main/tutorials/path-finding/
 bool RetreatComponent::traverseMap(int currRow, int currCol) {
 	// Array bounds checking
 	if (currRow < 0 || currCol < 0 || currRow >= mMap.rows() || currCol >= mMap.columns()) return false;
