@@ -1,5 +1,4 @@
 #include "Sprite.h"
-#include "Surface.h"
 #include "Renderer.h"
 
 Sprite::Sprite(Texture& texture, Rect source) 
@@ -21,6 +20,6 @@ Sprite&	Sprite::operator=(const Sprite& other) {
 	return *this;
 }
 
-void Sprite::draw(Renderer& renderer, const Rect& dest) {
-	SDL_RenderCopy(renderer.mutableData(), mTexture.mutableData(), mSource.data(), dest.data());
+void Sprite::draw(const Renderer& renderer, const Rect& dest) {
+	renderer.copyTexture(mTexture, mSource, dest);
 }

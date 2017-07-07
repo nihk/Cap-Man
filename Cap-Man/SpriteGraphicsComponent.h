@@ -12,7 +12,7 @@ public:
 	~SpriteGraphicsComponent();
 
 	void update(float delta, int state) override;
-	void draw(Renderer& renderer, const Rect& dest) override;
+	void draw(const Renderer& renderer, const Rect& dest) override;
 
 private:
 	std::unordered_map<int, Animation> mAnimations;

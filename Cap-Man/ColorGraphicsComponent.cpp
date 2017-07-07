@@ -9,7 +9,7 @@ ColorGraphicsComponent::ColorGraphicsComponent(Color color)
 ColorGraphicsComponent::~ColorGraphicsComponent() {
 }
 
-void ColorGraphicsComponent::draw(Renderer& renderer, const Rect& dest) {
-	SDL_SetRenderDrawColor(renderer.mutableData(), mColor.r(), mColor.g(), mColor.b(), mColor.a());
-	SDL_RenderFillRect(renderer.mutableData(), dest.data());
+void ColorGraphicsComponent::draw(const Renderer& renderer, const Rect& dest) {
+	renderer.setDrawColor(mColor);
+	renderer.fillRect(dest);
 }

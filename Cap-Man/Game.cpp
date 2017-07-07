@@ -89,7 +89,7 @@ bool Game::initialize() {
 	}
 
 	if (!load()) {
-		std::cerr << "Error: Failed to load entities" << std::endl;
+		std::cerr << "Error: Failed to load manager data" << std::endl;
 		return false;
 	}
 
@@ -113,7 +113,7 @@ bool Game::load() {
 	mManager.addSystem(std::make_shared<DrawSystem>(mManager, mRenderer));
 
 	if (!createEntities()) {
-		std::cerr << "Error: Failed to create entities: " << std::endl;
+		std::cerr << "Error: Failed to create entities" << std::endl;
 		return false;
 	}
 
@@ -121,12 +121,7 @@ bool Game::load() {
 }
 
 void Game::update(float delta) {
-	//mRenderer.setDrawColor(mBackgroundColor);
-	//mRenderer.clear();
-
 	mManager.updateSystems(delta);
-
-	//mRenderer.present();
 }
 
 void Game::unload() {

@@ -1,6 +1,8 @@
 #pragma once
 #include "Wrapper.h"
 
+class Texture;
+class Rect;
 class Color;
 class Window;
 struct SDL_Renderer;
@@ -13,6 +15,8 @@ public:
 
 	bool initialize(const Window& window);
 	void setDrawColor(const Color& color) const;
+	void fillRect(const Rect& rect) const;
+	void copyTexture(Texture& texture, const Rect& source, const Rect& dest) const;
 	void clear() const;
 	void present() const;
 

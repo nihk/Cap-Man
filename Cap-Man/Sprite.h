@@ -19,7 +19,7 @@ public:
 	Rect			getRect() const			{ return mSource; }
 	Texture			getTexture() const		{ return mTexture; }
 
-	void			draw(Renderer& renderer, const Rect& dest) override;
+	void			draw(const Renderer& renderer, const Rect& dest) override;
 
 private:
 	Texture&		mTexture;

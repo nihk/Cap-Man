@@ -17,7 +17,7 @@ public:
 
 	void reset();
 	void update(float delta);
-	void draw(Renderer& renderer, const Rect& dest) override;
+	void draw(const Renderer& renderer, const Rect& dest) override;
 
 private:
 	// Ideally this should be some factor of the delta update millis

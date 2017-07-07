@@ -11,7 +11,7 @@ public:
 
 	Color color() const { return mColor; }
 	void setColor(Color color) { mColor = color; }
-	void draw(Renderer& renderer, const Rect& dest) override;
+	void draw(const Renderer& renderer, const Rect& dest) override;
 
 private:
 	Color mColor;

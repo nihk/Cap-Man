@@ -27,6 +27,6 @@ void Animation::update(float delta) {
 	}
 }
 
-void Animation::draw(Renderer& renderer, const Rect& dest) {
+void Animation::draw(const Renderer& renderer, const Rect& dest) {
 	mSprites[mCurrentSpriteIndex].draw(renderer, dest);
 }

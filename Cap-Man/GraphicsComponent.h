@@ -13,6 +13,6 @@ public:
 	~GraphicsComponent() = default;
 
 	virtual void update(float delta, int state) { /* do nothing */}
-	void draw(Renderer& renderer, const Rect& dest) override { /* do nothing */ }
+	void draw(const Renderer& renderer, const Rect& dest) override { /* do nothing */ }
 };
 

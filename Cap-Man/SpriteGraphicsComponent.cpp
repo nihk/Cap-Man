@@ -17,7 +17,7 @@ void SpriteGraphicsComponent::update(float delta, int state) {
 	mAnimations.at(mState).update(delta);
 }
 
-void SpriteGraphicsComponent::draw(Renderer& renderer, const Rect& dest) {
+void SpriteGraphicsComponent::draw(const Renderer& renderer, const Rect& dest) {
 	mAnimations.at(mState).draw(renderer, dest);
 }
 
