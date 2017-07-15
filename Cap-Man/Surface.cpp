@@ -6,6 +6,10 @@ Surface::Surface()
 	: mSdlSurface(nullptr) {
 }
 
+Surface::~Surface() {
+	SDL_FreeSurface(mSdlSurface);
+}
+
 bool Surface::initialize(const std::string& filePath) {
 	mSdlSurface = IMG_Load(filePath.data());
 	return mSdlSurface != nullptr;
@@ -21,8 +25,4 @@ int Surface::width() const {
 
 int Surface::height() const {
 	return mSdlSurface->h;
-}
-
-Surface::~Surface() {
-	SDL_FreeSurface(mSdlSurface);
 }

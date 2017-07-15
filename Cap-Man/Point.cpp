@@ -11,6 +11,10 @@ Point::Point(int x, int y)
 Point::~Point() {
 }
 
+bool Point::operator==(const Point& other) const {
+	return x() == other.x() && y() == other.y();
+}
+
 double Point::distance(const Point& other) const {
 	int xDistance = abs(x() - other.x());
 	int yDistance = abs(y() - other.y());

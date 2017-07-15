@@ -39,6 +39,7 @@ void Game::onQuit() {
 
 void Game::onKeyDown(const SDL_KeyboardEvent* kbe) {
 	int key = kbe->keysym.scancode;
+	// TODO: Only set the recent keydowns for specific keys, i.e. up, down, left, right, enter?
 	mKeyboard.setRecentKeyDown(key);
 
 	if (key == SDL_SCANCODE_ESCAPE) {

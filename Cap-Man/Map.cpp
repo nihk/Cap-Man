@@ -134,21 +134,21 @@ Point Map::startLocation(StartLocation startLocation) const {
 //Point Map::startLocation(StartLocation startLocation) const {
 //}
 
-int Map::mapLocation(Point location, bool scaleUnitsToPixels) const {
-	if (scaleUnitsToPixels) {
-		scaleUpToUnits(location);
+int Map::mapLocation(Point location, bool scaleUtoP) const {
+	if (scaleUtoP) {
+		scaleUnitsToPixels(location);
 	}
 
 	return location.x() + location.y() * mColumns;
 }
 
 // TODO: Refactor this to be less stupid
-Point Map::mapLocation(int layoutIndex, bool scaleUnitsToPixels) const {
+Point Map::mapLocation(int layoutIndex, bool scaleUtoP) const {
 	int x = layoutIndex % mColumns;
 	int y = layoutIndex / mColumns;
 
-	if (scaleUnitsToPixels) {
-		scaleUpToUnits(x, y);
+	if (scaleUtoP) {
+		scaleUnitsToPixels(x, y);
 	}
 
 	return Point(x, y);
@@ -180,9 +180,9 @@ int Map::unitPixels(int numUnits) const {
 	return numUnits * mScales.at(mActiveScale) * mUnitPixelSize;
 }
 
-int Map::neighbourElement(Point location, bool scalePixelsToUnits, Directions::Direction direction) const {
-	if (scalePixelsToUnits) {
-		scaleDownToUnits(location);
+int Map::neighbourElement(Point location, bool scalePtoU, Directions::Direction direction) const {
+	if (scalePtoU) {
+		scalePixelsToUnits(location);
 	}
 
 	switch (direction) {
@@ -222,22 +222,23 @@ int Map::neighbourElement(Point location, bool scalePixelsToUnits, Directions::D
 	return mapElement(location.x(), location.y());
 }
 
-void Map::scaleUpToUnits(int& x, int& y) const {
+
+void Map::scaleUnitsToPixels(int& x, int& y) const {
 	x *= singleUnitPixels();
 	y *= singleUnitPixels();
 }
 
-void Map::scaleUpToUnits(Point& point) const {
+void Map::scaleUnitsToPixels(Point& point) const {
 	point.setX(point.x() * singleUnitPixels());
 	point.setY(point.y() * singleUnitPixels());
 }
 
-void Map::scaleDownToUnits(int& x, int& y) const {
+void Map::scalePixelsToUnits(int& x, int& y) const {
 	x /= singleUnitPixels();
 	y /= singleUnitPixels();
 }
 
-void Map::scaleDownToUnits(Point& point) const {
+void Map::scalePixelsToUnits(Point& point) const {
 	point.setX(point.x() / singleUnitPixels());
 	point.setY(point.y() / singleUnitPixels());
 }

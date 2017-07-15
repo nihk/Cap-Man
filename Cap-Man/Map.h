@@ -35,6 +35,12 @@ public:
 	int unitPixels(int numUnits) const;
 	int neighbourElement(Point location, bool scalePixelsToUnits, Directions::Direction direction) const;
 
+	// TODO: instead of mutating by reference, return new Point (value) instances?
+	void scaleUnitsToPixels(int& x, int& y) const;
+	void scaleUnitsToPixels(Point& point) const;
+	void scalePixelsToUnits(int& x, int& y) const;
+	void scalePixelsToUnits(Point& point) const;
+
 private:
 	static const std::string ROOT_XML_TAG;
 	static const std::string UNIT_PIXEL_SIZE_XML_TAG;
@@ -48,12 +54,6 @@ private:
 	static const std::string ITEM_XML_TAG;
 	static const std::string ITEM_KEY_ATTR;
 	static const std::string ITEM_VALUE_ATTR;
-
-	// TODO: instead of mutating by reference, return new Point (value) instances?
-	void scaleUpToUnits(int& x, int& y) const;
-	void scaleUpToUnits(Point& point) const;
-	void scaleDownToUnits(int& x, int& y) const;
-	void scaleDownToUnits(Point& point) const;
 
 	std::unordered_map<std::string, int> mLegend;
 	int mUnitPixelSize;

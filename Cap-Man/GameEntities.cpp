@@ -6,7 +6,7 @@
 #include "SpriteGraphicsComponent.h"
 #include "LastValidDirectionComponent.h"
 #include "ColorGraphicsComponent.h"
-#include "RetreatComponent.h"
+#include "AStarComponent.h"
 
 // TODO: Move metadata to XML so this method is less bloated
 bool Game::createEntities() {
@@ -75,7 +75,7 @@ bool Game::createEntities() {
 	{
 		int capMan = mManager.createEntity();
 
-		// TODO: Don't conflate Directions with AnimationStates
+		// TODO: Don't conflate Directions with AnimationStates. Just make dedicated stationaryDirection animations
 		std::unordered_map<int, Animation> capManAnimations;
 		Animation walkLeft(GameConstants::ANIMATION_FRAME_INTERVAL);
 		walkLeft.addSprite(mSpriteRepository.findSprite("capman_closed"));
@@ -173,8 +173,8 @@ bool Game::createEntities() {
 			vulnerable.addSprite(mSpriteRepository.findSprite("ghost_blue1"));
 			vulnerable.addSprite(mSpriteRepository.findSprite("ghost_blue2"));
 			ghostAnimations.insert_or_assign(AnimationStates::VULNERABLE, deathDown);
-			// TODO: most to constant
-			// TODO: vulnetable expiring faster?
+			// TODO: move to constant
+			// TODO: vulnerable expiring faster?
 			Animation vulnerableExpiring(264 /* millis */);
 			vulnerableExpiring.addSprite(mSpriteRepository.findSprite("ghost_blue1"));
 			vulnerableExpiring.addSprite(mSpriteRepository.findSprite("ghost_white1"));
@@ -201,7 +201,7 @@ bool Game::createEntities() {
 
 			Point startPoint = mMap.mapLocation(ghostStart, true /* scaleUnitsToPixels */);
 
-			mManager.addComponent(ghost, RetreatComponent(mMap));
+			mManager.addComponent(ghost, AStarComponent(mMap));
 			mManager.addComponent(ghost, DirectionInputComponent(Directions::LEFT));
 			mManager.addComponent(ghost, VelocityComponent(velocity, speed));
 			mManager.addComponent(ghost, PhysicsComponent(startPoint.x(), startPoint.y(), mMap.singleUnitPixels(), mMap.singleUnitPixels()));

@@ -12,7 +12,8 @@ public:
 
 	bool initialize(int width, int height);
 	// TODO: Consider this with respect to Map scaling
-	// NB: This doesn't affect mSdlWindow. Is used instead for updates after an SDL_Event window resize
+	// NB: This doesn't affect mSdlWindow. It's used instead for updates after 
+	// an SDL_Event already resized the window
 	void setDimens(int w, int h) { mWidth = w; mHeight = h; }
 
 	int width() const { return mWidth; }

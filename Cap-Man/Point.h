@@ -10,6 +10,8 @@ public:
 	Point(int x, int y);
 	~Point();
 
+	bool				operator==(const Point& other) const;
+
 	int					x() const				{ return mSdlPoint.x; }
 	int					y() const				{ return mSdlPoint.y; }
 	void				setX(int x)				{ mSdlPoint.x = x; }

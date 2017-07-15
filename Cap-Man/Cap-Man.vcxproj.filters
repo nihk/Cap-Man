@@ -150,14 +150,17 @@
     <ClCompile Include="PointGranterComponent.cpp">
       <Filter>Source Files\Components</Filter>
     </ClCompile>
-    <ClCompile Include="GhostDeathRetreatSystem.cpp">
-      <Filter>Source Files\Systems</Filter>
-    </ClCompile>
-    <ClCompile Include="RetreatComponent.cpp">
-      <Filter>Source Files\Components</Filter>
-    </ClCompile>
     <ClCompile Include="DirectionInputComponent.cpp">
       <Filter>Source Files\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="NodeWithCost.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="AStarComponent.cpp">
+      <Filter>Source Files\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="PathfindingSystem.cpp">
+      <Filter>Source Files\Systems</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -278,11 +281,14 @@
     <ClInclude Include="PointGranterComponent.h">
       <Filter>Header Files\Components</Filter>
     </ClInclude>
-    <ClInclude Include="GhostDeathRetreatSystem.h">
-      <Filter>Header Files\Systems</Filter>
+    <ClInclude Include="NodeWithCost.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="RetreatComponent.h">
+    <ClInclude Include="AStarComponent.h">
       <Filter>Header Files\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="PathfindingSystem.h">
+      <Filter>Header Files\Systems</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

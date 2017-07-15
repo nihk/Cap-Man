@@ -25,6 +25,7 @@ void DirectionAnimationSystem::updateEntity(float delta, int entity) {
 	// so set the delta to 0.0f so the animation won't progress (it'll "freeze")
 	// and draw the direction that was last valid
 	// TODO: This is wonky logic and conflates direction with state
+	// TODO Just use velocity and new stationaryDirection animation states
 	if (direction == Directions::NONE) {
 		delta = 0.0f;
 	} 

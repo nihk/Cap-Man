@@ -28,5 +28,5 @@ void Animation::update(float delta) {
 }
 
 void Animation::draw(const Renderer& renderer, const Rect& dest) {
-	mSprites[mCurrentSpriteIndex].draw(renderer, dest);
+	mSprites.at(mCurrentSpriteIndex).draw(renderer, dest);
 }

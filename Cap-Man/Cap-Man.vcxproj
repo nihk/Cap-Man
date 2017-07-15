@@ -146,6 +146,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Animation.cpp" />
+    <ClCompile Include="AStarComponent.cpp" />
     <ClCompile Include="BreadcrumbTrailComponent.cpp" />
     <ClCompile Include="Color.cpp" />
     <ClCompile Include="ColorGraphicsComponent.cpp" />
@@ -155,8 +156,8 @@
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="GameEntities.cpp" />
     <ClCompile Include="GameEvents.cpp" />
-    <ClCompile Include="GhostDeathRetreatSystem.cpp" />
-    <ClCompile Include="RetreatComponent.cpp" />
+    <ClCompile Include="NodeWithCost.cpp" />
+    <ClCompile Include="PathfindingSystem.cpp" />
     <ClCompile Include="Keyboard.cpp" />
     <ClCompile Include="KeyboardDirectionInputComponent.cpp" />
     <ClCompile Include="main.cpp" />
@@ -187,6 +188,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Animation.h" />
+    <ClInclude Include="AStarComponent.h" />
     <ClInclude Include="BreadcrumbTrailComponent.h" />
     <ClInclude Include="catch.hpp" />
     <ClInclude Include="Color.h" />
@@ -199,8 +201,8 @@
     <ClInclude Include="DrawSystem.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="Constants.h" />
-    <ClInclude Include="GhostDeathRetreatSystem.h" />
-    <ClInclude Include="RetreatComponent.h" />
+    <ClInclude Include="NodeWithCost.h" />
+    <ClInclude Include="PathfindingSystem.h" />
     <ClInclude Include="GraphicsComponent.h" />
     <ClInclude Include="Keyboard.h" />
     <ClInclude Include="KeyboardDirectionInputComponent.h" />

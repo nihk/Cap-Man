@@ -6,6 +6,7 @@
 
 class Map;
 
+// TODO: Rename to WallHuggingSystem
 class WallPathingSystem 
 	: public System {
 public:
