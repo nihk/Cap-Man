@@ -3,6 +3,7 @@
 #include "AStarComponent.h"
 #include "Manager.h"
 #include "Map.h"
+#include "PathGoalComponent.h"
 
 PathfindingSystem::PathfindingSystem(Manager& manager, Map& map) 
 		: System(manager)
@@ -10,6 +11,7 @@ PathfindingSystem::PathfindingSystem(Manager& manager, Map& map)
 	insertRequiredComponent(PhysicsComponent::ID);
 	insertRequiredComponent(AStarComponent::ID);
 	insertRequiredComponent(DirectionInputComponent::ID);
+	insertRequiredComponent(PathGoalComponent::ID);
 }
 
 PathfindingSystem::~PathfindingSystem() {
@@ -19,19 +21,29 @@ void PathfindingSystem::updateEntity(float delta, int entity) {
 	PhysicsComponent& physicsComponent = mManager.getComponent<PhysicsComponent>(entity);
 	AStarComponent& aStarComponent = mManager.getComponent<AStarComponent>(entity);
 	DirectionInputComponent& directionInputComponent = mManager.getComponent<DirectionInputComponent>(entity);
+	PathGoalComponent& pathGoalComponent = mManager.getComponent<PathGoalComponent>(entity);
 
+	if (!pathGoalComponent.hasGoal()) {
+		return;
+	}
+
+	Point goal = pathGoalComponent.goal();
 	Rect rect = physicsComponent.rect();
 	Point current = rect.center();
 	mMap.scalePixelsToUnits(current);
 
 	if (!aStarComponent.hasPath()) {
-		Point goal(18, 20);
 		aStarComponent.findPath(current, goal);
 	} 
 
 	Point nextStep = aStarComponent.peekCurrentPathStep();
 	if (current == nextStep) {
 		nextStep = aStarComponent.popNextPathStep();
+
+		// Exhausted the path nodes; remove the goal
+		if (!aStarComponent.hasPath()) {
+			pathGoalComponent.removeGoal();
+		}
 	}
 
 	if (current.x() < nextStep.x()) {

@@ -12,10 +12,11 @@
 #include "DrawSystem.h"
 #include "KeyboardDirectionInputComponent.h"
 #include "DirectionAnimationSystem.h"
-#include "WallPathingSystem.h"
+#include "WallHuggingSystem.h"
 #include "LastValidDirectionComponent.h"
 #include "AStarComponent.h"
 #include "PathfindingSystem.h"
+#include "PathGoalComponent.h"
 
 Game::Game()
 	: mShouldQuit(false) {
@@ -102,11 +103,12 @@ bool Game::load() {
 	mManager.createComponentStore<GraphicsComponent>();
 	mManager.createComponentStore<LastValidDirectionComponent>();
 	mManager.createComponentStore<AStarComponent>();
+	mManager.createComponentStore<PathGoalComponent>();
 
 	// NB: The systems are updated in the order they are added here!
 	mManager.addSystem(std::make_shared<SpeedSystem>(mManager));
 	mManager.addSystem(std::make_shared<PathfindingSystem>(mManager, mMap));
-	mManager.addSystem(std::make_shared<WallPathingSystem>(mManager, mMap));
+	mManager.addSystem(std::make_shared<WallHuggingSystem>(mManager, mMap));
 	mManager.addSystem(std::make_shared<MoveSystem>(mManager));
 	mManager.addSystem(std::make_shared<DirectionAnimationSystem>(mManager));
 	mManager.addSystem(std::make_shared<DrawSystem>(mManager, mRenderer));

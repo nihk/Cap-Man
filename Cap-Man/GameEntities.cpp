@@ -7,6 +7,7 @@
 #include "LastValidDirectionComponent.h"
 #include "ColorGraphicsComponent.h"
 #include "AStarComponent.h"
+#include "PathGoalComponent.h"
 
 // TODO: Move metadata to XML so this method is less bloated
 bool Game::createEntities() {
@@ -202,6 +203,7 @@ bool Game::createEntities() {
 			Point startPoint = mMap.mapLocation(ghostStart, true /* scaleUnitsToPixels */);
 
 			mManager.addComponent(ghost, AStarComponent(mMap));
+			mManager.addComponent(ghost, PathGoalComponent(Point(2, 2)));
 			mManager.addComponent(ghost, DirectionInputComponent(Directions::LEFT));
 			mManager.addComponent(ghost, VelocityComponent(velocity, speed));
 			mManager.addComponent(ghost, PhysicsComponent(startPoint.x(), startPoint.y(), mMap.singleUnitPixels(), mMap.singleUnitPixels()));

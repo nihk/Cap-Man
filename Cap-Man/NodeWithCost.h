@@ -21,8 +21,11 @@ private:
 
 	Point mPoint;
 	std::shared_ptr<NodeWithCost> mParent;
+	// The sum of the G and H costs
 	int mF;
+	// The cumulative movement cost from the parent to this node
 	int mG;
+	// The manhattan distance from this node to an goal node
 	int mH;
 };
 
