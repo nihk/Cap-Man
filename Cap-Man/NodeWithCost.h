@@ -11,6 +11,7 @@ public:
 	int x() const { return mPoint.x(); }
 	int y() const { return mPoint.y(); }
 	std::shared_ptr<NodeWithCost> parent() const { return mParent; }
+	// TODO: This should probably be in a constructor overload
 	void setCost(const NodeWithCost& goal);
 
 	bool operator<(const NodeWithCost& other) const;
@@ -25,7 +26,7 @@ private:
 	int mF;
 	// The cumulative movement cost from the parent to this node
 	int mG;
-	// The manhattan distance from this node to an goal node
+	// The manhattan distance from this node to a goal node
 	int mH;
 };
 

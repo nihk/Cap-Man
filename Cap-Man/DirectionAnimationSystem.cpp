@@ -20,15 +20,25 @@ void DirectionAnimationSystem::updateEntity(float delta, int entity) {
 
 	Directions::Direction prevValidDirection = lastValidDirectionComponent.lastKnownValidDirection();
 	Directions::Direction direction = directionInputComponent.direction();
+	AnimationStates::AnimationState animationState;
 
-	// If the current direction is NONE, then character is facing a wall,
-	// so set the delta to 0.0f so the animation won't progress (it'll "freeze")
-	// and draw the direction that was last valid
-	// TODO: This is wonky logic and conflates direction with state
-	// TODO Just use velocity and new stationaryDirection animation states
 	if (direction == Directions::NONE) {
-		delta = 0.0f;
-	} 
+		switch (prevValidDirection) {
+			case Directions::LEFT: animationState = AnimationStates::STATIONARY_LEFT; break;
+			case Directions::RIGHT: animationState = AnimationStates::STATIONARY_RIGHT; break;
+			case Directions::UP: animationState = AnimationStates::STATIONARY_UP; break;
+			case Directions::DOWN:  // Fall through
+			default: animationState = AnimationStates::STATIONARY_DOWN; break;
+		}
+	}  else {
+		switch (prevValidDirection) {
+			case Directions::LEFT: animationState = AnimationStates::WALK_LEFT; break;
+			case Directions::RIGHT: animationState = AnimationStates::WALK_RIGHT; break;
+			case Directions::UP: animationState = AnimationStates::WALK_UP; break;
+			case Directions::DOWN:  // Fall through
+			default: animationState = AnimationStates::WALK_DOWN; break;
+		}
+	}
 
-	graphicsComponent.update(delta, prevValidDirection);
+	graphicsComponent.update(delta, animationState);
 }

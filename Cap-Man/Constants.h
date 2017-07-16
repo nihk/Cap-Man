@@ -82,4 +82,8 @@ namespace AnimationStates {
 	static const AnimationState DEATH_DOWN = 1 << 8;
 	static const AnimationState VULNERABLE = 1 << 9;
 	static const AnimationState VULNERABLE_EXPIRING = 1 << 10;
+	static const AnimationState STATIONARY_LEFT = 1 << 11;
+	static const AnimationState STATIONARY_RIGHT = 1 << 12;
+	static const AnimationState STATIONARY_DOWN = 1 << 13;
+	static const AnimationState STATIONARY_UP = 1 << 14;
 }

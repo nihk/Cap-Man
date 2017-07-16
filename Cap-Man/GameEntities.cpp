@@ -76,7 +76,6 @@ bool Game::createEntities() {
 	{
 		int capMan = mManager.createEntity();
 
-		// TODO: Don't conflate Directions with AnimationStates. Just make dedicated stationaryDirection animations
 		std::unordered_map<int, Animation> capManAnimations;
 		Animation walkLeft(GameConstants::ANIMATION_FRAME_INTERVAL);
 		walkLeft.addSprite(mSpriteRepository.findSprite("capman_closed"));
@@ -102,6 +101,18 @@ bool Game::createEntities() {
 		walkDown.addSprite(mSpriteRepository.findSprite("capman_down2"));
 		walkDown.addSprite(mSpriteRepository.findSprite("capman_down1"));
 		capManAnimations.insert_or_assign(AnimationStates::WALK_DOWN, walkDown);
+		Animation stationaryLeft;
+		stationaryLeft.addSprite(mSpriteRepository.findSprite("capman_left1"));
+		capManAnimations.insert_or_assign(AnimationStates::STATIONARY_LEFT, stationaryLeft);
+		Animation stationaryRight;
+		stationaryRight.addSprite(mSpriteRepository.findSprite("capman_right1"));
+		capManAnimations.insert_or_assign(AnimationStates::STATIONARY_RIGHT, stationaryRight);
+		Animation stationaryUp;
+		stationaryUp.addSprite(mSpriteRepository.findSprite("capman_up1"));
+		capManAnimations.insert_or_assign(AnimationStates::STATIONARY_UP, stationaryUp);
+		Animation stationaryDown;
+		stationaryDown.addSprite(mSpriteRepository.findSprite("capman_down1"));
+		capManAnimations.insert_or_assign(AnimationStates::STATIONARY_DOWN, stationaryDown);
 		Animation death(GameConstants::ANIMATION_FRAME_INTERVAL);
 		death.addSprite(mSpriteRepository.findSprite("capman_death1"));
 		death.addSprite(mSpriteRepository.findSprite("capman_death2"));
@@ -157,6 +168,19 @@ bool Game::createEntities() {
 			walkDown.addSprite(mSpriteRepository.findSprite(ghostName + "_down2"));
 			ghostAnimations.insert_or_assign(AnimationStates::WALK_DOWN, walkDown);
 
+			Animation startionaryLeft;
+			startionaryLeft.addSprite(mSpriteRepository.findSprite(ghostName + "_left2"));
+			ghostAnimations.insert_or_assign(AnimationStates::STATIONARY_LEFT, startionaryLeft);
+			Animation stationaryRight;
+			stationaryRight.addSprite(mSpriteRepository.findSprite(ghostName + "_right1"));
+			ghostAnimations.insert_or_assign(AnimationStates::STATIONARY_RIGHT, stationaryRight);
+			Animation stationaryUp;
+			stationaryUp.addSprite(mSpriteRepository.findSprite(ghostName + "_up2"));
+			ghostAnimations.insert_or_assign(AnimationStates::STATIONARY_UP, stationaryUp);
+			Animation stationaryDown;
+			stationaryDown.addSprite(mSpriteRepository.findSprite(ghostName + "_down1"));
+			ghostAnimations.insert_or_assign(AnimationStates::STATIONARY_DOWN, stationaryDown);
+
 			Animation deathLeft;
 			deathLeft.addSprite(mSpriteRepository.findSprite("ghost_death_left"));
 			ghostAnimations.insert_or_assign(AnimationStates::DEATH_LEFT, deathLeft);
@@ -188,27 +212,32 @@ bool Game::createEntities() {
 			float speed = static_cast<float>(mMap.unitPixels(GameConstants::CHARACTER_UNITS_SPEED));
 
 			int ghostStart;
+			PathGoalComponent pathGoalComponent;
 
-			// TODO: Refactor. Perhaps indexOf takes a string?
+			// TODO: Refactor
 			if (ghostName == ghostNames.at(0)) {
 				ghostStart = mMap.indexOf(MapLayoutElements::INKY);
+				//pathGoalComponent.setGoal(Point(18, 20));
 			} else if (ghostName == ghostNames.at(1)) {
 				ghostStart = mMap.indexOf(MapLayoutElements::BLINKY);
+				pathGoalComponent.setGoal(Point(2, 2));
 			} else if (ghostName == ghostNames.at(2)) {
 				ghostStart = mMap.indexOf(MapLayoutElements::PINKY);
+				//pathGoalComponent.setGoal(Point(2, 20));
 			} else {
 				ghostStart = mMap.indexOf(MapLayoutElements::CLYDE);
+				pathGoalComponent.setGoal(Point(18, 2));
 			}
 
 			Point startPoint = mMap.mapLocation(ghostStart, true /* scaleUnitsToPixels */);
 
 			mManager.addComponent(ghost, AStarComponent(mMap));
-			mManager.addComponent(ghost, PathGoalComponent(Point(2, 2)));
-			mManager.addComponent(ghost, DirectionInputComponent(Directions::LEFT));
+			mManager.addComponent(ghost, std::move(pathGoalComponent));
+			mManager.addComponent(ghost, DirectionInputComponent());
 			mManager.addComponent(ghost, VelocityComponent(velocity, speed));
 			mManager.addComponent(ghost, PhysicsComponent(startPoint.x(), startPoint.y(), mMap.singleUnitPixels(), mMap.singleUnitPixels()));
-			mManager.addComponent(ghost, SpriteGraphicsComponent(ghostAnimations, AnimationStates::WALK_LEFT));
-			mManager.addComponent(ghost, LastValidDirectionComponent(Directions::LEFT));
+			mManager.addComponent(ghost, SpriteGraphicsComponent(ghostAnimations, AnimationStates::STATIONARY_DOWN));
+			mManager.addComponent(ghost, LastValidDirectionComponent(Directions::DOWN));
 			mManager.registerEntity(ghost);
 		}
 	}

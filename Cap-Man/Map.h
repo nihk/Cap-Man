@@ -12,6 +12,7 @@ class Map {
 public:
 	enum class Scale { SMALL, LARGE };
 	enum class StartLocation { CAP_MAN, INKY, BLINKY, PINKY, CLYDE };
+	enum class Resize { NONE, UNITS_TO_PIXELS, PIXELS_TO_UNITS };
 
 	Map();
 	~Map();
@@ -42,6 +43,7 @@ public:
 	void scalePixelsToUnits(Point& point) const;
 
 private:
+	// TODO: Can these be moved elsewhere?
 	static const std::string ROOT_XML_TAG;
 	static const std::string UNIT_PIXEL_SIZE_XML_TAG;
 	static const std::string UNIT_SCALE_XML_TAG;

@@ -222,7 +222,6 @@ int Map::neighbourElement(Point location, bool scalePtoU, Directions::Direction 
 	return mapElement(location.x(), location.y());
 }
 
-
 void Map::scaleUnitsToPixels(int& x, int& y) const {
 	x *= singleUnitPixels();
 	y *= singleUnitPixels();
