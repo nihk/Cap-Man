@@ -39,6 +39,12 @@ public:
 	}
 
 	template<class T, class = std::enable_if<std::is_base_of<Component<T>, T>::value>>
+	bool hasComponent(int entity) {
+		ComponentStore<T>& componentStore = getComponentStore<T>();
+		return componentStore.hasComponent(entity);
+	}
+
+	template<class T, class = std::enable_if<std::is_base_of<Component<T>, T>::value>>
 	bool addComponent(int entity, T&& component) {
 		// If the entity was newly created, this set will be empty
 		auto& entityComponents = findEntityComponents(entity);

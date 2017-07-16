@@ -59,9 +59,9 @@ namespace MapLayoutElements {
 	static const int WALL = 1;
 	static const int CAP_MAN = 2;
 	static const int INKY = 3;
-	static const int BLINKY = 4;
+	static const int CLYDE = 4;
 	static const int PINKY = 5;
-	static const int CLYDE = 6;
+	static const int BLINKY = 6;
 	static const int GHOST_GATE = 7;
 	static const int PELLET = 8;
 	static const int POWERUP = 9;

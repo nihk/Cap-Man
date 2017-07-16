@@ -17,6 +17,12 @@ public:
 	bool operator<(const NodeWithCost& other) const;
 	bool operator==(const NodeWithCost& other) const;
 
+	struct Hash {
+		size_t operator() (const NodeWithCost& node) const {
+			return Point::hash(node.point());
+		}
+	};
+
 private:
 	static const int AXIS_ALIGNED_MOVEMENT_COST;
 

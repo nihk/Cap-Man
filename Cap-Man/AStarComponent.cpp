@@ -25,9 +25,9 @@ void AStarComponent::findPath(Point start, Point end) {
 	NodeWithCost goal(end, nullptr);
 
 	// The set of nodes to be considered
-	std::unordered_set<NodeWithCost, NodePointHash> open;
+	std::unordered_set<NodeWithCost, NodeWithCost::Hash> open;
 	// The set of nodes already looked at
-	std::unordered_set<NodeWithCost, NodePointHash> closed;
+	std::unordered_set<NodeWithCost, NodeWithCost::Hash> closed;
 
 	open.insert(current);
 
@@ -54,7 +54,7 @@ Point AStarComponent::popNextPathStep() {
 }
 
 // O(n)
-NodeWithCost AStarComponent::findLowestFCost(const std::unordered_set<NodeWithCost, NodePointHash>& open) {
+NodeWithCost AStarComponent::findLowestFCost(const std::unordered_set<NodeWithCost, NodeWithCost::Hash>& open) {
 	auto it = open.begin();
 	NodeWithCost lowest = *it;
 
@@ -69,7 +69,7 @@ NodeWithCost AStarComponent::findLowestFCost(const std::unordered_set<NodeWithCo
 }
 
 void AStarComponent::addValidNeighbourNodesToOpen(NodeWithCost& current, const NodeWithCost& goal, 
-		std::unordered_set<NodeWithCost, NodePointHash>& open, const std::unordered_set<NodeWithCost, NodePointHash>& closed) const {
+		std::unordered_set<NodeWithCost, NodeWithCost::Hash>& open, const std::unordered_set<NodeWithCost, NodeWithCost::Hash>& closed) const {
 	int x = current.x();
 	int y = current.y();
 
@@ -85,7 +85,7 @@ void AStarComponent::addValidNeighbourNodesToOpen(NodeWithCost& current, const N
 }
 
 void AStarComponent::tryAddNodeToOpen(const Point& point, NodeWithCost& parent, const NodeWithCost& goal, 
-		std::unordered_set<NodeWithCost, NodePointHash>& open, const std::unordered_set<NodeWithCost, NodePointHash>& closed) const {
+		std::unordered_set<NodeWithCost, NodeWithCost::Hash>& open, const std::unordered_set<NodeWithCost, NodeWithCost::Hash>& closed) const {
 	if (isValidMapCoord(point) && !isWall(point)) {
 		NodeWithCost node = NodeWithCost(point, std::make_shared<NodeWithCost>(parent));
 		bool isInOpen = open.find(node) != open.end();

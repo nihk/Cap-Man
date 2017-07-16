@@ -167,9 +167,10 @@
     <ClCompile Include="PathGoalComponent.cpp" />
     <ClCompile Include="PhysicsComponent.cpp" />
     <ClCompile Include="Point.cpp" />
-    <ClCompile Include="PointGranterComponent.cpp" />
+    <ClCompile Include="PointsCollectorComponent.cpp" />
     <ClCompile Include="Rect.cpp" />
     <ClCompile Include="Renderer.cpp" />
+    <ClCompile Include="ScoreKeeperSystem.cpp" />
     <ClCompile Include="SpeedSystem.cpp" />
     <ClCompile Include="Sprite.cpp" />
     <ClCompile Include="SpriteGraphicsComponent.cpp" />
@@ -213,9 +214,10 @@
     <ClInclude Include="PathGoalComponent.h" />
     <ClInclude Include="PhysicsComponent.h" />
     <ClInclude Include="Point.h" />
-    <ClInclude Include="PointGranterComponent.h" />
+    <ClInclude Include="PointsCollectorComponent.h" />
     <ClInclude Include="Rect.h" />
     <ClInclude Include="Renderer.h" />
+    <ClInclude Include="ScoreKeeperSystem.h" />
     <ClInclude Include="SpeedSystem.h" />
     <ClInclude Include="Sprite.h" />
     <ClInclude Include="SpriteGraphicsComponent.h" />

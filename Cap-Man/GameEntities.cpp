@@ -8,8 +8,9 @@
 #include "ColorGraphicsComponent.h"
 #include "AStarComponent.h"
 #include "PathGoalComponent.h"
+#include "PointsCollectorComponent.h"
 
-// TODO: Move metadata to XML so this method is less bloated
+// TODO: Move metadata to XML so this method is less bloated?
 bool Game::createEntities() {
 	// Draw order: walls == pellets == powerups < cap-man < ghosts
 
@@ -28,8 +29,16 @@ bool Game::createEntities() {
 		mManager.registerEntity(background);
 	}
 
+	// Score
+	{
+		int score = mManager.createEntity();
+		std::unordered_map<int, Animation> scoreSprites;
+		Animation scoreAnimation;
+	}
+
 	// Pellets
 	{
+		// TODO: Magic numbers
 		int pelletSideLength = mMap.singleUnitPixels() / 4;
 		int pelletPadding = (mMap.singleUnitPixels() - pelletSideLength) / 2;
 		for (size_t i = 0; i < layout.size(); ++i) {
@@ -43,6 +52,8 @@ bool Game::createEntities() {
 				mManager.addComponent(pellet, PhysicsComponent(rect));
 				mManager.addComponent(pellet, ColorGraphicsComponent(Colors::BEIGE));
 				mManager.registerEntity(pellet);
+
+				mPellets.insert_or_assign(i, pellet);
 			}
 		}
 	}
@@ -66,8 +77,9 @@ bool Game::createEntities() {
 				powerupAnimation.addSprite(powerupAsset);
 				powerupAnimations.insert_or_assign(AnimationStates::DEFAULT, powerupAnimation);
 				mManager.addComponent(powerup, SpriteGraphicsComponent(powerupAnimations, AnimationStates::DEFAULT));
-
 				mManager.registerEntity(powerup);
+
+				mPowerups.insert_or_assign(i, powerup);
 			}
 		}
 	}
@@ -140,6 +152,7 @@ bool Game::createEntities() {
 		mManager.addComponent(capMan, PhysicsComponent(startPoint.x(), startPoint.y(), mMap.singleUnitPixels(), mMap.singleUnitPixels()));
 		mManager.addComponent(capMan, SpriteGraphicsComponent(capManAnimations, AnimationStates::WALK_LEFT));
 		mManager.addComponent(capMan, LastValidDirectionComponent(Directions::LEFT));
+		mManager.addComponent(capMan, PointsCollectorComponent());
 		mManager.registerEntity(capMan);
 	}
 

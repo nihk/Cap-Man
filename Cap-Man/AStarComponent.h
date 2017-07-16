@@ -22,19 +22,11 @@ public:
 	Point peekCurrentPathStep() const { return mOptimalPath.front(); }
 
 private:
-	struct NodePointHash {
-		size_t operator() (const NodeWithCost& node) const {
-			int result = node.x();
-			result = 31 * result + node.y();
-			return result;
-		}
-	};
-
-	static NodeWithCost findLowestFCost(const std::unordered_set<NodeWithCost, NodePointHash>& open);
+	static NodeWithCost findLowestFCost(const std::unordered_set<NodeWithCost, NodeWithCost::Hash>& open);
 	void addValidNeighbourNodesToOpen(NodeWithCost& current, const NodeWithCost& goal,
-	                                  std::unordered_set<NodeWithCost, NodePointHash>& open, const std::unordered_set<NodeWithCost, NodePointHash>& closed) const;
+	                                  std::unordered_set<NodeWithCost, NodeWithCost::Hash>& open, const std::unordered_set<NodeWithCost, NodeWithCost::Hash>& closed) const;
 	void tryAddNodeToOpen(const Point& point, NodeWithCost& parent,
-	                      const NodeWithCost& goal, std::unordered_set<NodeWithCost, NodePointHash>& open, const std::unordered_set<NodeWithCost, NodePointHash>& closed) const;
+	                      const NodeWithCost& goal, std::unordered_set<NodeWithCost, NodeWithCost::Hash>& open, const std::unordered_set<NodeWithCost, NodeWithCost::Hash>& closed) const;
 	bool isValidMapCoord(const Point& point) const;
 	bool isWall(const Point& point) const;
 	void extractOptimalPath(std::shared_ptr<NodeWithCost> node);

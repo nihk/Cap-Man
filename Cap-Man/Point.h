@@ -11,6 +11,7 @@ public:
 	~Point();
 
 	bool				operator==(const Point& other) const;
+	static size_t		hash(const Point& point);
 
 	int					x() const				{ return mSdlPoint.x; }
 	int					y() const				{ return mSdlPoint.y; }
@@ -20,6 +21,12 @@ public:
 	double				distance(const Point& other) const;
 	const SDL_Point*	data() const override	{ return &mSdlPoint; }
 	SDL_Point*			mutableData() override	{ return &mSdlPoint; }
+
+	struct Hash {
+		size_t operator() (const Point& point) const {
+			return hash(point);
+		}
+	};
 
 private:
 	SDL_Point	mSdlPoint;

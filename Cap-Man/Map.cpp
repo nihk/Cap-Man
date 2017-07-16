@@ -121,6 +121,7 @@ bool Map::initialize(std::string fileName) {
 	return true;
 }
 
+// Assumes unit length scaling
 int Map::mapElement(int x, int y) const {
 	int index = x + y * mColumns;
 	return mLayout.at(index);

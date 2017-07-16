@@ -17,7 +17,6 @@ int main(int argc, char** argv) {
 			std::cerr << "Error: Game failed to run" << std::endl;
 			return 1;
 		}
-
 		return 0;
 	}
 }

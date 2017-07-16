@@ -144,9 +144,6 @@
     <ClCompile Include="LastValidDirectionComponent.cpp">
       <Filter>Source Files\Components</Filter>
     </ClCompile>
-    <ClCompile Include="PointGranterComponent.cpp">
-      <Filter>Source Files\Components</Filter>
-    </ClCompile>
     <ClCompile Include="DirectionInputComponent.cpp">
       <Filter>Source Files\Components</Filter>
     </ClCompile>
@@ -164,6 +161,12 @@
     </ClCompile>
     <ClCompile Include="WallHuggingSystem.cpp">
       <Filter>Source Files\Systems</Filter>
+    </ClCompile>
+    <ClCompile Include="ScoreKeeperSystem.cpp">
+      <Filter>Source Files\Systems</Filter>
+    </ClCompile>
+    <ClCompile Include="PointsCollectorComponent.cpp">
+      <Filter>Source Files\Components</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -278,9 +281,6 @@
     <ClInclude Include="LastValidDirectionComponent.h">
       <Filter>Header Files\Components</Filter>
     </ClInclude>
-    <ClInclude Include="PointGranterComponent.h">
-      <Filter>Header Files\Components</Filter>
-    </ClInclude>
     <ClInclude Include="NodeWithCost.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -295,6 +295,12 @@
     </ClInclude>
     <ClInclude Include="WallHuggingSystem.h">
       <Filter>Header Files\Systems</Filter>
+    </ClInclude>
+    <ClInclude Include="ScoreKeeperSystem.h">
+      <Filter>Header Files\Systems</Filter>
+    </ClInclude>
+    <ClInclude Include="PointsCollectorComponent.h">
+      <Filter>Header Files\Components</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
