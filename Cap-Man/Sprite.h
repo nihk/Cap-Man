@@ -1,5 +1,4 @@
 #pragma once
-#include <string>
 #include "Rect.h"
 #include "Texture.h"
 #include "Drawable.h"
@@ -16,8 +15,7 @@ public:
 
 	int				width() const			{ return mSource.width(); }
 	int				height() const			{ return mSource.height(); }
-	Rect			getRect() const			{ return mSource; }
-	Texture			getTexture() const		{ return mTexture; }
+	Rect			rect() const			{ return mSource; }
 
 	void			draw(const Renderer& renderer, const Rect& dest) override;
 

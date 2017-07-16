@@ -17,11 +17,17 @@
 #include "PathfindingSystem.h"
 #include "PathGoalComponent.h"
 #include "WallHuggingSystem.h"
-#include "ScoreKeeperSystem.h"
+#include "PelletMonitoringSystem.h"
 #include "PointsCollectorComponent.h"
+#include "WinConditionComponent.h"
+#include "ScoreWatcherComponent.h"
+#include "ScoreAccumulatorSystem.h"
+#include "IdleAnimationComponent.h"
+#include "IdleAnimationSystem.h"
 
 Game::Game()
-	: mShouldQuit(false) {
+	: mShouldQuit(false)
+	, mCapMan(-1) {
 }
 
 Game::~Game() {
@@ -107,14 +113,19 @@ bool Game::load() {
 	mManager.createComponentStore<AStarComponent>();
 	mManager.createComponentStore<PathGoalComponent>();
 	mManager.createComponentStore<PointsCollectorComponent>();
+	mManager.createComponentStore<WinConditionComponent>();
+	mManager.createComponentStore<ScoreWatcherComponent>();
+	mManager.createComponentStore<IdleAnimationComponent>();
 
 	// NB: The systems are updated in the order they are added here!
 	mManager.addSystem(std::make_shared<SpeedSystem>(mManager));
 	mManager.addSystem(std::make_shared<PathfindingSystem>(mManager, mMap));
 	mManager.addSystem(std::make_shared<WallHuggingSystem>(mManager, mMap));
 	mManager.addSystem(std::make_shared<MoveSystem>(mManager));
-	mManager.addSystem(std::make_shared<ScoreKeeperSystem>(mManager, mMap, mPellets));
+	mManager.addSystem(std::make_shared<PelletMonitoringSystem>(mManager, mMap, mPellets));
 	mManager.addSystem(std::make_shared<DirectionAnimationSystem>(mManager));
+	mManager.addSystem(std::make_shared<ScoreAccumulatorSystem>(mManager));
+	mManager.addSystem(std::make_shared<IdleAnimationSystem>(mManager));
 	mManager.addSystem(std::make_shared<DrawSystem>(mManager, mRenderer));
 
 	if (!createEntities()) {

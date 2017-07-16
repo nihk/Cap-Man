@@ -156,6 +156,7 @@
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="GameEntities.cpp" />
     <ClCompile Include="GameEvents.cpp" />
+    <ClCompile Include="IdleAnimationSystem.cpp" />
     <ClCompile Include="NodeWithCost.cpp" />
     <ClCompile Include="PathfindingSystem.cpp" />
     <ClCompile Include="Keyboard.cpp" />
@@ -170,11 +171,15 @@
     <ClCompile Include="PointsCollectorComponent.cpp" />
     <ClCompile Include="Rect.cpp" />
     <ClCompile Include="Renderer.cpp" />
-    <ClCompile Include="ScoreKeeperSystem.cpp" />
+    <ClCompile Include="PelletMonitoringSystem.cpp" />
+    <ClCompile Include="ScoreAccumulatorSystem.cpp" />
+    <ClCompile Include="ScoreWatcherComponent.cpp" />
+    <ClCompile Include="ScoreGraphicsComponent.cpp" />
     <ClCompile Include="SpeedSystem.cpp" />
     <ClCompile Include="Sprite.cpp" />
-    <ClCompile Include="SpriteGraphicsComponent.cpp" />
+    <ClCompile Include="AnimationGraphicsComponent.cpp" />
     <ClCompile Include="SpriteRepository.cpp" />
+    <ClCompile Include="IdleAnimationComponent.cpp" />
     <ClCompile Include="Surface.cpp" />
     <ClCompile Include="System.cpp" />
     <ClCompile Include="TestAnimation.cpp" />
@@ -186,6 +191,7 @@
     <ClCompile Include="VelocityComponent.cpp" />
     <ClCompile Include="LastValidDirectionComponent.cpp" />
     <ClCompile Include="WallHuggingSystem.cpp" />
+    <ClCompile Include="WinConditionComponent.cpp" />
     <ClCompile Include="Window.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -203,6 +209,7 @@
     <ClInclude Include="DrawSystem.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="Constants.h" />
+    <ClInclude Include="IdleAnimationSystem.h" />
     <ClInclude Include="NodeWithCost.h" />
     <ClInclude Include="PathfindingSystem.h" />
     <ClInclude Include="GraphicsComponent.h" />
@@ -217,11 +224,15 @@
     <ClInclude Include="PointsCollectorComponent.h" />
     <ClInclude Include="Rect.h" />
     <ClInclude Include="Renderer.h" />
-    <ClInclude Include="ScoreKeeperSystem.h" />
+    <ClInclude Include="PelletMonitoringSystem.h" />
+    <ClInclude Include="ScoreAccumulatorSystem.h" />
+    <ClInclude Include="ScoreWatcherComponent.h" />
+    <ClInclude Include="ScoreGraphicsComponent.h" />
     <ClInclude Include="SpeedSystem.h" />
     <ClInclude Include="Sprite.h" />
-    <ClInclude Include="SpriteGraphicsComponent.h" />
+    <ClInclude Include="AnimationGraphicsComponent.h" />
     <ClInclude Include="SpriteRepository.h" />
+    <ClInclude Include="IdleAnimationComponent.h" />
     <ClInclude Include="Surface.h" />
     <ClInclude Include="System.h" />
     <ClInclude Include="Texture.h" />
@@ -231,6 +242,7 @@
     <ClInclude Include="VelocityComponent.h" />
     <ClInclude Include="LastValidDirectionComponent.h" />
     <ClInclude Include="WallHuggingSystem.h" />
+    <ClInclude Include="WinConditionComponent.h" />
     <ClInclude Include="Window.h" />
     <ClInclude Include="Wrapper.h" />
   </ItemGroup>

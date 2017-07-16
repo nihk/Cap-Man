@@ -28,6 +28,8 @@ private:
 	Manager		mManager;
 	Map			mMap;
 	SpriteRepository	mSpriteRepository;
+
+	int			mCapMan;
 	std::unordered_map<int /* map layout index */, int /* entity id */> mPellets;
 	std::unordered_map<int /* map layout index */, int /* entity id */> mPowerups;
 

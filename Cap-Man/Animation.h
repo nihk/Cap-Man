@@ -22,7 +22,7 @@ public:
 private:
 	// Ideally this should be some factor of the delta update millis
 	unsigned mSpriteIntervalMillis;
-	unsigned mTimeSpentBetweenSpriteChange;
+	float mTimeSpentBetweenSpriteChange;
 	unsigned mCurrentSpriteIndex;
 	std::vector<Sprite> mSprites;
 };

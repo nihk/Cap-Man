@@ -51,6 +51,7 @@ namespace Metadata {
 namespace GameConstants {
 	static const int CHARACTER_UNITS_SPEED = 4;  // units/sec
 	static const int ANIMATION_FRAME_INTERVAL = 66;  // ms
+	static const int BLINKING_FRAME_INTERVAL = 132;  // ms
 }
 
 namespace MapLayoutElements {

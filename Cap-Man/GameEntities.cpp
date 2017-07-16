@@ -3,12 +3,16 @@
 #include "Velocity.h"
 #include "VelocityComponent.h"
 #include "KeyboardDirectionInputComponent.h"
-#include "SpriteGraphicsComponent.h"
+#include "AnimationGraphicsComponent.h"
 #include "LastValidDirectionComponent.h"
 #include "ColorGraphicsComponent.h"
 #include "AStarComponent.h"
 #include "PathGoalComponent.h"
 #include "PointsCollectorComponent.h"
+#include "WinConditionComponent.h"
+#include "ScoreGraphicsComponent.h"
+#include "ScoreWatcherComponent.h"
+#include "IdleAnimationComponent.h"
 
 // TODO: Move metadata to XML so this method is less bloated?
 bool Game::createEntities() {
@@ -21,19 +25,12 @@ bool Game::createEntities() {
 		int background = mManager.createEntity();
 		std::unordered_map<int, Animation> backgroundAnimations;
 		Animation backgroundAnimation;
-		backgroundAnimation.addSprite(mSpriteRepository.findSprite("background_walls"));
-		backgroundAnimations.insert_or_assign(AnimationStates::DEFAULT, backgroundAnimation);
+		backgroundAnimation.addSprite(std::move(mSpriteRepository.findSprite("background_walls")));
+		backgroundAnimations.insert_or_assign(AnimationStates::DEFAULT, std::move(backgroundAnimation));
 
 		mManager.addComponent(background, PhysicsComponent(0, 0, mWindow.width(), mWindow.height()));
-		mManager.addComponent(background, SpriteGraphicsComponent(backgroundAnimations, AnimationStates::DEFAULT));
+		mManager.addComponent(background, AnimationGraphicsComponent(std::move(backgroundAnimations), AnimationStates::DEFAULT));
 		mManager.registerEntity(background);
-	}
-
-	// Score
-	{
-		int score = mManager.createEntity();
-		std::unordered_map<int, Animation> scoreSprites;
-		Animation scoreAnimation;
 	}
 
 	// Pellets
@@ -60,7 +57,7 @@ bool Game::createEntities() {
 
 	// Powerups
 	{
-		Sprite powerupAsset = mSpriteRepository.findSprite("powerup");
+		Sprite powerupAsset = std::move(mSpriteRepository.findSprite("powerup"));
 		int powerupSideLength = powerupAsset.width() * mMap.scaleMultiplier();
 		Rect powerupDimens(-1, -1, powerupSideLength, powerupSideLength);
 		int powerupPadding = powerupSideLength / 2;
@@ -73,10 +70,12 @@ bool Game::createEntities() {
 				mManager.addComponent(powerup, PhysicsComponent(powerupDimens));
 
 				std::unordered_map<int, Animation> powerupAnimations;
-				Animation powerupAnimation;
-				powerupAnimation.addSprite(powerupAsset);
-				powerupAnimations.insert_or_assign(AnimationStates::DEFAULT, powerupAnimation);
-				mManager.addComponent(powerup, SpriteGraphicsComponent(powerupAnimations, AnimationStates::DEFAULT));
+				Animation powerupAnimation(GameConstants::BLINKING_FRAME_INTERVAL);
+				powerupAnimation.addSprite(std::move(powerupAsset));
+				powerupAnimation.addSprite(std::move(mSpriteRepository.findSprite("powerup_off")));
+				powerupAnimations.insert_or_assign(AnimationStates::DEFAULT, std::move(powerupAnimation));
+				mManager.addComponent(powerup, AnimationGraphicsComponent(std::move(powerupAnimations), AnimationStates::DEFAULT));
+				mManager.addComponent(powerup, IdleAnimationComponent());
 				mManager.registerEntity(powerup);
 
 				mPowerups.insert_or_assign(i, powerup);
@@ -86,57 +85,57 @@ bool Game::createEntities() {
 
 	// Cap-Man
 	{
-		int capMan = mManager.createEntity();
+		mCapMan = mManager.createEntity();
 
 		std::unordered_map<int, Animation> capManAnimations;
 		Animation walkLeft(GameConstants::ANIMATION_FRAME_INTERVAL);
-		walkLeft.addSprite(mSpriteRepository.findSprite("capman_closed"));
-		walkLeft.addSprite(mSpriteRepository.findSprite("capman_left1"));
-		walkLeft.addSprite(mSpriteRepository.findSprite("capman_left2"));
-		walkLeft.addSprite(mSpriteRepository.findSprite("capman_left1"));
+		walkLeft.addSprite(std::move(mSpriteRepository.findSprite("capman_closed")));
+		walkLeft.addSprite(std::move(mSpriteRepository.findSprite("capman_left1")));
+		walkLeft.addSprite(std::move(mSpriteRepository.findSprite("capman_left2")));
+		walkLeft.addSprite(std::move(mSpriteRepository.findSprite("capman_left1")));
 		capManAnimations.insert_or_assign(AnimationStates::WALK_LEFT, walkLeft);
 		Animation walkRight(GameConstants::ANIMATION_FRAME_INTERVAL);
-		walkRight.addSprite(mSpriteRepository.findSprite("capman_closed"));
-		walkRight.addSprite(mSpriteRepository.findSprite("capman_right1"));
-		walkRight.addSprite(mSpriteRepository.findSprite("capman_right2"));
-		walkRight.addSprite(mSpriteRepository.findSprite("capman_right1"));
+		walkRight.addSprite(std::move(mSpriteRepository.findSprite("capman_closed")));
+		walkRight.addSprite(std::move(mSpriteRepository.findSprite("capman_right1")));
+		walkRight.addSprite(std::move(mSpriteRepository.findSprite("capman_right2")));
+		walkRight.addSprite(std::move(mSpriteRepository.findSprite("capman_right1")));
 		capManAnimations.insert_or_assign(AnimationStates::WALK_RIGHT, walkRight);
 		Animation walkUp(GameConstants::ANIMATION_FRAME_INTERVAL);
-		walkUp.addSprite(mSpriteRepository.findSprite("capman_closed"));
-		walkUp.addSprite(mSpriteRepository.findSprite("capman_up1"));
-		walkUp.addSprite(mSpriteRepository.findSprite("capman_up2"));
-		walkUp.addSprite(mSpriteRepository.findSprite("capman_up1"));
+		walkUp.addSprite(std::move(mSpriteRepository.findSprite("capman_closed")));
+		walkUp.addSprite(std::move(mSpriteRepository.findSprite("capman_up1")));
+		walkUp.addSprite(std::move(mSpriteRepository.findSprite("capman_up2")));
+		walkUp.addSprite(std::move(mSpriteRepository.findSprite("capman_up1")));
 		capManAnimations.insert_or_assign(AnimationStates::WALK_UP, walkUp);
 		Animation walkDown(GameConstants::ANIMATION_FRAME_INTERVAL);
-		walkDown.addSprite(mSpriteRepository.findSprite("capman_closed"));
-		walkDown.addSprite(mSpriteRepository.findSprite("capman_down1"));
-		walkDown.addSprite(mSpriteRepository.findSprite("capman_down2"));
-		walkDown.addSprite(mSpriteRepository.findSprite("capman_down1"));
+		walkDown.addSprite(std::move(mSpriteRepository.findSprite("capman_closed")));
+		walkDown.addSprite(std::move(mSpriteRepository.findSprite("capman_down1")));
+		walkDown.addSprite(std::move(mSpriteRepository.findSprite("capman_down2")));
+		walkDown.addSprite(std::move(mSpriteRepository.findSprite("capman_down1")));
 		capManAnimations.insert_or_assign(AnimationStates::WALK_DOWN, walkDown);
 		Animation stationaryLeft;
-		stationaryLeft.addSprite(mSpriteRepository.findSprite("capman_left1"));
+		stationaryLeft.addSprite(std::move(mSpriteRepository.findSprite("capman_left1")));
 		capManAnimations.insert_or_assign(AnimationStates::STATIONARY_LEFT, stationaryLeft);
 		Animation stationaryRight;
-		stationaryRight.addSprite(mSpriteRepository.findSprite("capman_right1"));
+		stationaryRight.addSprite(std::move(mSpriteRepository.findSprite("capman_right1")));
 		capManAnimations.insert_or_assign(AnimationStates::STATIONARY_RIGHT, stationaryRight);
 		Animation stationaryUp;
-		stationaryUp.addSprite(mSpriteRepository.findSprite("capman_up1"));
+		stationaryUp.addSprite(std::move(mSpriteRepository.findSprite("capman_up1")));
 		capManAnimations.insert_or_assign(AnimationStates::STATIONARY_UP, stationaryUp);
 		Animation stationaryDown;
-		stationaryDown.addSprite(mSpriteRepository.findSprite("capman_down1"));
+		stationaryDown.addSprite(std::move(mSpriteRepository.findSprite("capman_down1")));
 		capManAnimations.insert_or_assign(AnimationStates::STATIONARY_DOWN, stationaryDown);
 		Animation death(GameConstants::ANIMATION_FRAME_INTERVAL);
-		death.addSprite(mSpriteRepository.findSprite("capman_death1"));
-		death.addSprite(mSpriteRepository.findSprite("capman_death2"));
-		death.addSprite(mSpriteRepository.findSprite("capman_death3"));
-		death.addSprite(mSpriteRepository.findSprite("capman_death4"));
-		death.addSprite(mSpriteRepository.findSprite("capman_death5"));
-		death.addSprite(mSpriteRepository.findSprite("capman_death6"));
-		death.addSprite(mSpriteRepository.findSprite("capman_death7"));
-		death.addSprite(mSpriteRepository.findSprite("capman_death8"));
-		death.addSprite(mSpriteRepository.findSprite("capman_death9"));
-		death.addSprite(mSpriteRepository.findSprite("capman_death10"));
-		death.addSprite(mSpriteRepository.findSprite("capman_death11"));
+		death.addSprite(std::move(mSpriteRepository.findSprite("capman_death1")));
+		death.addSprite(std::move(mSpriteRepository.findSprite("capman_death2")));
+		death.addSprite(std::move(mSpriteRepository.findSprite("capman_death3")));
+		death.addSprite(std::move(mSpriteRepository.findSprite("capman_death4")));
+		death.addSprite(std::move(mSpriteRepository.findSprite("capman_death5")));
+		death.addSprite(std::move(mSpriteRepository.findSprite("capman_death6")));
+		death.addSprite(std::move(mSpriteRepository.findSprite("capman_death7")));
+		death.addSprite(std::move(mSpriteRepository.findSprite("capman_death8")));
+		death.addSprite(std::move(mSpriteRepository.findSprite("capman_death9")));
+		death.addSprite(std::move(mSpriteRepository.findSprite("capman_death10")));
+		death.addSprite(std::move(mSpriteRepository.findSprite("capman_death11")));
 		capManAnimations.insert_or_assign(AnimationStates::DEATH, death);
 		Velocity velocity(mMap.unitPixels(GameConstants::CHARACTER_UNITS_SPEED), 0);
 		float speed = static_cast<float>(mMap.unitPixels(GameConstants::CHARACTER_UNITS_SPEED));
@@ -147,13 +146,14 @@ bool Game::createEntities() {
 		// Start Cap-Man off as if a left key were pressed
 		mKeyboard.setRecentKeyDown(Keys::LEFT);
 
-		mManager.addComponent(capMan, KeyboardDirectionInputComponent(mKeyboard, Directions::LEFT));
-		mManager.addComponent(capMan, VelocityComponent(velocity, speed));
-		mManager.addComponent(capMan, PhysicsComponent(startPoint.x(), startPoint.y(), mMap.singleUnitPixels(), mMap.singleUnitPixels()));
-		mManager.addComponent(capMan, SpriteGraphicsComponent(capManAnimations, AnimationStates::WALK_LEFT));
-		mManager.addComponent(capMan, LastValidDirectionComponent(Directions::LEFT));
-		mManager.addComponent(capMan, PointsCollectorComponent());
-		mManager.registerEntity(capMan);
+		mManager.addComponent(mCapMan, KeyboardDirectionInputComponent(mKeyboard, Directions::LEFT));
+		mManager.addComponent(mCapMan, VelocityComponent(velocity, speed));
+		mManager.addComponent(mCapMan, PhysicsComponent(startPoint.x(), startPoint.y(), mMap.singleUnitPixels(), mMap.singleUnitPixels()));
+		mManager.addComponent(mCapMan, AnimationGraphicsComponent(std::move(capManAnimations), AnimationStates::WALK_LEFT));
+		mManager.addComponent(mCapMan, LastValidDirectionComponent(Directions::LEFT));
+		mManager.addComponent(mCapMan, PointsCollectorComponent());
+		mManager.addComponent(mCapMan, WinConditionComponent());
+		mManager.registerEntity(mCapMan);
 	}
 
 	// Ghosts
@@ -165,59 +165,59 @@ bool Game::createEntities() {
 
 			std::unordered_map<int, Animation> ghostAnimations;
 			Animation walkLeft(GameConstants::ANIMATION_FRAME_INTERVAL);
-			walkLeft.addSprite(mSpriteRepository.findSprite(ghostName + "_left1"));
-			walkLeft.addSprite(mSpriteRepository.findSprite(ghostName + "_left2"));
+			walkLeft.addSprite(std::move(mSpriteRepository.findSprite(ghostName + "_left1")));
+			walkLeft.addSprite(std::move(mSpriteRepository.findSprite(ghostName + "_left2")));
 			ghostAnimations.insert_or_assign(AnimationStates::WALK_LEFT, walkLeft);
 			Animation walkRight(GameConstants::ANIMATION_FRAME_INTERVAL);
-			walkRight.addSprite(mSpriteRepository.findSprite(ghostName + "_right1"));
-			walkRight.addSprite(mSpriteRepository.findSprite(ghostName + "_right2"));
+			walkRight.addSprite(std::move(mSpriteRepository.findSprite(ghostName + "_right1")));
+			walkRight.addSprite(std::move(mSpriteRepository.findSprite(ghostName + "_right2")));
 			ghostAnimations.insert_or_assign(AnimationStates::WALK_RIGHT, walkRight);
 			Animation walkUp(GameConstants::ANIMATION_FRAME_INTERVAL);
-			walkUp.addSprite(mSpriteRepository.findSprite(ghostName + "_up1"));
-			walkUp.addSprite(mSpriteRepository.findSprite(ghostName + "_up2"));
+			walkUp.addSprite(std::move(mSpriteRepository.findSprite(ghostName + "_up1")));
+			walkUp.addSprite(std::move(mSpriteRepository.findSprite(ghostName + "_up2")));
 			ghostAnimations.insert_or_assign(AnimationStates::WALK_UP, walkUp);
 			Animation walkDown(GameConstants::ANIMATION_FRAME_INTERVAL);
-			walkDown.addSprite(mSpriteRepository.findSprite(ghostName + "_down1"));
-			walkDown.addSprite(mSpriteRepository.findSprite(ghostName + "_down2"));
+			walkDown.addSprite(std::move(mSpriteRepository.findSprite(ghostName + "_down1")));
+			walkDown.addSprite(std::move(mSpriteRepository.findSprite(ghostName + "_down2")));
 			ghostAnimations.insert_or_assign(AnimationStates::WALK_DOWN, walkDown);
 
 			Animation startionaryLeft;
-			startionaryLeft.addSprite(mSpriteRepository.findSprite(ghostName + "_left2"));
+			startionaryLeft.addSprite(std::move(mSpriteRepository.findSprite(ghostName + "_left2")));
 			ghostAnimations.insert_or_assign(AnimationStates::STATIONARY_LEFT, startionaryLeft);
 			Animation stationaryRight;
-			stationaryRight.addSprite(mSpriteRepository.findSprite(ghostName + "_right1"));
+			stationaryRight.addSprite(std::move(mSpriteRepository.findSprite(ghostName + "_right1")));
 			ghostAnimations.insert_or_assign(AnimationStates::STATIONARY_RIGHT, stationaryRight);
 			Animation stationaryUp;
-			stationaryUp.addSprite(mSpriteRepository.findSprite(ghostName + "_up2"));
+			stationaryUp.addSprite(std::move(mSpriteRepository.findSprite(ghostName + "_up2")));
 			ghostAnimations.insert_or_assign(AnimationStates::STATIONARY_UP, stationaryUp);
 			Animation stationaryDown;
-			stationaryDown.addSprite(mSpriteRepository.findSprite(ghostName + "_down1"));
+			stationaryDown.addSprite(std::move(mSpriteRepository.findSprite(ghostName + "_down1")));
 			ghostAnimations.insert_or_assign(AnimationStates::STATIONARY_DOWN, stationaryDown);
 
 			Animation deathLeft;
-			deathLeft.addSprite(mSpriteRepository.findSprite("ghost_death_left"));
+			deathLeft.addSprite(std::move(mSpriteRepository.findSprite("ghost_death_left")));
 			ghostAnimations.insert_or_assign(AnimationStates::DEATH_LEFT, deathLeft);
 			Animation deathRight;
-			deathRight.addSprite(mSpriteRepository.findSprite("ghost_death_right"));
+			deathRight.addSprite(std::move(mSpriteRepository.findSprite("ghost_death_right")));
 			ghostAnimations.insert_or_assign(AnimationStates::DEATH_RIGHT, deathRight);
 			Animation deathUp;
-			deathUp.addSprite(mSpriteRepository.findSprite("ghost_death_up"));
+			deathUp.addSprite(std::move(mSpriteRepository.findSprite("ghost_death_up")));
 			ghostAnimations.insert_or_assign(AnimationStates::DEATH_UP, deathUp);
 			Animation deathDown;
-			deathDown.addSprite(mSpriteRepository.findSprite("ghost_death_down"));
+			deathDown.addSprite(std::move(mSpriteRepository.findSprite("ghost_death_down")));
 			ghostAnimations.insert_or_assign(AnimationStates::DEATH_DOWN, deathDown);
 
 			Animation vulnerable(GameConstants::ANIMATION_FRAME_INTERVAL);
-			vulnerable.addSprite(mSpriteRepository.findSprite("ghost_blue1"));
-			vulnerable.addSprite(mSpriteRepository.findSprite("ghost_blue2"));
+			vulnerable.addSprite(std::move(mSpriteRepository.findSprite("ghost_blue1")));
+			vulnerable.addSprite(std::move(mSpriteRepository.findSprite("ghost_blue2")));
 			ghostAnimations.insert_or_assign(AnimationStates::VULNERABLE, deathDown);
 			// TODO: move to constant
 			// TODO: vulnerable expiring faster?
 			Animation vulnerableExpiring(264 /* millis */);
-			vulnerableExpiring.addSprite(mSpriteRepository.findSprite("ghost_blue1"));
-			vulnerableExpiring.addSprite(mSpriteRepository.findSprite("ghost_white1"));
-			vulnerableExpiring.addSprite(mSpriteRepository.findSprite("ghost_blue2"));
-			vulnerableExpiring.addSprite(mSpriteRepository.findSprite("ghost_white2"));
+			vulnerableExpiring.addSprite(std::move(mSpriteRepository.findSprite("ghost_blue1")));
+			vulnerableExpiring.addSprite(std::move(mSpriteRepository.findSprite("ghost_white1")));
+			vulnerableExpiring.addSprite(std::move(mSpriteRepository.findSprite("ghost_blue2")));
+			vulnerableExpiring.addSprite(std::move(mSpriteRepository.findSprite("ghost_white2")));
 			ghostAnimations.insert_or_assign(AnimationStates::VULNERABLE_EXPIRING, vulnerableExpiring);
 
 			// TODO: set initial velocity
@@ -249,10 +249,36 @@ bool Game::createEntities() {
 			mManager.addComponent(ghost, DirectionInputComponent());
 			mManager.addComponent(ghost, VelocityComponent(velocity, speed));
 			mManager.addComponent(ghost, PhysicsComponent(startPoint.x(), startPoint.y(), mMap.singleUnitPixels(), mMap.singleUnitPixels()));
-			mManager.addComponent(ghost, SpriteGraphicsComponent(ghostAnimations, AnimationStates::STATIONARY_DOWN));
+			mManager.addComponent(ghost, AnimationGraphicsComponent(std::move(ghostAnimations), AnimationStates::STATIONARY_DOWN));
 			mManager.addComponent(ghost, LastValidDirectionComponent(Directions::DOWN));
 			mManager.registerEntity(ghost);
 		}
+	}
+
+	// Score
+	{
+		int score = mManager.createEntity();
+		std::unordered_map<int, Sprite> numberSprites;
+		numberSprites.insert_or_assign(0, std::move(mSpriteRepository.findSprite("text_0")));
+		numberSprites.insert_or_assign(1, std::move(mSpriteRepository.findSprite("text_1")));
+		numberSprites.insert_or_assign(2, std::move(mSpriteRepository.findSprite("text_2")));
+		numberSprites.insert_or_assign(3, std::move(mSpriteRepository.findSprite("text_3")));
+		numberSprites.insert_or_assign(4, std::move(mSpriteRepository.findSprite("text_4")));
+		numberSprites.insert_or_assign(5, std::move(mSpriteRepository.findSprite("text_5")));
+		numberSprites.insert_or_assign(6, std::move(mSpriteRepository.findSprite("text_6")));
+		numberSprites.insert_or_assign(7, std::move(mSpriteRepository.findSprite("text_7")));
+		numberSprites.insert_or_assign(8, std::move(mSpriteRepository.findSprite("text_8")));
+		numberSprites.insert_or_assign(9, std::move(mSpriteRepository.findSprite("text_9")));
+
+		mManager.addComponent(score, ScoreGraphicsComponent(std::move(numberSprites)));
+		int marginTop = mMap.singleUnitPixels() / 4;
+		int marginLeft = mMap.singleUnitPixels();
+		int w = mMap.singleUnitPixels() / 2;
+		int h = mMap.singleUnitPixels() / 2;
+		// This PhysicsComponent is the AABB location of the first digit of the score
+		mManager.addComponent(score, PhysicsComponent(marginLeft, marginTop, w, h));
+		mManager.addComponent(score, ScoreWatcherComponent(mCapMan));
+		mManager.registerEntity(score);
 	}
 
 	return true;

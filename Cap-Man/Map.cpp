@@ -132,9 +132,6 @@ Point Map::startLocation(StartLocation startLocation) const {
 	return Point();
 }
 
-//Point Map::startLocation(StartLocation startLocation) const {
-//}
-
 int Map::mapLocation(Point location, bool scaleUtoP) const {
 	if (scaleUtoP) {
 		scaleUnitsToPixels(location);

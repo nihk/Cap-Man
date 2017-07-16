@@ -61,7 +61,8 @@
 	<texture name="clyde_right1" 	x="120" y="140" w="16" 	h="16" />
 	<texture name="clyde_right2" 	x="140" y="140" w="16" 	h="16" />
 
-	<texture name="powerup"	x="0" 	y="180" w="8" 	h="8" />
+	<texture name="powerup"	    x="0" 	y="180" w="8" 	h="8" />
+  <texture name="powerup_off"	x="0" 	y="190" w="8" 	h="8" />
 
 	<texture name="ghost_blue1" 	x="0" 	y="160" w="16" 	h="16" />
 	<texture name="ghost_blue2" 	x="20" 	y="160" w="16" 	h="16" />
