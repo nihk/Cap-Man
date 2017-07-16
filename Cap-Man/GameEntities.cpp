@@ -70,7 +70,7 @@ bool Game::createEntities() {
 				mManager.addComponent(powerup, PhysicsComponent(powerupDimens));
 
 				std::unordered_map<int, Animation> powerupAnimations;
-				Animation powerupAnimation(GameConstants::BLINKING_FRAME_INTERVAL);
+				Animation powerupAnimation(GameConstants::POWERUP_BLINKING_INTERVAL);
 				powerupAnimation.addSprite(std::move(powerupAsset));
 				powerupAnimation.addSprite(std::move(mSpriteRepository.findSprite("powerup_off")));
 				powerupAnimations.insert_or_assign(AnimationStates::DEFAULT, std::move(powerupAnimation));
@@ -279,6 +279,28 @@ bool Game::createEntities() {
 		mManager.addComponent(score, PhysicsComponent(marginLeft, marginTop, w, h));
 		mManager.addComponent(score, ScoreWatcherComponent(mCapMan));
 		mManager.registerEntity(score);
+	}
+
+	// 1-up
+	{
+		int oneUpEntity = mManager.createEntity();
+
+		Sprite oneUpSprite = std::move(mSpriteRepository.findSprite("text_1up"));
+		int marginLeft = (mMap.columns() - 1) * mMap.singleUnitPixels() - oneUpSprite.width() * mMap.scaleMultiplier();
+		int marginTop = mMap.singleUnitPixels() / 4;
+		int w = oneUpSprite.width() * mMap.scaleMultiplier();
+		int h = oneUpSprite.height() * mMap.scaleMultiplier();
+
+		std::unordered_map<int, Animation> oneUpAnimations;
+		Animation oneUpAnimation(GameConstants::ONE_UP_BLINKING_INTERVAL);
+		oneUpAnimation.addSprite(std::move(oneUpSprite));
+		oneUpAnimation.addSprite(std::move(mSpriteRepository.findSprite("text_1up_off")));
+		oneUpAnimations.insert_or_assign(AnimationStates::DEFAULT, std::move(oneUpAnimation));
+
+		mManager.addComponent(oneUpEntity, PhysicsComponent(marginLeft, marginTop, w, h));
+		mManager.addComponent(oneUpEntity, AnimationGraphicsComponent(std::move(oneUpAnimations), AnimationStates::DEFAULT));
+		mManager.addComponent(oneUpEntity, IdleAnimationComponent());
+		mManager.registerEntity(oneUpEntity);
 	}
 
 	return true;

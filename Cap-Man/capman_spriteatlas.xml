@@ -75,6 +75,9 @@
 	<texture name="ghost_death_right"	x="60" 	y="200" w="16" 	h="16" />
 
 	<texture name="text_game_over" x="10" y="190" w="80" h="8" />
+  <texture name="text_ready"     x="200" y="0" w="48" h="8" />
+  <texture name="text_1up"       x="212" y="70" w="24" h="8" />
+  <texture name="text_1up_off"   x="212" y="60" w="24" h="8" />
 	
 	<texture name="text_0"	x="10" 	y="180" w="8" 	h="8" />
 	<texture name="text_1"	x="20" 	y="180" w="8" 	h="8" />
