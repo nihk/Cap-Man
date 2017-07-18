@@ -303,5 +303,32 @@ bool Game::createEntities() {
 		mManager.registerEntity(oneUpEntity);
 	}
 
+	// Life entities
+	{
+		int marginLeft = 0;
+
+		for (uint8_t i = 0; i < GameConstants::NUM_STARTING_LIVES; ++i) {
+			int life = mManager.createEntity();
+
+			Sprite lifeSprite = std::move(mSpriteRepository.findSprite("capman_life"));
+			marginLeft += mMap.singleUnitPixels();
+			int marginTop = (mMap.rows() - 1) * mMap.singleUnitPixels();
+			int w = lifeSprite.width() * mMap.scaleMultiplier();
+			int h = lifeSprite.height() * mMap.scaleMultiplier();
+
+			std::unordered_map<int, Animation> lifeAnimations;
+			Animation lifeAnimation;
+			lifeAnimation.addSprite(std::move(lifeSprite));
+			lifeAnimations.insert_or_assign(AnimationStates::DEFAULT, std::move(lifeAnimation));
+
+			mManager.addComponent(life, PhysicsComponent(marginLeft, marginTop, w, h));
+			mManager.addComponent(life, AnimationGraphicsComponent(std::move(lifeAnimations), AnimationStates::DEFAULT));
+			mManager.addComponent(life, IdleAnimationComponent());
+			mManager.registerEntity(life);
+
+			mLifeEntities.push(life);
+		}
+	}
+
 	return true;
 }

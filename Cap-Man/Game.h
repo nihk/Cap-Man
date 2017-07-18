@@ -8,6 +8,7 @@
 #include "Keyboard.h"
 #include "Map.h"
 #include "SpriteRepository.h"
+#include <stack>
 
 class Game {
 public:
@@ -32,6 +33,7 @@ private:
 	int			mCapMan;
 	std::unordered_map<int /* map layout index */, int /* entity id */> mPellets;
 	std::unordered_map<int /* map layout index */, int /* entity id */> mPowerups;
+	std::stack<int> mLifeEntities;
 
 	bool		initialize();
 	bool load();

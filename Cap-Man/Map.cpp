@@ -27,7 +27,7 @@ Map::~Map() {
 }
 
 // TODO: This classes calculation logic needs to be less dumbified
-// TODO: Make a map of <Point, int>
+// TODO: Make a map of <Point, int>?
 
 bool Map::initialize(std::string fileName) {
 	tinyxml2::XMLDocument xmlDocument;

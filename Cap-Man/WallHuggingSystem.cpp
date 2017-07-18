@@ -69,11 +69,11 @@ bool WallHuggingSystem::isElementWallOrInvalid(int element) {
 }
 
 /**
- * An entity is represented by an AABB. Despite this game being tile-based, the entity's physics component
- * can overlap either 1, 2, or 4 tiles at any given time. The "feet" of the AABB will overlap either 1 or 2
- * map tile elements, e.g. when an entity is moving upward, its bottom left and bottom right points will
- * touch either 1 or 2 tiles. The neighbourElement1 and neighbourElement2 params here represent what element
- * is in those tiles that the entity's physicscomponent's "feet" are touching.
+ * An entity is represented by an AABB. Despite this game being tile-based, the proposed location for the next
+ * position of the entity's physics component can overlap either 1, 2, or 4 tiles at any given time. The "feet" 
+ * of the AABB will overlap either 1 or 2 map tile elements, e.g. when an entity is moving upward, its bottom 
+ * left and bottom right points will touch either 1 or 2 tiles. The neighbourElement1 and neighbourElement2 
+ * params here represent what element is in those tiles that the entity's physicscomponent's "feet" are touching.
  */
 void WallHuggingSystem::getNeighbourElementsByDirection(Directions::Direction direction, Rect rect, int& neighbourElement1, int& neighbourElement2) const {
 	switch (direction) {

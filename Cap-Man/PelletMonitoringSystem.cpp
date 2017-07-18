@@ -39,8 +39,9 @@ void PelletMonitoringSystem::updateEntity(float delta, int entity) {
 		auto& graphicsComponentStore = mManager.getComponentStore<GraphicsComponent>();
 		
 		if (physicsComponentStore.hasComponent(pelletEntity) && graphicsComponentStore.hasComponent(pelletEntity)) {
-			graphicsComponentStore.removeComponent(pelletEntity);
-			graphicsComponentStore.removeComponent(pelletEntity);
+			// TODO: Cache the unregistered pellets somewhere? And don't remove?
+			/*graphicsComponentStore.removeComponent(pelletEntity);
+			graphicsComponentStore.removeComponent(pelletEntity);*/
 			mManager.unregisterEntity(pelletEntity);
 			mPellets.erase(mapLayoutIndex);
 			// TODO: Magic number

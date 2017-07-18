@@ -10,8 +10,10 @@ public:
 	~IdleAnimationComponent();
 
 	int state() const { return mState; }
+	void setState(int state) { mState = state; }
 
 private:
+	// The state its animation should be in
 	int mState;
 };
 

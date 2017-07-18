@@ -22,21 +22,25 @@ void DirectionAnimationSystem::updateEntity(float delta, int entity) {
 	Directions::Direction direction = directionInputComponent.direction();
 	AnimationStates::AnimationState animationState;
 
-	if (direction == Directions::NONE) {
-		switch (prevValidDirection) {
-			case Directions::LEFT: animationState = AnimationStates::STATIONARY_LEFT; break;
-			case Directions::RIGHT: animationState = AnimationStates::STATIONARY_RIGHT; break;
-			case Directions::UP: animationState = AnimationStates::STATIONARY_UP; break;
-			case Directions::DOWN:  // Fall through
-			default: animationState = AnimationStates::STATIONARY_DOWN; break;
+	bool halted = direction == Directions::NONE;
+
+	switch (prevValidDirection) {
+		case Directions::LEFT: {
+			animationState = halted ? AnimationStates::STATIONARY_LEFT : AnimationStates::WALK_LEFT;
+			break;
 		}
-	}  else {
-		switch (prevValidDirection) {
-			case Directions::LEFT: animationState = AnimationStates::WALK_LEFT; break;
-			case Directions::RIGHT: animationState = AnimationStates::WALK_RIGHT; break;
-			case Directions::UP: animationState = AnimationStates::WALK_UP; break;
-			case Directions::DOWN:  // Fall through
-			default: animationState = AnimationStates::WALK_DOWN; break;
+		case Directions::RIGHT: {
+			animationState = halted ? AnimationStates::STATIONARY_RIGHT : AnimationStates::WALK_RIGHT;
+			break;
+		}
+		case Directions::UP: {
+			animationState = halted ? AnimationStates::STATIONARY_UP : AnimationStates::WALK_UP;
+			break;
+		}
+		case Directions::DOWN:  // Fall through
+		default: {
+			animationState = halted ? AnimationStates::STATIONARY_DOWN : AnimationStates::WALK_DOWN;
+			break;
 		}
 	}
 
