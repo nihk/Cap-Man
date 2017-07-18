@@ -24,6 +24,7 @@
 	<texture name="capman_death11" 	x="200"	y="240" w="16" 	h="16" />
 	
 	<texture name="capman_life" 	x="80"	y="160" w="16" 	h="16" />
+  <texture name="cherry" 	      x="168"	y="160" w="16" 	h="16" />
 
 	<texture name="blinky_up1" 		x="0" 	y="80" 	w="16" 	h="16" />
 	<texture name="blinky_up2" 		x="20" 	y="80" 	w="16" 	h="16" />

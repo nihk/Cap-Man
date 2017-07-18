@@ -330,5 +330,26 @@ bool Game::createEntities() {
 		}
 	}
 
+	// Cherry in bottom right of map
+	{
+		int cherry = mManager.createEntity();
+
+		Sprite cherrySprite = std::move(mSpriteRepository.findSprite("cherry"));
+		int marginLeft = (mMap.columns() - 2) * mMap.singleUnitPixels();
+		int marginTop = (mMap.rows() - 1) * mMap.singleUnitPixels();
+		int w = cherrySprite.width() * mMap.scaleMultiplier();
+		int h = cherrySprite.height() * mMap.scaleMultiplier();
+
+		std::unordered_map<int, Animation> cherryAnimations;
+		Animation cherryAnimation;
+		cherryAnimation.addSprite(std::move(cherrySprite));
+		cherryAnimations.insert_or_assign(AnimationStates::DEFAULT, std::move(cherryAnimation));
+
+		mManager.addComponent(cherry, PhysicsComponent(marginLeft, marginTop, w, h));
+		mManager.addComponent(cherry, AnimationGraphicsComponent(std::move(cherryAnimations), AnimationStates::DEFAULT));
+		mManager.addComponent(cherry, IdleAnimationComponent());
+		mManager.registerEntity(cherry);
+	}
+
 	return true;
 }
