@@ -11,6 +11,7 @@ public:
 	~Point();
 
 	bool				operator==(const Point& other) const;
+	bool				operator!=(const Point& other) const;
 	static size_t		hash(const Point& point);
 
 	int					x() const				{ return mSdlPoint.x; }

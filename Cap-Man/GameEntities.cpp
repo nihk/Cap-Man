@@ -13,12 +13,23 @@
 #include "ScoreGraphicsComponent.h"
 #include "ScoreWatcherComponent.h"
 #include "IdleAnimationComponent.h"
+#include "TeleportComponent.h"
 
 // TODO: Move metadata to XML so this method is less bloated?
 bool Game::createEntities() {
 	// Draw order: walls == pellets == powerups < cap-man < ghosts
 
 	std::vector<int> layout = mMap.layout();
+
+	// Prepare the teleport pads; both Cap-Man and the Ghosts use the same ones
+	int portalRow = 10;
+	Point portA(-1, portalRow);
+	Point portB(mMap.columns(), portalRow);
+	mMap.scaleUnitsToPixels(portA);
+	mMap.scaleUnitsToPixels(portB);
+	Rect portPadA(portA.x(), portA.y(), mMap.singleUnitPixels(), mMap.singleUnitPixels());
+	Rect portPadB(portB.x(), portB.y(), mMap.singleUnitPixels(), mMap.singleUnitPixels());
+	TeleportComponent teleportComponent(portPadA, Directions::RIGHT, portPadB, Directions::LEFT);
 
 	// Background/walls
 	{
@@ -153,6 +164,7 @@ bool Game::createEntities() {
 		mManager.addComponent(mCapMan, LastValidDirectionComponent(Directions::LEFT));
 		mManager.addComponent(mCapMan, PointsCollectorComponent());
 		mManager.addComponent(mCapMan, WinConditionComponent());
+		mManager.addComponent(mCapMan, std::move(teleportComponent));
 		mManager.registerEntity(mCapMan);
 	}
 
@@ -251,6 +263,7 @@ bool Game::createEntities() {
 			mManager.addComponent(ghost, PhysicsComponent(startPoint.x(), startPoint.y(), mMap.singleUnitPixels(), mMap.singleUnitPixels()));
 			mManager.addComponent(ghost, AnimationGraphicsComponent(std::move(ghostAnimations), AnimationStates::STATIONARY_DOWN));
 			mManager.addComponent(ghost, LastValidDirectionComponent(Directions::DOWN));
+			mManager.addComponent(ghost, std::move(teleportComponent));
 			mManager.registerEntity(ghost);
 		}
 	}

@@ -68,6 +68,7 @@ namespace MapLayoutElements {
 	static const int GHOST_GATE = 7;
 	static const int PELLET = 8;
 	static const int POWERUP = 9;
+	static const int EDGE = 10;
 }
 
 namespace AnimationStates {

@@ -24,6 +24,8 @@
 #include "ScoreAccumulatorSystem.h"
 #include "IdleAnimationComponent.h"
 #include "IdleAnimationSystem.h"
+#include "TeleportComponent.h"
+#include "TeleportSystem.h"
 
 Game::Game()
 	: mShouldQuit(false)
@@ -116,6 +118,7 @@ bool Game::load() {
 	mManager.createComponentStore<WinConditionComponent>();
 	mManager.createComponentStore<ScoreWatcherComponent>();
 	mManager.createComponentStore<IdleAnimationComponent>();
+	mManager.createComponentStore<TeleportComponent>();
 
 	// NB: The systems are updated in the order they are added here!
 	mManager.addSystem(std::make_shared<SpeedSystem>(mManager));
@@ -125,6 +128,7 @@ bool Game::load() {
 	mManager.addSystem(std::make_shared<PelletMonitoringSystem>(mManager, mMap, mPellets));
 	mManager.addSystem(std::make_shared<DirectionAnimationSystem>(mManager));
 	mManager.addSystem(std::make_shared<ScoreAccumulatorSystem>(mManager));
+	mManager.addSystem(std::make_shared<TeleportSystem>(mManager));
 	mManager.addSystem(std::make_shared<IdleAnimationSystem>(mManager));
 	mManager.addSystem(std::make_shared<DrawSystem>(mManager, mRenderer));
 

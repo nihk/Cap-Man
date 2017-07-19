@@ -15,6 +15,10 @@ bool Point::operator==(const Point& other) const {
 	return x() == other.x() && y() == other.y();
 }
 
+bool Point::operator!=(const Point& other) const {
+	return !(*this == other);
+}
+
 size_t Point::hash(const Point& point) {
 	int result = point.x();
 	result = 31 * result + point.y();

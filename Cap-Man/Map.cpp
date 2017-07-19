@@ -186,28 +186,28 @@ int Map::neighbourElement(Point location, bool scalePtoU, Directions::Direction 
 	switch (direction) {
 		case Directions::UP: {
 			if (location.y() == 0) {
-				return MapLayoutElements::INVALID;
+				return MapLayoutElements::EDGE;
 			}
 			location.setY(location.y() - 1);
 			break;
 		}
 		case Directions::RIGHT: {
 			if (location.x() == mColumns - 1) {
-				return MapLayoutElements::INVALID;
+				return MapLayoutElements::EDGE;
 			}
 			location.setX(location.x() + 1);
 			break;
 		}
 		case Directions::DOWN: {
 			if (location.y() == mRows - 1) {
-				return MapLayoutElements::INVALID;
+				return MapLayoutElements::EDGE;
 			}
 			location.setY(location.y() + 1);
 			break;
 		}
 		case Directions::LEFT: {
 			if (location.x() == 0) {
-				return MapLayoutElements::INVALID;
+				return MapLayoutElements::EDGE;
 			}
 			location.setX(location.x() - 1);
 			break;

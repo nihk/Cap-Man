@@ -182,6 +182,8 @@
     <ClCompile Include="IdleAnimationComponent.cpp" />
     <ClCompile Include="Surface.cpp" />
     <ClCompile Include="System.cpp" />
+    <ClCompile Include="TeleportComponent.cpp" />
+    <ClCompile Include="TeleportSystem.cpp" />
     <ClCompile Include="TestAnimation.cpp" />
     <ClCompile Include="TestMap.cpp" />
     <ClCompile Include="Texture.cpp" />
@@ -235,6 +237,8 @@
     <ClInclude Include="IdleAnimationComponent.h" />
     <ClInclude Include="Surface.h" />
     <ClInclude Include="System.h" />
+    <ClInclude Include="TeleportComponent.h" />
+    <ClInclude Include="TeleportSystem.h" />
     <ClInclude Include="Texture.h" />
     <ClInclude Include="tinyxml2.h" />
     <ClInclude Include="UID.h" />
