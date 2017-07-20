@@ -7,7 +7,6 @@
 
 ScoreAccumulatorSystem::ScoreAccumulatorSystem(Manager& manager) 
 		: System(manager) {
-	// This ScoreWatcherComponent is just here to isolate the score entity
 	insertRequiredComponent(ScoreWatcherComponent::ID);
 	insertRequiredComponent(GraphicsComponent::ID);
 }

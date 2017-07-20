@@ -26,6 +26,10 @@
 #include "IdleAnimationSystem.h"
 #include "TeleportComponent.h"
 #include "TeleportSystem.h"
+#include "BreadcrumbTrailComponent.h"
+#include "BreadcrumbFollowerComponent.h"
+#include "BreadcrumbFollowerSystem.h"
+#include "BreadcrumbTrailSystem.h"
 
 Game::Game()
 	: mShouldQuit(false)
@@ -119,10 +123,14 @@ bool Game::load() {
 	mManager.createComponentStore<ScoreWatcherComponent>();
 	mManager.createComponentStore<IdleAnimationComponent>();
 	mManager.createComponentStore<TeleportComponent>();
+	mManager.createComponentStore<BreadcrumbTrailComponent>();
+	mManager.createComponentStore<BreadcrumbFollowerComponent>();
 
 	// NB: The systems are updated in the order they are added here!
 	mManager.addSystem(std::make_shared<SpeedSystem>(mManager));
 	mManager.addSystem(std::make_shared<PathfindingSystem>(mManager, mMap));
+	mManager.addSystem(std::make_shared<BreadcrumbTrailSystem>(mManager, mMap));
+	mManager.addSystem(std::make_shared<BreadcrumbFollowerSystem>(mManager, mMap));
 	mManager.addSystem(std::make_shared<WallHuggingSystem>(mManager, mMap));
 	mManager.addSystem(std::make_shared<MoveSystem>(mManager));
 	mManager.addSystem(std::make_shared<PelletMonitoringSystem>(mManager, mMap, mPellets));

@@ -14,6 +14,8 @@
 #include "ScoreWatcherComponent.h"
 #include "IdleAnimationComponent.h"
 #include "TeleportComponent.h"
+#include "BreadcrumbTrailComponent.h"
+#include "BreadcrumbFollowerComponent.h"
 
 // TODO: Move metadata to XML so this method is less bloated?
 bool Game::createEntities() {
@@ -165,6 +167,7 @@ bool Game::createEntities() {
 		mManager.addComponent(mCapMan, PointsCollectorComponent());
 		mManager.addComponent(mCapMan, WinConditionComponent());
 		mManager.addComponent(mCapMan, std::move(teleportComponent));
+		mManager.addComponent(mCapMan, BreadcrumbTrailComponent());
 		mManager.registerEntity(mCapMan);
 	}
 
@@ -264,6 +267,7 @@ bool Game::createEntities() {
 			mManager.addComponent(ghost, AnimationGraphicsComponent(std::move(ghostAnimations), AnimationStates::STATIONARY_DOWN));
 			mManager.addComponent(ghost, LastValidDirectionComponent(Directions::DOWN));
 			mManager.addComponent(ghost, std::move(teleportComponent));
+			mManager.addComponent(ghost, BreadcrumbFollowerComponent(mCapMan));
 			mManager.registerEntity(ghost);
 		}
 	}

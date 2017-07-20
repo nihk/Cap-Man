@@ -147,7 +147,10 @@
   <ItemGroup>
     <ClCompile Include="Animation.cpp" />
     <ClCompile Include="AStarComponent.cpp" />
+    <ClCompile Include="BreadcrumbFollowerComponent.cpp" />
+    <ClCompile Include="BreadcrumbFollowerSystem.cpp" />
     <ClCompile Include="BreadcrumbTrailComponent.cpp" />
+    <ClCompile Include="BreadcrumbTrailSystem.cpp" />
     <ClCompile Include="Color.cpp" />
     <ClCompile Include="ColorGraphicsComponent.cpp" />
     <ClCompile Include="DirectionAnimationSystem.cpp" />
@@ -199,7 +202,10 @@
   <ItemGroup>
     <ClInclude Include="Animation.h" />
     <ClInclude Include="AStarComponent.h" />
+    <ClInclude Include="BreadcrumbFollowerComponent.h" />
+    <ClInclude Include="BreadcrumbFollowerSystem.h" />
     <ClInclude Include="BreadcrumbTrailComponent.h" />
+    <ClInclude Include="BreadcrumbTrailSystem.h" />
     <ClInclude Include="catch.hpp" />
     <ClInclude Include="Color.h" />
     <ClInclude Include="ColorGraphicsComponent.h" />
