@@ -11,6 +11,7 @@ int main(int argc, char** argv) {
 		int result = Catch::Session().run(argc, argv);
 		return (result < 0xff ? result : 0xff);
 	} else {
+		srand(static_cast<unsigned>(time(nullptr)));
 		Game game;
 
 		if (!game.run()) {

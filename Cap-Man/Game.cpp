@@ -30,6 +30,7 @@
 #include "BreadcrumbFollowerComponent.h"
 #include "BreadcrumbFollowerSystem.h"
 #include "BreadcrumbTrailSystem.h"
+#include "PseudoRandomDirectionComponent.h"
 
 Game::Game()
 	: mShouldQuit(false)
@@ -125,6 +126,7 @@ bool Game::load() {
 	mManager.createComponentStore<TeleportComponent>();
 	mManager.createComponentStore<BreadcrumbTrailComponent>();
 	mManager.createComponentStore<BreadcrumbFollowerComponent>();
+	mManager.createComponentStore<PseudoRandomDirectionComponent>();
 
 	// NB: The systems are updated in the order they are added here!
 	mManager.addSystem(std::make_shared<SpeedSystem>(mManager));

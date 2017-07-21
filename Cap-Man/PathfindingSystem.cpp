@@ -38,11 +38,13 @@ void PathfindingSystem::updateEntity(float delta, int entity) {
 
 	Point nextStep = aStarComponent.peekCurrentPathStep();
 	if (current == nextStep) {
-		nextStep = aStarComponent.popNextPathStep();
+		aStarComponent.popNextPathStep();
 
 		// Exhausted the path nodes; remove the goal
 		if (!aStarComponent.hasPath()) {
 			pathGoalComponent.removeGoal();
+		} else {
+			nextStep = aStarComponent.peekCurrentPathStep();
 		}
 	}
 

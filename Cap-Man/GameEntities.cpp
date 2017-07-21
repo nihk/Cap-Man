@@ -16,6 +16,7 @@
 #include "TeleportComponent.h"
 #include "BreadcrumbTrailComponent.h"
 #include "BreadcrumbFollowerComponent.h"
+#include "PseudoRandomDirectionComponent.h"
 
 // TODO: Move metadata to XML so this method is less bloated?
 bool Game::createEntities() {
@@ -245,13 +246,13 @@ bool Game::createEntities() {
 			// TODO: Refactor
 			if (ghostName == ghostNames.at(0)) {
 				ghostStart = mMap.indexOf(MapLayoutElements::INKY);
-				//pathGoalComponent.setGoal(Point(18, 20));
+				pathGoalComponent.setGoal(Point(11, 10));
 			} else if (ghostName == ghostNames.at(1)) {
 				ghostStart = mMap.indexOf(MapLayoutElements::BLINKY);
 				pathGoalComponent.setGoal(Point(2, 2));
 			} else if (ghostName == ghostNames.at(2)) {
 				ghostStart = mMap.indexOf(MapLayoutElements::PINKY);
-				//pathGoalComponent.setGoal(Point(2, 20));
+				pathGoalComponent.setGoal(Point(9, 10));
 			} else {
 				ghostStart = mMap.indexOf(MapLayoutElements::CLYDE);
 				pathGoalComponent.setGoal(Point(18, 2));
@@ -268,6 +269,7 @@ bool Game::createEntities() {
 			mManager.addComponent(ghost, LastValidDirectionComponent(Directions::DOWN));
 			mManager.addComponent(ghost, std::move(teleportComponent));
 			mManager.addComponent(ghost, BreadcrumbFollowerComponent(mCapMan));
+			mManager.addComponent(ghost, PseudoRandomDirectionComponent(GameConstants::GHOST_DIRECTION_CHANGE_INTERVAL));
 			mManager.registerEntity(ghost);
 		}
 	}

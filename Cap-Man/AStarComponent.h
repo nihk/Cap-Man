@@ -18,7 +18,7 @@ public:
 
 	void findPath(Point start, Point end);
 	bool hasPath() const { return !mOptimalPath.empty(); }
-	Point popNextPathStep();
+	void popNextPathStep();
 	Point peekCurrentPathStep() const { return mOptimalPath.front(); }
 
 private:

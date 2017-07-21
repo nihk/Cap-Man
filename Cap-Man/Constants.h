@@ -54,6 +54,7 @@ namespace GameConstants {
 	static const int POWERUP_BLINKING_INTERVAL = 132;  // ms
 	static const int ONE_UP_BLINKING_INTERVAL = 198;  // ms
 	static const uint8_t NUM_STARTING_LIVES = 2;
+	static const int GHOST_DIRECTION_CHANGE_INTERVAL = 1000;  // ms
 }
 
 namespace MapLayoutElements {

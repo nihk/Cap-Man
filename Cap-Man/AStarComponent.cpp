@@ -47,10 +47,8 @@ void AStarComponent::findPath(Point start, Point end) {
 	extractOptimalPath(std::make_shared<NodeWithCost>(current));
 }
 
-Point AStarComponent::popNextPathStep() {
-	Point point = mOptimalPath.front();
-	mOptimalPath.erase(mOptimalPath.begin());
-	return point;
+void AStarComponent::popNextPathStep() {
+	mOptimalPath.pop_front();
 }
 
 // O(n)

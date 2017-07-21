@@ -1,6 +1,6 @@
 #include "BreadcrumbTrailComponent.h"
 
-const int BreadcrumbTrailComponent::MAX_SCORE = 15;
+const int BreadcrumbTrailComponent::MAX_SCORE = 10;
 const int BreadcrumbTrailComponent::MIN_SCORE = 1;
 const int BreadcrumbTrailComponent::NO_SCORE = 0;
 
