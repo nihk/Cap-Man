@@ -17,6 +17,7 @@
 #include "BreadcrumbTrailComponent.h"
 #include "BreadcrumbFollowerComponent.h"
 #include "PseudoRandomDirectionComponent.h"
+#include "PauseComponent.h"
 
 // TODO: Move metadata to XML so this method is less bloated?
 bool Game::createEntities() {
@@ -103,28 +104,28 @@ bool Game::createEntities() {
 
 		std::unordered_map<int, Animation> capManAnimations;
 		Animation walkLeft(GameConstants::ANIMATION_FRAME_INTERVAL);
-		walkLeft.addSprite(std::move(mSpriteRepository.findSprite("capman_closed")));
 		walkLeft.addSprite(std::move(mSpriteRepository.findSprite("capman_left1")));
 		walkLeft.addSprite(std::move(mSpriteRepository.findSprite("capman_left2")));
 		walkLeft.addSprite(std::move(mSpriteRepository.findSprite("capman_left1")));
+		walkLeft.addSprite(std::move(mSpriteRepository.findSprite("capman_closed")));
 		capManAnimations.insert_or_assign(AnimationStates::WALK_LEFT, walkLeft);
 		Animation walkRight(GameConstants::ANIMATION_FRAME_INTERVAL);
-		walkRight.addSprite(std::move(mSpriteRepository.findSprite("capman_closed")));
 		walkRight.addSprite(std::move(mSpriteRepository.findSprite("capman_right1")));
 		walkRight.addSprite(std::move(mSpriteRepository.findSprite("capman_right2")));
 		walkRight.addSprite(std::move(mSpriteRepository.findSprite("capman_right1")));
+		walkRight.addSprite(std::move(mSpriteRepository.findSprite("capman_closed")));
 		capManAnimations.insert_or_assign(AnimationStates::WALK_RIGHT, walkRight);
 		Animation walkUp(GameConstants::ANIMATION_FRAME_INTERVAL);
-		walkUp.addSprite(std::move(mSpriteRepository.findSprite("capman_closed")));
 		walkUp.addSprite(std::move(mSpriteRepository.findSprite("capman_up1")));
 		walkUp.addSprite(std::move(mSpriteRepository.findSprite("capman_up2")));
 		walkUp.addSprite(std::move(mSpriteRepository.findSprite("capman_up1")));
+		walkUp.addSprite(std::move(mSpriteRepository.findSprite("capman_closed")));
 		capManAnimations.insert_or_assign(AnimationStates::WALK_UP, walkUp);
 		Animation walkDown(GameConstants::ANIMATION_FRAME_INTERVAL);
-		walkDown.addSprite(std::move(mSpriteRepository.findSprite("capman_closed")));
 		walkDown.addSprite(std::move(mSpriteRepository.findSprite("capman_down1")));
 		walkDown.addSprite(std::move(mSpriteRepository.findSprite("capman_down2")));
 		walkDown.addSprite(std::move(mSpriteRepository.findSprite("capman_down1")));
+		walkDown.addSprite(std::move(mSpriteRepository.findSprite("capman_closed")));
 		capManAnimations.insert_or_assign(AnimationStates::WALK_DOWN, walkDown);
 		Animation stationaryLeft;
 		stationaryLeft.addSprite(std::move(mSpriteRepository.findSprite("capman_left1")));
@@ -368,6 +369,14 @@ bool Game::createEntities() {
 		mManager.addComponent(cherry, AnimationGraphicsComponent(std::move(cherryAnimations), AnimationStates::DEFAULT));
 		mManager.addComponent(cherry, IdleAnimationComponent());
 		mManager.registerEntity(cherry);
+	}
+
+	// Pause entity
+	{
+		mPauseEntity = mManager.createEntity();
+		float gameIntroDuration = 5.0f * 1000.0f;  // 5 seconds
+		mManager.addComponent(mPauseEntity, PauseComponent(true, gameIntroDuration));
+		mManager.registerEntity(mPauseEntity);
 	}
 
 	return true;

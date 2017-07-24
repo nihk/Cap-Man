@@ -7,12 +7,13 @@ Manager::Manager() {
 Manager::~Manager() {
 }
 
-void Manager::addSystem(const std::shared_ptr<System>& system) {
+void Manager::addSystem(std::type_index typeIndex, const std::shared_ptr<System>& system) {
+
 	if (!system || system->getRequiredComponents().empty()) {
 		throw std::runtime_error("System did not specify required Components");
 	}
 
-	mSystems.push_back(system);
+	mSystems.insert_or_assign(typeIndex, system);
 }
 
 int Manager::createEntity() {
@@ -28,7 +29,8 @@ size_t Manager::registerEntity(int entity) {
 	std::set<int>& entityComponents = findEntityComponents(entity);
 
 	// Cycle through all systems to check which ones can be registered by the entity
-	for (auto& system : mSystems) {
+	for (auto& pair : mSystems) {
+		std::shared_ptr<System> system = pair.second;
 		auto systemRequiredComponents = system->getRequiredComponents();
 
 		// Check if all components required by the system are what the entity uses
@@ -46,7 +48,8 @@ size_t Manager::registerEntity(int entity) {
 size_t Manager::unregisterEntity(int entity) {
 	size_t numSystemsUnregisteredFrom = 0;
 
-	for (auto& system : mSystems) {
+	for (auto& pair : mSystems) {
+		std::shared_ptr<System> system = pair.second;
 		numSystemsUnregisteredFrom += system->unregisterEntity(entity);
 	}
 
@@ -62,12 +65,18 @@ void Manager::clear() {
 size_t Manager::updateSystems(float delta) {
 	size_t numUpdatedSystems = 0;
 
-	for (auto& system : mSystems) {
+	for (auto& pair : mSystems) {
+		std::shared_ptr<System> system = pair.second;
 		system->updateEntities(delta);
 		++numUpdatedSystems;
 	}
 
 	return numUpdatedSystems;
+}
+
+void Manager::toggleSystemUpdatability(std::type_index typeIndex, bool shouldUpdate) {
+	std::shared_ptr<System> system = mSystems.at(typeIndex);
+	system->setUpdatable(shouldUpdate);
 }
 
 // Finds the set of components that a particular entity uses

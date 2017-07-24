@@ -5,6 +5,7 @@
 #include "ComponentStore.h"
 #include "System.h"
 #include "Component.h"
+#include <typeindex>
 
 class Manager {
 public:
@@ -55,11 +56,12 @@ public:
 		return componentStore.addComponent(entity, std::move(component));
 	}
 
-	void			addSystem(const std::shared_ptr<System>& system);
+	void			addSystem(std::type_index typeIndex, const std::shared_ptr<System>& system);
 	int				createEntity();
 	size_t			registerEntity(int entity);
 	size_t			unregisterEntity(int entity);
 	size_t			updateSystems(float delta);
+	void			toggleSystemUpdatability(std::type_index typeIndex, bool shouldUpdate);
 	void			clear();
 
 private:
@@ -70,8 +72,8 @@ private:
 	// A map of component IDs to their respective component store (a map of an entity to component). 
 	// This is useful for getting all entities that use a particular component type
 	std::unordered_map<int, std::unique_ptr<IComponentStore>>		mComponentStores;
-	// The order they are inserted is the order they are updated, e.g. plan insertions accordingly
-	// if you're depending on something like input->velocity->physics->draw
-	std::vector<std::shared_ptr<System>>							mSystems;
+	// The order they are inserted is the order they are updated, so plan insertions accordingly
+	// if you're depending on some order like input->velocity->physics->draw
+	std::unordered_map<std::type_index, std::shared_ptr<System>>	mSystems;
 };
 

@@ -31,6 +31,7 @@ private:
 	SpriteRepository	mSpriteRepository;
 
 	int			mCapMan;
+	int			mPauseEntity;
 	std::unordered_map<int /* map layout index */, int /* entity id */> mPellets;
 	std::unordered_map<int /* map layout index */, int /* entity id */> mPowerups;
 	std::stack<int> mLifeEntities;

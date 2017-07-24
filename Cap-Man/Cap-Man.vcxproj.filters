@@ -204,6 +204,12 @@
     <ClCompile Include="PseudoRandomDirectionComponent.cpp">
       <Filter>Source Files\Components</Filter>
     </ClCompile>
+    <ClCompile Include="PauseSystem.cpp">
+      <Filter>Source Files\Systems</Filter>
+    </ClCompile>
+    <ClCompile Include="PauseComponent.cpp">
+      <Filter>Source Files\Components</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="UID.h">
@@ -376,6 +382,12 @@
     </ClInclude>
     <ClInclude Include="Utils.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="PauseSystem.h">
+      <Filter>Header Files\Systems</Filter>
+    </ClInclude>
+    <ClInclude Include="PauseComponent.h">
+      <Filter>Header Files\Components</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

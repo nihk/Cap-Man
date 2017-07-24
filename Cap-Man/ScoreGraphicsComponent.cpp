@@ -2,7 +2,7 @@
 
 ScoreGraphicsComponent::ScoreGraphicsComponent(std::unordered_map<int, Sprite>&& numberSprites)
 	: mNumberSprites(numberSprites)
-	, mScore(0) {
+	, mScore(-1) {
 }
 
 ScoreGraphicsComponent::~ScoreGraphicsComponent() {
@@ -13,9 +13,17 @@ void ScoreGraphicsComponent::update(float delta, int state) {
 	if (mScore != state) {
 		mScore = state;
 		mScoreDigits.clear();
-		while (state) {
-			mScoreDigits.push_back(state % 10);
-			state /= 10;
+
+		if (state == 0) {
+			// Handle the initial case of the score being zero. The 
+			// while looping logic in the else block doesn't handle
+			// a score of zero properly.
+			mScoreDigits.push_back(state);
+		} else {
+			while (state) {
+				mScoreDigits.push_back(state % 10);
+				state /= 10;
+			}
 		}
 	}
 }

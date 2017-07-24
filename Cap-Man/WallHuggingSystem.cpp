@@ -61,7 +61,6 @@ bool WallHuggingSystem::tryMovingInDirection(Directions::Direction direction, co
 bool WallHuggingSystem::tryMovingInDirection(Directions::Direction direction, DirectionInputComponent& directionComponent, LastValidDirectionComponent& lastValidDirectionComponent, VelocityComponent& velocityComponent, const Rect& rect) const {
 	int neighbourElement1;
 	int neighbourElement2;
-
 	getNeighbourElementsByDirection(direction, rect, neighbourElement1, neighbourElement2);
 
 	if (!isElementWallOrInvalid(neighbourElement1) && !isElementWallOrInvalid(neighbourElement2)) {
