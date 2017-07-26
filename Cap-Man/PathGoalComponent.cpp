@@ -4,7 +4,7 @@ PathGoalComponent::PathGoalComponent()
 	: PathGoalComponent(Point(-1, -1)) {
 }
 
-PathGoalComponent::PathGoalComponent(Point initialGoal)
+PathGoalComponent::PathGoalComponent(const Point& initialGoal)
 	: mGoal(initialGoal) {
 }
 

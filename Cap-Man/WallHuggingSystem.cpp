@@ -39,12 +39,13 @@ void WallHuggingSystem::updateEntity(float delta, int entity) {
 
 		if (!tryMovingInDirection(lastKnownValidDirection, directionInputComponent, lastValidDirectionComponent, velocityComponent, rect)) {
 
+			// TODO: Is these even needed now that I have PseudoRandomDirectionSystem seemingly always guaranteeing a path?
 			// Both the attempted direction and current direction hit a wall, so try moving pseudo-randomly if possible
-			if (!tryMovingPseudoRandomlyIfPresent(entity, directionInputComponent, lastValidDirectionComponent, velocityComponent, rect)) {
+			//if (!tryMovingPseudoRandomlyIfPresent(entity, directionInputComponent, lastValidDirectionComponent, velocityComponent, rect)) {
 				// Otherwise, invalidate the direction
 				velocityComponent.stopMovement();
 				directionInputComponent.setNoDirection();
-			}
+			//}
 		}
 	}
 }

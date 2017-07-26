@@ -18,6 +18,7 @@
 #include "BreadcrumbFollowerComponent.h"
 #include "PseudoRandomDirectionComponent.h"
 #include "PauseComponent.h"
+#include "SystemControllerComponent.h"
 
 // TODO: Move metadata to XML so this method is less bloated?
 bool Game::createEntities() {
@@ -374,8 +375,10 @@ bool Game::createEntities() {
 	// Pause entity
 	{
 		mPauseEntity = mManager.createEntity();
-		float gameIntroDuration = 5.0f * 1000.0f;  // 5 seconds
-		mManager.addComponent(mPauseEntity, PauseComponent(true, gameIntroDuration));
+		// TODO: Match this duration up with the intro music + a small delay
+		float gameIntroDurationMillis = 1.0f * 1000.0f;
+		mManager.addComponent(mPauseEntity, PauseComponent(true, gameIntroDurationMillis));
+		mManager.addComponent(mPauseEntity, SystemControllerComponent());
 		mManager.registerEntity(mPauseEntity);
 	}
 

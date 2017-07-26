@@ -1,5 +1,7 @@
 #pragma once
 #include "System.h"
+#include <typeindex>
+#include <vector>
 
 // Pauses other systems, except essential ones that draw
 class PauseSystem 
@@ -16,7 +18,7 @@ private:
 	const static bool PAUSE;
 	const static bool UNPAUSE;
 
-	void togglePause(bool shouldPause) const;
+	void togglePause(bool shouldPause, const std::vector<std::type_index>& managerTypes) const;
 
 	bool mAreSystemsPaused;
 };

@@ -48,13 +48,13 @@ void PathfindingSystem::updateEntity(float delta, int entity) {
 		}
 	}
 
-	if (current.x() < nextStep.x()) {
+	if (current.x() + 1 == nextStep.x()) {
 		directionInputComponent.setDirection(Directions::RIGHT);
-	} else if (current.x() > nextStep.x()) {
+	} else if (current.x() - 1 == nextStep.x()) {
 		directionInputComponent.setDirection(Directions::LEFT);
-	} else if (current.y() < nextStep.y()) {
+	} else if (current.y() + 1 == nextStep.y()) {
 		directionInputComponent.setDirection(Directions::DOWN);
-	} else if (current.y() > nextStep.y()) {
+	} else if (current.y() - 1 == nextStep.y()) {
 		directionInputComponent.setDirection(Directions::UP);
 	}
 }

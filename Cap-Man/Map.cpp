@@ -90,10 +90,19 @@ bool Map::initialize(std::string fileName) {
 	mRows = layout->IntAttribute(LAYOUT_ROWS_ATTR.data());
 	mColumns = layout->IntAttribute(LAYOUT_COLUMNS_ATTR.data());
 	std::string map = layout->GetText();
+	int layoutIndex = 0;
 	for (auto& c : map) {
 		// Converts char numbers to their int number equivalents,
 		// e.g. '0' -> 0 or '1' -> 1
-		mLayout.push_back(c - '0');
+		int i = c - '0';
+
+		mLayout.push_back(i);
+
+		if (i != MapLayoutElements::WALL) {
+			mNavigableIndices.push_back(layoutIndex);
+		}
+
+		++layoutIndex;
 	}
 
 	tinyxml2::XMLElement* legend = layout->NextSiblingElement(LEGEND_XML_TAG.data());

@@ -35,6 +35,7 @@ public:
 	int singleUnitPixels() const;
 	int unitPixels(int numUnits) const;
 	int neighbourElement(Point location, bool scalePixelsToUnits, Directions::Direction direction) const;
+	const std::vector<int>& navigableIndices() const { return mNavigableIndices; }
 
 	// TODO: instead of mutating by reference, return new Point (value) instances?
 	void scaleUnitsToPixels(int& x, int& y) const;
@@ -62,6 +63,7 @@ private:
 	std::unordered_map<Scale, int> mScales;
 	Scale mActiveScale;
 	std::vector<int> mLayout;
+	std::vector<int> mNavigableIndices;
 	int mRows;
 	int mColumns;  // a.k.a. row-length
 };

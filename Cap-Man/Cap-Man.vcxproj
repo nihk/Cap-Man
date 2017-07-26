@@ -160,6 +160,8 @@
     <ClCompile Include="GameEntities.cpp" />
     <ClCompile Include="GameEvents.cpp" />
     <ClCompile Include="IdleAnimationSystem.cpp" />
+    <ClCompile Include="PseudoRandomDirectionSystem.cpp" />
+    <ClCompile Include="SystemControllerComponent.cpp" />
     <ClCompile Include="NodeWithCost.cpp" />
     <ClCompile Include="PathfindingSystem.cpp" />
     <ClCompile Include="Keyboard.cpp" />
@@ -221,6 +223,8 @@
     <ClInclude Include="Game.h" />
     <ClInclude Include="Constants.h" />
     <ClInclude Include="IdleAnimationSystem.h" />
+    <ClInclude Include="PseudoRandomDirectionSystem.h" />
+    <ClInclude Include="SystemControllerComponent.h" />
     <ClInclude Include="NodeWithCost.h" />
     <ClInclude Include="PathfindingSystem.h" />
     <ClInclude Include="GraphicsComponent.h" />

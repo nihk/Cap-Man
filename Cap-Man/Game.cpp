@@ -33,6 +33,8 @@
 #include "PseudoRandomDirectionComponent.h"
 #include "PauseComponent.h"
 #include "PauseSystem.h"
+#include "SystemControllerComponent.h"
+#include "PseudoRandomDirectionSystem.h"
 
 Game::Game()
 	: mShouldQuit(false)
@@ -131,21 +133,23 @@ bool Game::load() {
 	mManager.createComponentStore<BreadcrumbFollowerComponent>();
 	mManager.createComponentStore<PseudoRandomDirectionComponent>();
 	mManager.createComponentStore<PauseComponent>();
+	mManager.createComponentStore<SystemControllerComponent>();
 
 	// NB: The systems are updated in the order they are added here!
-	mManager.addSystem(typeid(PauseSystem), std::make_shared<PauseSystem>(mManager));
-	mManager.addSystem(typeid(SpeedSystem), std::make_shared<SpeedSystem>(mManager));
-	mManager.addSystem(typeid(PathfindingSystem), std::make_shared<PathfindingSystem>(mManager, mMap));
-	mManager.addSystem(typeid(BreadcrumbTrailSystem), std::make_shared<BreadcrumbTrailSystem>(mManager, mMap));
-	mManager.addSystem(typeid(BreadcrumbFollowerSystem), std::make_shared<BreadcrumbFollowerSystem>(mManager, mMap));
-	mManager.addSystem(typeid(WallHuggingSystem), std::make_shared<WallHuggingSystem>(mManager, mMap));
-	mManager.addSystem(typeid(MoveSystem), std::make_shared<MoveSystem>(mManager));
-	mManager.addSystem(typeid(PelletMonitoringSystem), std::make_shared<PelletMonitoringSystem>(mManager, mMap, mPellets));
-	mManager.addSystem(typeid(DirectionAnimationSystem), std::make_shared<DirectionAnimationSystem>(mManager));
-	mManager.addSystem(typeid(ScoreAccumulatorSystem), std::make_shared<ScoreAccumulatorSystem>(mManager));
-	mManager.addSystem(typeid(TeleportSystem), std::make_shared<TeleportSystem>(mManager));
-	mManager.addSystem(typeid(IdleAnimationSystem), std::make_shared<IdleAnimationSystem>(mManager));
-	mManager.addSystem(typeid(DrawSystem), std::make_shared<DrawSystem>(mManager, mRenderer));
+	mManager.addSystem(typeid(PauseSystem),					std::make_shared<PauseSystem>(mManager));
+	mManager.addSystem(typeid(PseudoRandomDirectionSystem), std::make_shared<PseudoRandomDirectionSystem>(mManager, mMap));
+	mManager.addSystem(typeid(SpeedSystem),					std::make_shared<SpeedSystem>(mManager));
+	mManager.addSystem(typeid(PathfindingSystem),			std::make_shared<PathfindingSystem>(mManager, mMap));
+	mManager.addSystem(typeid(BreadcrumbTrailSystem),		std::make_shared<BreadcrumbTrailSystem>(mManager, mMap));
+	mManager.addSystem(typeid(BreadcrumbFollowerSystem),	std::make_shared<BreadcrumbFollowerSystem>(mManager, mMap));
+	mManager.addSystem(typeid(WallHuggingSystem),			std::make_shared<WallHuggingSystem>(mManager, mMap));
+	mManager.addSystem(typeid(MoveSystem),					std::make_shared<MoveSystem>(mManager));
+	mManager.addSystem(typeid(PelletMonitoringSystem),		std::make_shared<PelletMonitoringSystem>(mManager, mMap, mPellets));
+	mManager.addSystem(typeid(DirectionAnimationSystem),	std::make_shared<DirectionAnimationSystem>(mManager));
+	mManager.addSystem(typeid(ScoreAccumulatorSystem),		std::make_shared<ScoreAccumulatorSystem>(mManager));
+	mManager.addSystem(typeid(TeleportSystem),				std::make_shared<TeleportSystem>(mManager));
+	mManager.addSystem(typeid(IdleAnimationSystem),			std::make_shared<IdleAnimationSystem>(mManager));
+	mManager.addSystem(typeid(DrawSystem),					std::make_shared<DrawSystem>(mManager, mRenderer));
 
 	if (!createEntities()) {
 		std::cerr << "Error: Failed to create entities" << std::endl;

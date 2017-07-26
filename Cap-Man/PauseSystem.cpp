@@ -10,6 +10,7 @@
 #include "TeleportSystem.h"
 #include "WallHuggingSystem.h"
 #include "DirectionAnimationSystem.h"
+#include "SystemControllerComponent.h"
 
 const bool PauseSystem::PAUSE = false;
 const bool PauseSystem::UNPAUSE = true;
@@ -18,6 +19,7 @@ PauseSystem::PauseSystem(Manager& manager)
 		: System(manager)
 		, mAreSystemsPaused(false) {
 	insertRequiredComponent(PauseComponent::ID);
+	insertRequiredComponent(SystemControllerComponent::ID);
 }
 
 PauseSystem::~PauseSystem() {
@@ -25,27 +27,23 @@ PauseSystem::~PauseSystem() {
 
 void PauseSystem::updateEntity(float delta, int entity) {
 	PauseComponent& pauseComponent = mManager.getComponent<PauseComponent>(entity);
-	pauseComponent.update(delta);
+	SystemControllerComponent& systemControllerComponent = mManager.getComponent<SystemControllerComponent>(entity);
 
+	pauseComponent.update(delta);
 	bool shouldPause = pauseComponent.shouldPause();
+	const std::vector<std::type_index>& managerTypes = systemControllerComponent.systemTypes();
 
 	if (!mAreSystemsPaused && shouldPause) {
-		togglePause(PAUSE);
+		togglePause(PAUSE, managerTypes);
 		setSystemsPaused(true);
 	} else if (mAreSystemsPaused && !shouldPause) {
-		togglePause(UNPAUSE);
+		togglePause(UNPAUSE, managerTypes);
 		setSystemsPaused(false);
 	}
 }
 
-void PauseSystem::togglePause(bool shouldPause) const {
-	mManager.toggleSystemUpdatability(typeid(BreadcrumbFollowerSystem), shouldPause);
-	mManager.toggleSystemUpdatability(typeid(BreadcrumbTrailSystem), shouldPause);
-	mManager.toggleSystemUpdatability(typeid(MoveSystem), shouldPause);
-	mManager.toggleSystemUpdatability(typeid(PathfindingSystem), shouldPause);
-	mManager.toggleSystemUpdatability(typeid(PelletMonitoringSystem), shouldPause);
-	mManager.toggleSystemUpdatability(typeid(DirectionAnimationSystem), shouldPause);
-	mManager.toggleSystemUpdatability(typeid(SpeedSystem), shouldPause);
-	mManager.toggleSystemUpdatability(typeid(TeleportSystem), shouldPause);
-	mManager.toggleSystemUpdatability(typeid(WallHuggingSystem), shouldPause);
+void PauseSystem::togglePause(bool shouldPause, const std::vector<std::type_index>& managerTypes) const {
+	for (const auto& managerType : managerTypes) {
+		mManager.toggleSystemUpdatability(managerType, shouldPause);
+	}
 }

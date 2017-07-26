@@ -24,3 +24,15 @@ TEST_CASE("Map 1d index to Point and vice versa is computed") {
 	REQUIRE(loc1index == 20);
 	REQUIRE(loc2index == 21);
 }
+
+TEST_CASE("Navigable tile matches point") {
+	Map map;
+	// Assumes the standard 21x23 map
+	map.initialize(Metadata::MAP_FILENAME);
+
+	int firstPellet = 44;
+	Point point = map.mapLocation(firstPellet, false);
+
+	REQUIRE(point.x() == 2);
+	REQUIRE(point.y() == 2);
+}
