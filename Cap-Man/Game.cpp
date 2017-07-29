@@ -156,7 +156,7 @@ bool Game::load() {
 	mManager.addSystem(typeid(WallHuggingSystem),			std::make_shared<WallHuggingSystem>(mManager, mMap));
 	mManager.addSystem(typeid(MoveSystem),					std::make_shared<MoveSystem>(mManager));
 	mManager.addSystem(typeid(CapManAttackedSystem),		std::make_shared<CapManAttackedSystem>(mManager, mGameState, mLifeEntities, mConsumedEntities));
-	mManager.addSystem(typeid(PelletMonitoringSystem),		std::make_shared<PelletMonitoringSystem>(mManager, mMap, mPellets, mConsumedEntities));
+	mManager.addSystem(typeid(PelletMonitoringSystem),		std::make_shared<PelletMonitoringSystem>(mManager, mMap, mPellets, mConsumedEntities, mGameState));
 	mManager.addSystem(typeid(ScoreAccumulatorSystem),		std::make_shared<ScoreAccumulatorSystem>(mManager));
 	mManager.addSystem(typeid(TeleportSystem),				std::make_shared<TeleportSystem>(mManager));
 	mManager.addSystem(typeid(ResetSystem),					std::make_shared<ResetSystem>(mManager, mGameState, mConsumedEntities));
@@ -178,6 +178,10 @@ void Game::update(float delta) {
 
 void Game::unload() {
 	mManager.clear();
+	mLifeEntities.clear();
+	mConsumedEntities.clear();
+	mPellets.clear();
+	mPowerups.clear();
 }
 
 void Game::shutdown() {

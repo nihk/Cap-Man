@@ -25,6 +25,36 @@ size_t Point::hash(const Point& point) {
 	return result;
 }
 
+bool Point::isAdjacentToOrOn(const Point& other) const {
+	bool isAdjacent = isAdjacentAbove(other) 
+		|| isAdjacentBelow(other) 
+		|| isAdjacentLeft(other) 
+		|| isAdjacentRight(other);
+	bool isOn = *this == other;
+
+	return isAdjacent || isOn;
+}
+
+bool Point::isAdjacentAbove(const Point& other) const {
+	return x() == other.x() 
+		&& y() + 1 == other.y();
+}
+
+bool Point::isAdjacentBelow(const Point& other) const {
+	return x() == other.x()
+		&& y() - 1 == other.y();
+}
+
+bool Point::isAdjacentLeft(const Point& other) const {
+	return x() + 1 == other.x()
+		&& y() == other.y();
+}
+
+bool Point::isAdjacentRight(const Point& other) const {
+	return x() - 1 == other.x()
+		&& y() == other.y();
+}
+
 double Point::distance(const Point& other) const {
 	int xDistance = abs(x() - other.x());
 	int yDistance = abs(y() - other.y());

@@ -162,6 +162,7 @@
     <ClCompile Include="GameEvents.cpp" />
     <ClCompile Include="IdleAnimationSystem.cpp" />
     <ClCompile Include="LifeCollisionComponent.cpp" />
+    <ClCompile Include="PowerupMonitoringSystem.cpp" />
     <ClCompile Include="PseudoRandomDirectionSystem.cpp" />
     <ClCompile Include="ResetComponent.cpp" />
     <ClCompile Include="ResetSystem.cpp" />
@@ -229,6 +230,7 @@
     <ClInclude Include="Constants.h" />
     <ClInclude Include="IdleAnimationSystem.h" />
     <ClInclude Include="LifeCollisionComponent.h" />
+    <ClInclude Include="PowerupMonitoringSystem.h" />
     <ClInclude Include="PseudoRandomDirectionSystem.h" />
     <ClInclude Include="ResetComponent.h" />
     <ClInclude Include="ResetSystem.h" />

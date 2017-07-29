@@ -4,6 +4,7 @@
 #include "AStarComponent.h"
 #include "PathGoalComponent.h"
 #include "PointsCollectorComponent.h"
+#include "WinConditionComponent.h"
 
 ResetSystem::ResetSystem(Manager& manager, int& state, std::unordered_set<int>& consumedEntities)
 		: System(manager)
@@ -30,10 +31,25 @@ size_t ResetSystem::updateEntities(float delta) {
 				it = mConsumedEntities.erase(it);
 			}
 
-			auto& pointsStore = mManager.getComponentStore<PointsCollectorComponent>();
-			for (auto& pair : pointsStore.getStore()) {
-				auto& pointsComponent = pair.second;
-				pointsComponent.resetPoints();
+			bool hasWon = false;
+			auto& winConditionStore = mManager.getComponentStore<WinConditionComponent>();
+			for (auto& pair : winConditionStore.getStore()) {
+				auto& winComponent = pair.second;
+				if (winComponent.hasWon()) {
+					hasWon = true;
+					winComponent.nextRound();
+				} else {
+					winComponent.reset();
+				}
+			}
+
+			// Only reset the score if the player lost, otherwise keep accumulating them
+			if (!hasWon) {
+				auto& pointsStore = mManager.getComponentStore<PointsCollectorComponent>();
+				for (auto& pair : pointsStore.getStore()) {
+					auto& pointsComponent = pair.second;
+					pointsComponent.resetPoints();
+				}
 			}
 		}
 

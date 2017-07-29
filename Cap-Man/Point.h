@@ -19,6 +19,13 @@ public:
 	void				setX(int x)				{ mSdlPoint.x = x; }
 	void				setY(int y)				{ mSdlPoint.y = y; }
 
+						// Assumes two points in units for all these bool checks
+	bool				isAdjacentToOrOn(const Point& other) const;
+	bool				isAdjacentAbove(const Point& other) const;
+	bool				isAdjacentBelow(const Point& other) const;
+	bool				isAdjacentLeft(const Point& other) const;
+	bool				isAdjacentRight(const Point& other) const;
+
 	double				distance(const Point& other) const;
 	const SDL_Point*	data() const override	{ return &mSdlPoint; }
 	SDL_Point*			mutableData() override	{ return &mSdlPoint; }

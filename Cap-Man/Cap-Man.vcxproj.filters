@@ -228,6 +228,9 @@
     <ClCompile Include="ResetSystem.cpp">
       <Filter>Source Files\Systems</Filter>
     </ClCompile>
+    <ClCompile Include="PowerupMonitoringSystem.cpp">
+      <Filter>Source Files\Systems</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="UID.h">
@@ -423,6 +426,9 @@
       <Filter>Header Files\Components</Filter>
     </ClInclude>
     <ClInclude Include="ResetSystem.h">
+      <Filter>Header Files\Systems</Filter>
+    </ClInclude>
+    <ClInclude Include="PowerupMonitoringSystem.h">
       <Filter>Header Files\Systems</Filter>
     </ClInclude>
   </ItemGroup>

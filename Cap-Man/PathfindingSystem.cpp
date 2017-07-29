@@ -30,13 +30,20 @@ void PathfindingSystem::updateEntity(float delta, int entity) {
 	Rect rect = physicsComponent.rect();
 	Point current = rect.center();
 	mMap.scalePixelsToUnits(current);
+	Point goal = pathGoalComponent.goal();
 
 	if (!aStarComponent.hasPath()) {
-		Point goal = pathGoalComponent.goal();
 		aStarComponent.findPath(current, goal);
-	} 
+	}
 
 	Point nextStep = aStarComponent.peekCurrentPathStep();
+
+	// TODO: Resolve this workaround for a bug
+	//if (!nextStep.isAdjacentToOrOn(current)) {
+	//	aStarComponent.purgePath();
+	//	aStarComponent.findPath(current, goal);
+	//}
+
 	if (current == nextStep) {
 		aStarComponent.popNextPathStep();
 

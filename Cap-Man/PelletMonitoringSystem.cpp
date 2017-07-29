@@ -5,12 +5,18 @@
 #include "Map.h"
 #include "GraphicsComponent.h"
 #include "WinConditionComponent.h"
+#include "Game.h"
 
-PelletMonitoringSystem::PelletMonitoringSystem(Manager& manager, Map& map, std::unordered_map<int, int>& pellets, std::unordered_set<int>& consumedEntities)
+const int PelletMonitoringSystem::PELLET_POINT_VALUE = 10;
+
+PelletMonitoringSystem::PelletMonitoringSystem(Manager& manager, Map& map, 
+	std::unordered_map<int, int>& pellets, std::unordered_set<int>& consumedEntities,
+	int& gameState)
 		: System(manager)
 		, mMap(map)
 		, mPellets(pellets)
-		, mConsumedEntities(consumedEntities) {
+		, mConsumedEntities(consumedEntities)
+		, mGameState(gameState) {
 	insertRequiredComponent(PhysicsComponent::ID);
 	insertRequiredComponent(PointsCollectorComponent::ID);
 	insertRequiredComponent(WinConditionComponent::ID);
@@ -46,12 +52,16 @@ void PelletMonitoringSystem::updateEntity(float delta, int entity) {
 				&& !isConsumedPellet) {
 			mManager.unregisterEntity(pelletEntity);
 			mConsumedEntities.insert(pelletEntity);
-			// TODO: Magic number
-			pointsComponent.addPoints(10);
+			pointsComponent.addPoints(PELLET_POINT_VALUE);
+
+			int totalPelletsEaten = pointsComponent.points() / PELLET_POINT_VALUE;
+			int pelletsEatenThisGame = totalPelletsEaten - winConditionComponent.numGamesWon() * mPellets.size();
+			bool hasWon = pelletsEatenThisGame == mPellets.size();
 
 			// Collected all the pellets. Game is therefore won.
-			if (mPellets.empty()) {
-				winConditionComponent.setWon(true);
+			if (hasWon) {
+				winConditionComponent.setWon();
+				mGameState = Game::STATE_RESET_ALL;
 			}
 		}
 	}
