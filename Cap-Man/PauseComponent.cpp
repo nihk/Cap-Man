@@ -17,8 +17,8 @@ bool PauseComponent::shouldPause() const {
 	return mShouldPause && mAccumulatedPauseTimeMillis < mPauseDurationMillis;
 }
 
-void PauseComponent::setShouldPause(bool shouldPause, float pauseDuration) {
-	mShouldPause = shouldPause;
+void PauseComponent::pause(float pauseDuration) {
+	mShouldPause = true;
 	mPauseDurationMillis = pauseDuration;
 	mAccumulatedPauseTimeMillis = 0.0f;
 }

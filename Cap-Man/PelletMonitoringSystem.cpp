@@ -6,10 +6,11 @@
 #include "GraphicsComponent.h"
 #include "WinConditionComponent.h"
 
-PelletMonitoringSystem::PelletMonitoringSystem(Manager& manager, Map& map, std::unordered_map<int, int>& pellets)
+PelletMonitoringSystem::PelletMonitoringSystem(Manager& manager, Map& map, std::unordered_map<int, int>& pellets, std::unordered_set<int>& consumedEntities)
 		: System(manager)
 		, mMap(map)
-		, mPellets(pellets) {
+		, mPellets(pellets)
+		, mConsumedEntities(consumedEntities) {
 	insertRequiredComponent(PhysicsComponent::ID);
 	insertRequiredComponent(PointsCollectorComponent::ID);
 	insertRequiredComponent(WinConditionComponent::ID);
@@ -38,12 +39,13 @@ void PelletMonitoringSystem::updateEntity(float delta, int entity) {
 		auto& physicsComponentStore = mManager.getComponentStore<PhysicsComponent>();
 		auto& graphicsComponentStore = mManager.getComponentStore<GraphicsComponent>();
 		
-		if (physicsComponentStore.hasComponent(pelletEntity) && graphicsComponentStore.hasComponent(pelletEntity)) {
-			// TODO: Cache the unregistered pellets somewhere? And don't remove?
-			/*graphicsComponentStore.removeComponent(pelletEntity);
-			graphicsComponentStore.removeComponent(pelletEntity);*/
+		bool isConsumedPellet = mConsumedEntities.find(pelletEntity) != mConsumedEntities.end();
+		
+		if (physicsComponentStore.hasComponent(pelletEntity) 
+				&& graphicsComponentStore.hasComponent(pelletEntity)
+				&& !isConsumedPellet) {
 			mManager.unregisterEntity(pelletEntity);
-			mPellets.erase(mapLayoutIndex);
+			mConsumedEntities.insert(pelletEntity);
 			// TODO: Magic number
 			pointsComponent.addPoints(10);
 

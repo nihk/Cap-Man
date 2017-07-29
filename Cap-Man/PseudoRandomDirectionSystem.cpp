@@ -3,6 +3,7 @@
 #include "PhysicsComponent.h"
 #include <iostream>
 #include "PathGoalComponent.h"
+#include "AStarComponent.h"
 
 PseudoRandomDirectionSystem::PseudoRandomDirectionSystem(Manager& manager, Map& map) 
 		: System(manager)
@@ -16,12 +17,12 @@ PseudoRandomDirectionSystem::~PseudoRandomDirectionSystem() {
 }
 
 void PseudoRandomDirectionSystem::updateEntity(float delta, int entity) {
-	static int num = 0;
 	PathGoalComponent& pathGoalComponent = mManager.getComponent<PathGoalComponent>(entity);
 	PhysicsComponent& physicsComponent = mManager.getComponent<PhysicsComponent>(entity);
 	DirectionInputComponent& directionInputComponent = mManager.getComponent<DirectionInputComponent>(entity);
 
-	if (pathGoalComponent.hasGoal() && directionInputComponent.direction() != Directions::NONE) {
+	if (pathGoalComponent.hasGoal() 
+			&& directionInputComponent.direction() != Directions::NONE) {
 		return;
 	}
 

@@ -151,6 +151,7 @@
     <ClCompile Include="BreadcrumbFollowerSystem.cpp" />
     <ClCompile Include="BreadcrumbTrailComponent.cpp" />
     <ClCompile Include="BreadcrumbTrailSystem.cpp" />
+    <ClCompile Include="CapManAttackedSystem.cpp" />
     <ClCompile Include="Color.cpp" />
     <ClCompile Include="ColorGraphicsComponent.cpp" />
     <ClCompile Include="DirectionAnimationSystem.cpp" />
@@ -160,7 +161,10 @@
     <ClCompile Include="GameEntities.cpp" />
     <ClCompile Include="GameEvents.cpp" />
     <ClCompile Include="IdleAnimationSystem.cpp" />
+    <ClCompile Include="LifeCollisionComponent.cpp" />
     <ClCompile Include="PseudoRandomDirectionSystem.cpp" />
+    <ClCompile Include="ResetComponent.cpp" />
+    <ClCompile Include="ResetSystem.cpp" />
     <ClCompile Include="SystemControllerComponent.cpp" />
     <ClCompile Include="NodeWithCost.cpp" />
     <ClCompile Include="PathfindingSystem.cpp" />
@@ -211,6 +215,7 @@
     <ClInclude Include="BreadcrumbFollowerSystem.h" />
     <ClInclude Include="BreadcrumbTrailComponent.h" />
     <ClInclude Include="BreadcrumbTrailSystem.h" />
+    <ClInclude Include="CapManAttackedSystem.h" />
     <ClInclude Include="catch.hpp" />
     <ClInclude Include="Color.h" />
     <ClInclude Include="ColorGraphicsComponent.h" />
@@ -223,7 +228,10 @@
     <ClInclude Include="Game.h" />
     <ClInclude Include="Constants.h" />
     <ClInclude Include="IdleAnimationSystem.h" />
+    <ClInclude Include="LifeCollisionComponent.h" />
     <ClInclude Include="PseudoRandomDirectionSystem.h" />
+    <ClInclude Include="ResetComponent.h" />
+    <ClInclude Include="ResetSystem.h" />
     <ClInclude Include="SystemControllerComponent.h" />
     <ClInclude Include="NodeWithCost.h" />
     <ClInclude Include="PathfindingSystem.h" />

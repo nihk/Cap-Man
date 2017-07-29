@@ -11,6 +11,7 @@ public:
 	int points() const { return mPoints; }
 	void setPoints(int points) { mPoints = points; }
 	void addPoints(int points) { mPoints += points; }
+	void resetPoints() { mPoints = 0; }
 
 private:
 	int mPoints;

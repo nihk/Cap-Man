@@ -8,12 +8,16 @@
 #include "Keyboard.h"
 #include "Map.h"
 #include "SpriteRepository.h"
-#include <stack>
+#include <unordered_set>
 
 class Game {
 public:
 	Game();
 	~Game();
+
+	static const int STATE_NORMAL;
+	static const int STATE_RESET_CHARACTERS;
+	static const int STATE_RESET_ALL;
 
 	bool		run();
 
@@ -29,15 +33,18 @@ private:
 	Manager		mManager;
 	Map			mMap;
 	SpriteRepository	mSpriteRepository;
+	// TODO: Should this instead of some GameState singleton/instance?
+	int			mGameState;
 
 	int			mCapMan;
 	int			mPauseEntity;
 	std::unordered_map<int /* map layout index */, int /* entity id */> mPellets;
 	std::unordered_map<int /* map layout index */, int /* entity id */> mPowerups;
-	std::stack<int> mLifeEntities;
+	std::vector<int> mLifeEntities;
+	std::unordered_set<int> mConsumedEntities;
 
 	bool		initialize();
-	bool load();
+	bool		load();
 	bool		createEntities();
 	void		unload();
 	void		shutdown();

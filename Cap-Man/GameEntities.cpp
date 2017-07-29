@@ -19,6 +19,8 @@
 #include "PseudoRandomDirectionComponent.h"
 #include "PauseComponent.h"
 #include "SystemControllerComponent.h"
+#include "LifeCollisionComponent.h"
+#include "ResetComponent.h"
 
 // TODO: Move metadata to XML so this method is less bloated?
 bool Game::createEntities() {
@@ -58,8 +60,10 @@ bool Game::createEntities() {
 			if (layout.at(i) == MapLayoutElements::PELLET) {
 				int pellet = mManager.createEntity();
 				Point pelletLocation = mMap.mapLocation(i, true);
-				Rect rect(pelletLocation.x() + pelletPadding,
-					pelletLocation.y() + pelletPadding,
+				pelletLocation.setX(pelletLocation.x() + pelletPadding);
+				pelletLocation.setY(pelletLocation.y() + pelletPadding);
+				Rect rect(pelletLocation.x(),
+					pelletLocation.y(),
 					pelletSideLength,
 					pelletSideLength);
 				mManager.addComponent(pellet, PhysicsComponent(rect));
@@ -81,8 +85,10 @@ bool Game::createEntities() {
 			if (layout.at(i) == MapLayoutElements::POWERUP) {
 				int powerup = mManager.createEntity();
 				Point powerupLocation = mMap.mapLocation(i, true);
-				powerupDimens.setLeft(powerupLocation.x() + powerupPadding);
-				powerupDimens.setTop(powerupLocation.y() + powerupPadding);
+				powerupLocation.setX(powerupLocation.x() + powerupPadding);
+				powerupLocation.setY(powerupLocation.y() + powerupPadding);
+				powerupDimens.setLeft(powerupLocation.x());
+				powerupDimens.setTop(powerupLocation.y());
 				mManager.addComponent(powerup, PhysicsComponent(powerupDimens));
 
 				std::unordered_map<int, Animation> powerupAnimations;
@@ -162,15 +168,19 @@ bool Game::createEntities() {
 		// Start Cap-Man off as if a left key were pressed
 		mKeyboard.setRecentKeyDown(Keys::LEFT);
 
-		mManager.addComponent(mCapMan, KeyboardDirectionInputComponent(mKeyboard, Directions::LEFT));
+		Directions::Direction startDirection = Directions::LEFT;
+
+		mManager.addComponent(mCapMan, KeyboardDirectionInputComponent(mKeyboard, startDirection));
 		mManager.addComponent(mCapMan, VelocityComponent(velocity, speed));
 		mManager.addComponent(mCapMan, PhysicsComponent(startPoint.x(), startPoint.y(), mMap.singleUnitPixels(), mMap.singleUnitPixels()));
 		mManager.addComponent(mCapMan, AnimationGraphicsComponent(std::move(capManAnimations), AnimationStates::WALK_LEFT));
-		mManager.addComponent(mCapMan, LastValidDirectionComponent(Directions::LEFT));
+		mManager.addComponent(mCapMan, LastValidDirectionComponent(startDirection));
 		mManager.addComponent(mCapMan, PointsCollectorComponent());
 		mManager.addComponent(mCapMan, WinConditionComponent());
 		mManager.addComponent(mCapMan, std::move(teleportComponent));
 		mManager.addComponent(mCapMan, BreadcrumbTrailComponent());
+		mManager.addComponent(mCapMan, LifeCollisionComponent(LifeCollisionComponent::Type::HOLDER));
+		mManager.addComponent(mCapMan, ResetComponent(startPoint, Game::STATE_RESET_ALL | Game::STATE_RESET_CHARACTERS, startDirection));
 		mManager.registerEntity(mCapMan);
 	}
 
@@ -264,7 +274,7 @@ bool Game::createEntities() {
 
 			mManager.addComponent(ghost, AStarComponent(mMap));
 			mManager.addComponent(ghost, std::move(pathGoalComponent));
-			mManager.addComponent(ghost, DirectionInputComponent());
+			mManager.addComponent(ghost, DirectionInputComponent(Directions::DOWN));
 			mManager.addComponent(ghost, VelocityComponent(velocity, speed));
 			mManager.addComponent(ghost, PhysicsComponent(startPoint.x(), startPoint.y(), mMap.singleUnitPixels(), mMap.singleUnitPixels()));
 			mManager.addComponent(ghost, AnimationGraphicsComponent(std::move(ghostAnimations), AnimationStates::STATIONARY_DOWN));
@@ -272,6 +282,8 @@ bool Game::createEntities() {
 			mManager.addComponent(ghost, std::move(teleportComponent));
 			mManager.addComponent(ghost, BreadcrumbFollowerComponent(mCapMan));
 			mManager.addComponent(ghost, PseudoRandomDirectionComponent(GameConstants::GHOST_DIRECTION_CHANGE_INTERVAL));
+			mManager.addComponent(ghost, LifeCollisionComponent(LifeCollisionComponent::Type::TAKER));
+			mManager.addComponent(ghost, ResetComponent(startPoint, Game::STATE_RESET_ALL | Game::STATE_RESET_CHARACTERS, Directions::DOWN));
 			mManager.registerEntity(ghost);
 		}
 	}
@@ -347,7 +359,7 @@ bool Game::createEntities() {
 			mManager.addComponent(life, IdleAnimationComponent());
 			mManager.registerEntity(life);
 
-			mLifeEntities.push(life);
+			mLifeEntities.push_back(life);
 		}
 	}
 

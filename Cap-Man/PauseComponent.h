@@ -9,7 +9,7 @@ public:
 	~PauseComponent();
 
 	bool shouldPause() const;
-	void setShouldPause(bool shouldPause, float pauseDuration);
+	void pause(float pauseDuration);
 	void update(float delta);
 
 private:

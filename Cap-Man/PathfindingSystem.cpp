@@ -27,12 +27,12 @@ void PathfindingSystem::updateEntity(float delta, int entity) {
 		return;
 	}
 
-	Point goal = pathGoalComponent.goal();
 	Rect rect = physicsComponent.rect();
 	Point current = rect.center();
 	mMap.scalePixelsToUnits(current);
 
 	if (!aStarComponent.hasPath()) {
+		Point goal = pathGoalComponent.goal();
 		aStarComponent.findPath(current, goal);
 	} 
 

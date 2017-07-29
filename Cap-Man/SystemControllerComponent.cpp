@@ -9,6 +9,7 @@
 #include "TeleportSystem.h"
 #include "WallHuggingSystem.h"
 #include "PseudoRandomDirectionSystem.h"
+#include "ResetSystem.h"
 
 SystemControllerComponent::SystemControllerComponent() {
 	mSystemTypes = {
@@ -22,6 +23,7 @@ SystemControllerComponent::SystemControllerComponent() {
 		typeid(TeleportSystem),
 		typeid(WallHuggingSystem),
 		typeid(PseudoRandomDirectionSystem),
+		typeid(ResetSystem),
 	};
 }
 

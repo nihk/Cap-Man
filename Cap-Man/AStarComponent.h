@@ -20,6 +20,7 @@ public:
 	bool hasPath() const { return !mOptimalPath.empty(); }
 	void popNextPathStep();
 	Point peekCurrentPathStep() const { return mOptimalPath.front(); }
+	void purgePath() { mOptimalPath.clear(); }
 
 private:
 	static NodeWithCost findLowestFCost(const std::unordered_set<NodeWithCost, NodeWithCost::Hash>& open);

@@ -35,9 +35,18 @@
 #include "PauseSystem.h"
 #include "SystemControllerComponent.h"
 #include "PseudoRandomDirectionSystem.h"
+#include "CapManAttackedSystem.h"
+#include "LifeCollisionComponent.h"
+#include "ResetSystem.h"
+#include "ResetComponent.h"
+
+const int Game::STATE_NORMAL = 1;
+const int Game::STATE_RESET_ALL = 1 << 1;
+const int Game::STATE_RESET_CHARACTERS = 1 << 2;
 
 Game::Game()
 	: mShouldQuit(false)
+	, mGameState(STATE_NORMAL)
 	, mCapMan(-1)
 	, mPauseEntity(-1) {
 }
@@ -134,20 +143,24 @@ bool Game::load() {
 	mManager.createComponentStore<PseudoRandomDirectionComponent>();
 	mManager.createComponentStore<PauseComponent>();
 	mManager.createComponentStore<SystemControllerComponent>();
+	mManager.createComponentStore<LifeCollisionComponent>();
+	mManager.createComponentStore<ResetComponent>();
 
 	// NB: The systems are updated in the order they are added here!
 	mManager.addSystem(typeid(PauseSystem),					std::make_shared<PauseSystem>(mManager));
-	mManager.addSystem(typeid(PseudoRandomDirectionSystem), std::make_shared<PseudoRandomDirectionSystem>(mManager, mMap));
 	mManager.addSystem(typeid(SpeedSystem),					std::make_shared<SpeedSystem>(mManager));
+	mManager.addSystem(typeid(PseudoRandomDirectionSystem), std::make_shared<PseudoRandomDirectionSystem>(mManager, mMap));
 	mManager.addSystem(typeid(PathfindingSystem),			std::make_shared<PathfindingSystem>(mManager, mMap));
 	mManager.addSystem(typeid(BreadcrumbTrailSystem),		std::make_shared<BreadcrumbTrailSystem>(mManager, mMap));
 	mManager.addSystem(typeid(BreadcrumbFollowerSystem),	std::make_shared<BreadcrumbFollowerSystem>(mManager, mMap));
 	mManager.addSystem(typeid(WallHuggingSystem),			std::make_shared<WallHuggingSystem>(mManager, mMap));
 	mManager.addSystem(typeid(MoveSystem),					std::make_shared<MoveSystem>(mManager));
-	mManager.addSystem(typeid(PelletMonitoringSystem),		std::make_shared<PelletMonitoringSystem>(mManager, mMap, mPellets));
-	mManager.addSystem(typeid(DirectionAnimationSystem),	std::make_shared<DirectionAnimationSystem>(mManager));
+	mManager.addSystem(typeid(CapManAttackedSystem),		std::make_shared<CapManAttackedSystem>(mManager, mGameState, mLifeEntities, mConsumedEntities));
+	mManager.addSystem(typeid(PelletMonitoringSystem),		std::make_shared<PelletMonitoringSystem>(mManager, mMap, mPellets, mConsumedEntities));
 	mManager.addSystem(typeid(ScoreAccumulatorSystem),		std::make_shared<ScoreAccumulatorSystem>(mManager));
 	mManager.addSystem(typeid(TeleportSystem),				std::make_shared<TeleportSystem>(mManager));
+	mManager.addSystem(typeid(ResetSystem),					std::make_shared<ResetSystem>(mManager, mGameState, mConsumedEntities));
+	mManager.addSystem(typeid(DirectionAnimationSystem),	std::make_shared<DirectionAnimationSystem>(mManager));
 	mManager.addSystem(typeid(IdleAnimationSystem),			std::make_shared<IdleAnimationSystem>(mManager));
 	mManager.addSystem(typeid(DrawSystem),					std::make_shared<DrawSystem>(mManager, mRenderer));
 
