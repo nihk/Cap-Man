@@ -21,6 +21,8 @@
 #include "SystemControllerComponent.h"
 #include "LifeCollisionComponent.h"
 #include "ResetComponent.h"
+#include "PowerupCollectorComponent.h"
+#include "VulnerabilityComponent.h"
 
 // TODO: Move metadata to XML so this method is less bloated?
 bool Game::createEntities() {
@@ -176,6 +178,7 @@ bool Game::createEntities() {
 		mManager.addComponent(mCapMan, AnimationGraphicsComponent(std::move(capManAnimations), AnimationStates::WALK_LEFT));
 		mManager.addComponent(mCapMan, LastValidDirectionComponent(startDirection));
 		mManager.addComponent(mCapMan, PointsCollectorComponent());
+		mManager.addComponent(mCapMan, PowerupCollectorComponent());
 		mManager.addComponent(mCapMan, WinConditionComponent());
 		mManager.addComponent(mCapMan, std::move(teleportComponent));
 		mManager.addComponent(mCapMan, BreadcrumbTrailComponent());
@@ -190,6 +193,7 @@ bool Game::createEntities() {
 		for (const auto& ghostName : ghostNames) {
 
 			int ghost = mManager.createEntity();
+			mGhosts.insert(ghost);
 
 			std::unordered_map<int, Animation> ghostAnimations;
 			Animation walkLeft(GameConstants::ANIMATION_FRAME_INTERVAL);
@@ -284,6 +288,7 @@ bool Game::createEntities() {
 			mManager.addComponent(ghost, PseudoRandomDirectionComponent(GameConstants::GHOST_DIRECTION_CHANGE_INTERVAL));
 			mManager.addComponent(ghost, LifeCollisionComponent(LifeCollisionComponent::Type::TAKER));
 			mManager.addComponent(ghost, ResetComponent(startPoint, Game::STATE_RESET_ALL | Game::STATE_RESET_CHARACTERS, Directions::DOWN));
+			mManager.addComponent(ghost, VulnerabilityComponent());
 			mManager.registerEntity(ghost);
 		}
 	}

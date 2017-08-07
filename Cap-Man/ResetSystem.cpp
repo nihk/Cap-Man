@@ -5,6 +5,7 @@
 #include "PathGoalComponent.h"
 #include "PointsCollectorComponent.h"
 #include "WinConditionComponent.h"
+#include "VulnerabilityComponent.h"
 
 ResetSystem::ResetSystem(Manager& manager, int& state, std::unordered_set<int>& consumedEntities)
 		: System(manager)
@@ -58,6 +59,7 @@ size_t ResetSystem::updateEntities(float delta) {
 		auto& directionStore = mManager.getComponentStore<DirectionInputComponent>();
 		auto& aStarStore = mManager.getComponentStore<AStarComponent>();
 		auto& pathGoalStore = mManager.getComponentStore<PathGoalComponent>();
+		auto& vulnStore = mManager.getComponentStore<VulnerabilityComponent>();
 		for (auto& pair : resetStore.getStore()) {
 			int entity = pair.first;
 			auto& physicsComponent = physicsStore.getComponent(entity);
@@ -81,6 +83,10 @@ size_t ResetSystem::updateEntities(float delta) {
 				if (pathGoalStore.hasComponent(entity)) {
 					auto& pathGoalComponent = pathGoalStore.getComponent(entity);
 					pathGoalComponent.removeGoal();
+				}
+				if (vulnStore.hasComponent(entity)) {
+					auto& vulnComponent = vulnStore.getComponent(entity);
+					vulnComponent.reset();
 				}
 
 				++numUpdatedEntities;

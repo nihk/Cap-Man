@@ -96,6 +96,56 @@ Point BreadcrumbTrailComponent::nextBreadcrumb(int score) const {
 	return *it;
 }
 
+//Point BreadcrumbTrailComponent::previousBreadcrumb(const Point& point) const {
+//	if (!hasBreadcrumb(point)) {
+//		return point;
+//	}
+//
+//	auto rit = mBreadcrumbs.rbegin();
+//
+//	while (rit != mBreadcrumbs.rend() && *rit != point) {
+//		// Increment the iterator to the current Point position
+//		++rit;
+//	}
+//
+//	// If the next element past the given point param was the end, 
+//	// there's nowhere else to go but where you are
+//	if (rit == mBreadcrumbs.rend()) {
+//		return point;
+//	}
+//
+//	// Increment to the next Point position based on score;
+//	++rit;
+//
+//	// One last check...
+//	if (rit == mBreadcrumbs.rend()) {
+//		return point;
+//	}
+//
+//	return *rit;
+//}
+//
+//Point BreadcrumbTrailComponent::previousBreadcrumb(int score) const {
+//	if (score == MIN_SCORE) {
+//		// Can't get a lower score than the first element
+//		return mBreadcrumbs.front();
+//	}
+//	
+//	int counter = MAX_SCORE;
+//	auto rit = mBreadcrumbs.rbegin();
+//
+//	while (counter != score) {
+//		// Increment the iterator to the current Point position
+//		++rit;
+//		--counter;
+//	}
+//
+//	// Increment to the next Point position based on score;
+//	++rit;
+//
+//	return *rit;
+//}
+
 int BreadcrumbTrailComponent::hasBreadcrumb(const Point& point) const {
 	return breadcrumbScore(point) > NO_SCORE;
 }

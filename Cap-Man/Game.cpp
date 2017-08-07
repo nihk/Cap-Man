@@ -39,6 +39,9 @@
 #include "LifeCollisionComponent.h"
 #include "ResetSystem.h"
 #include "ResetComponent.h"
+#include "PowerupCollectorComponent.h"
+#include "PowerupMonitoringSystem.h"
+#include "VulnerabilityComponent.h"
 
 const int Game::STATE_NORMAL = 1;
 const int Game::STATE_RESET_ALL = 1 << 1;
@@ -145,6 +148,8 @@ bool Game::load() {
 	mManager.createComponentStore<SystemControllerComponent>();
 	mManager.createComponentStore<LifeCollisionComponent>();
 	mManager.createComponentStore<ResetComponent>();
+	mManager.createComponentStore<PowerupCollectorComponent>();
+	mManager.createComponentStore<VulnerabilityComponent>();
 
 	// NB: The systems are updated in the order they are added here!
 	mManager.addSystem(typeid(PauseSystem),					std::make_shared<PauseSystem>(mManager));
@@ -157,6 +162,7 @@ bool Game::load() {
 	mManager.addSystem(typeid(MoveSystem),					std::make_shared<MoveSystem>(mManager));
 	mManager.addSystem(typeid(CapManAttackedSystem),		std::make_shared<CapManAttackedSystem>(mManager, mGameState, mLifeEntities, mConsumedEntities));
 	mManager.addSystem(typeid(PelletMonitoringSystem),		std::make_shared<PelletMonitoringSystem>(mManager, mMap, mPellets, mConsumedEntities, mGameState));
+	mManager.addSystem(typeid(PowerupMonitoringSystem),		std::make_shared<PowerupMonitoringSystem>(mManager, mMap, mPowerups, mConsumedEntities, mGhosts));
 	mManager.addSystem(typeid(ScoreAccumulatorSystem),		std::make_shared<ScoreAccumulatorSystem>(mManager));
 	mManager.addSystem(typeid(TeleportSystem),				std::make_shared<TeleportSystem>(mManager));
 	mManager.addSystem(typeid(ResetSystem),					std::make_shared<ResetSystem>(mManager, mGameState, mConsumedEntities));
@@ -182,6 +188,7 @@ void Game::unload() {
 	mConsumedEntities.clear();
 	mPellets.clear();
 	mPowerups.clear();
+	mGhosts.clear();
 }
 
 void Game::shutdown() {

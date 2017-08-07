@@ -37,10 +37,6 @@ void PelletMonitoringSystem::updateEntity(float delta, int entity) {
 
 	if (element == MapLayoutElements::PELLET) {
 		int mapLayoutIndex = mMap.mapLocation(center, false);
-		bool isActivePellet = mPellets.find(mapLayoutIndex) != mPellets.end();
-		if (!isActivePellet) {
-			return;
-		}
 		int pelletEntity = mPellets.at(mapLayoutIndex);
 		auto& physicsComponentStore = mManager.getComponentStore<PhysicsComponent>();
 		auto& graphicsComponentStore = mManager.getComponentStore<GraphicsComponent>();

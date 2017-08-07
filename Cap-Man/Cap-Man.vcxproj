@@ -162,6 +162,7 @@
     <ClCompile Include="GameEvents.cpp" />
     <ClCompile Include="IdleAnimationSystem.cpp" />
     <ClCompile Include="LifeCollisionComponent.cpp" />
+    <ClCompile Include="PowerupCollectorComponent.cpp" />
     <ClCompile Include="PowerupMonitoringSystem.cpp" />
     <ClCompile Include="PseudoRandomDirectionSystem.cpp" />
     <ClCompile Include="ResetComponent.cpp" />
@@ -205,6 +206,7 @@
     <ClCompile Include="Velocity.cpp" />
     <ClCompile Include="VelocityComponent.cpp" />
     <ClCompile Include="LastValidDirectionComponent.cpp" />
+    <ClCompile Include="VulnerabilityComponent.cpp" />
     <ClCompile Include="WallHuggingSystem.cpp" />
     <ClCompile Include="WinConditionComponent.cpp" />
     <ClCompile Include="Window.cpp" />
@@ -230,6 +232,7 @@
     <ClInclude Include="Constants.h" />
     <ClInclude Include="IdleAnimationSystem.h" />
     <ClInclude Include="LifeCollisionComponent.h" />
+    <ClInclude Include="PowerupCollectorComponent.h" />
     <ClInclude Include="PowerupMonitoringSystem.h" />
     <ClInclude Include="PseudoRandomDirectionSystem.h" />
     <ClInclude Include="ResetComponent.h" />
@@ -272,6 +275,7 @@
     <ClInclude Include="Velocity.h" />
     <ClInclude Include="VelocityComponent.h" />
     <ClInclude Include="LastValidDirectionComponent.h" />
+    <ClInclude Include="VulnerabilityComponent.h" />
     <ClInclude Include="WallHuggingSystem.h" />
     <ClInclude Include="WinConditionComponent.h" />
     <ClInclude Include="Window.h" />

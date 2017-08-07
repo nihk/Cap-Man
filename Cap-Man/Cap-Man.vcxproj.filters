@@ -31,14 +31,14 @@
     <Filter Include="Source Files\Tests">
       <UniqueIdentifier>{605768eb-b937-400e-aa93-e41314ba79f6}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\Systems">
-      <UniqueIdentifier>{6f9d2bf3-9211-4950-b973-56ee6810acd0}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Header Files\Wrappers for SDL">
       <UniqueIdentifier>{d015834e-d524-4937-a4a4-9276484b4c63}</UniqueIdentifier>
     </Filter>
     <Filter Include="Source Files\Wrappers for SDL">
       <UniqueIdentifier>{2728e1c8-129b-4aa2-b8ba-a8456ce4de77}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Systems">
+      <UniqueIdentifier>{6f9d2bf3-9211-4950-b973-56ee6810acd0}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -228,8 +228,14 @@
     <ClCompile Include="ResetSystem.cpp">
       <Filter>Source Files\Systems</Filter>
     </ClCompile>
+    <ClCompile Include="PowerupCollectorComponent.cpp">
+      <Filter>Source Files\Components</Filter>
+    </ClCompile>
     <ClCompile Include="PowerupMonitoringSystem.cpp">
       <Filter>Source Files\Systems</Filter>
+    </ClCompile>
+    <ClCompile Include="VulnerabilityComponent.cpp">
+      <Filter>Source Files\Components</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -430,6 +436,12 @@
     </ClInclude>
     <ClInclude Include="PowerupMonitoringSystem.h">
       <Filter>Header Files\Systems</Filter>
+    </ClInclude>
+    <ClInclude Include="PowerupCollectorComponent.h">
+      <Filter>Header Files\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="VulnerabilityComponent.h">
+      <Filter>Header Files\Components</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

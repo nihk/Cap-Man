@@ -38,6 +38,7 @@ private:
 
 	int			mCapMan;
 	int			mPauseEntity;
+	std::unordered_set<int> mGhosts;
 	std::unordered_map<int /* map layout index */, int /* entity id */> mPellets;
 	std::unordered_map<int /* map layout index */, int /* entity id */> mPowerups;
 	std::vector<int> mLifeEntities;

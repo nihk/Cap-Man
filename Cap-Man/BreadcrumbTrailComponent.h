@@ -16,6 +16,8 @@ public:
 	int breadcrumbScore(const Point& point) const;
 	Point nextBreadcrumb(const Point& point) const;
 	Point nextBreadcrumb(int score) const;
+	//Point previousBreadcrumb(const Point& point) const;
+	//Point previousBreadcrumb(int score) const;
 	int hasBreadcrumb(const Point& point) const;
 
 private:
