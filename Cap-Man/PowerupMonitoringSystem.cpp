@@ -31,6 +31,16 @@ void PowerupMonitoringSystem::updateEntity(float delta, int entity) {
 	mMap.scalePixelsToUnits(center);
 	int element = mMap.mapElement(center.x(), center.y());
 
+	// TODO: Extract to method
+	for (auto ghost : mGhosts) {
+		auto& vulnerabilityComponent = mManager.getComponent<VulnerabilityComponent>(ghost);
+		auto& velocityComponent = mManager.getComponent<VelocityComponent>(ghost);
+		float defaultSpeed = static_cast<float>(mMap.unitPixels(GameConstants::CHARACTER_UNITS_SPEED));
+		if (!vulnerabilityComponent.isVulnerable() && velocityComponent.speed() != defaultSpeed) {
+			velocityComponent.setSpeed(defaultSpeed);
+		}
+	}
+
 	if (element == MapLayoutElements::POWERUP) {
 		int mapLayoutIndex = mMap.mapLocation(center, false);
 		int powerupEntity = mPowerups.at(mapLayoutIndex);
@@ -54,6 +64,6 @@ void PowerupMonitoringSystem::turnGhostsVulnerable() const {
 		auto& vulnerabilityComponent = mManager.getComponent<VulnerabilityComponent>(ghost);
 		auto& velocityComponent = mManager.getComponent<VelocityComponent>(ghost);
 		vulnerabilityComponent.makeTemporarilyVulnerable(GameConstants::GHOST_VULNERABILITY_DURATION);
-		velocityComponent.setSpeed(static_cast<float>(mMap.unitPixels(GameConstants::CHARACTER_VULNERABLE_SPEED)));
+		velocityComponent.setSpeed(velocityComponent.halfSpeed());
 	}
 }

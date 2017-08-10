@@ -6,6 +6,7 @@
 #include "PointsCollectorComponent.h"
 #include "WinConditionComponent.h"
 #include "VulnerabilityComponent.h"
+#include "VelocityComponent.h"
 
 ResetSystem::ResetSystem(Manager& manager, int& state, std::unordered_set<int>& consumedEntities)
 		: System(manager)
@@ -60,6 +61,7 @@ size_t ResetSystem::updateEntities(float delta) {
 		auto& aStarStore = mManager.getComponentStore<AStarComponent>();
 		auto& pathGoalStore = mManager.getComponentStore<PathGoalComponent>();
 		auto& vulnStore = mManager.getComponentStore<VulnerabilityComponent>();
+		auto& velocityStore = mManager.getComponentStore<VelocityComponent>();
 		for (auto& pair : resetStore.getStore()) {
 			int entity = pair.first;
 			auto& physicsComponent = physicsStore.getComponent(entity);
@@ -87,6 +89,10 @@ size_t ResetSystem::updateEntities(float delta) {
 				if (vulnStore.hasComponent(entity)) {
 					auto& vulnComponent = vulnStore.getComponent(entity);
 					vulnComponent.reset();
+				}
+				if (velocityStore.hasComponent(entity)) {
+					auto& velComponent = velocityStore.getComponent(entity);
+					velComponent.setSpeed(velComponent.halfSpeed() * 2.0f);
 				}
 
 				++numUpdatedEntities;

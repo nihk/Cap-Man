@@ -50,13 +50,13 @@ namespace Metadata {
 
 namespace GameConstants {
 	static const int CHARACTER_UNITS_SPEED = 4;  // units/sec
-	static const int CHARACTER_VULNERABLE_SPEED = 2;  // units/sec
+	//static const int CHARACTER_VULNERABLE_SPEED = 2;  // units/sec
 	static const int ANIMATION_FRAME_INTERVAL = 66;  // ms
 	static const int POWERUP_BLINKING_INTERVAL = 132;  // ms
 	static const int ONE_UP_BLINKING_INTERVAL = 198;  // ms
 	static const uint8_t NUM_STARTING_LIVES = 2;
 	static const int GHOST_DIRECTION_CHANGE_INTERVAL = 1000;  // ms
-	static const float GHOST_VULNERABILITY_DURATION = 10.0f * 1000.0f;
+	static const float GHOST_VULNERABILITY_DURATION = 8.0f * 1000.0f;
 }
 
 namespace MapLayoutElements {

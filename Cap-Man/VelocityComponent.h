@@ -15,11 +15,13 @@ public:
 	void		setVelocityFromDirection(Directions::Direction direction);
 	void		stopMovement()						{ setVelocity(0.0f, 0.0f); }
 	float		speed() const						{ return mSpeed; }
+	float		halfSpeed() const					{ return mHalfSpeed; }
 	void		setSpeed(float speed)				{ mSpeed = speed; }
 	bool		isMoving() const					{ return mVelocity.isMoving(); }
 
 private:
 	Velocity	mVelocity;
 	float		mSpeed;
+	float		mHalfSpeed;
 };
 

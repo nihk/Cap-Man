@@ -4,6 +4,7 @@
 #include "LifeCollisionComponent.h"
 #include "Game.h"
 #include "ResetComponent.h"
+#include "VulnerabilityComponent.h"
 
 CapManAttackedSystem::CapManAttackedSystem(Manager& manager, int& state, std::vector<int>& lifeEntities, std::unordered_set<int>& consumedEntities)
 		: System(manager)
@@ -19,6 +20,7 @@ CapManAttackedSystem::~CapManAttackedSystem() {
 }
 
 // TODO: Need to not pause capman's death animation but pause the ghosts'
+// TODO: Extract into smaller methods
 void CapManAttackedSystem::updateEntity(float delta, int entity) {
 	PhysicsComponent& physicsComponent = mManager.getComponent<PhysicsComponent>(entity);
 	LifeCollisionComponent& lifeCollisionComponent = mManager.getComponent<LifeCollisionComponent>(entity);
@@ -33,6 +35,7 @@ void CapManAttackedSystem::updateEntity(float delta, int entity) {
 
 	auto& lifeStore = mManager.getComponentStore<LifeCollisionComponent>();
 	auto& physicsStore = mManager.getComponentStore<PhysicsComponent>();
+	auto& vulnerabilityStore = mManager.getComponentStore<VulnerabilityComponent>();
 
 	Rect lifeHolderRect = physicsComponent.rect();
 
@@ -46,6 +49,12 @@ void CapManAttackedSystem::updateEntity(float delta, int entity) {
 			// This should always be false, i.e. I defined all entities with velocities to also have physics
 			|| !physicsStore.hasComponent(storeEntity)) {
 			continue;
+		}
+
+		auto& vulnerabilityComponent = vulnerabilityStore.getComponent(storeEntity);
+		if (vulnerabilityComponent.isVulnerable()) {
+			// Capman is invulnerable when high on a powerup
+			return;
 		}
 
 		auto& storePhysicsComponent = physicsStore.getComponent(storeEntity);

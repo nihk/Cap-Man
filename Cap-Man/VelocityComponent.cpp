@@ -6,7 +6,8 @@ VelocityComponent::VelocityComponent(float vx, float vy, float speed)
 
 VelocityComponent::VelocityComponent(Velocity velocity, float speed)
 	: mVelocity(velocity)
-	, mSpeed(speed) {
+	, mSpeed(speed)
+	, mHalfSpeed(speed * 0.5f) {
 }
 
 VelocityComponent::~VelocityComponent() {

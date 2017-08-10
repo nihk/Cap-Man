@@ -64,15 +64,15 @@ void BreadcrumbFollowerSystem::updateEntity(float delta, int entity) {
 				aStarComponent.purgePath();
 				aStarComponent.findPath(center, goal);
 			}
-		} else {
-			Point nextBreadcrumb = trailComponent.nextBreadcrumb(center);
+		}
+	} else {
+		Point nextBreadcrumb = trailComponent.nextBreadcrumb(center);
 
-			Directions::Direction nextDir = nextDirection(center, nextBreadcrumb);
+		Directions::Direction nextDir = nextDirection(center, nextBreadcrumb);
 
-			// If the direction was NONE, just keep going in that same direction, then
-			if (nextDir != Directions::NONE) {
-				directionComponent.setDirection(nextDir);
-			}
+		// If the direction was NONE, just keep going in that same direction, then
+		if (nextDir != Directions::NONE) {
+			directionComponent.setDirection(nextDir);
 		}
 	}
 }

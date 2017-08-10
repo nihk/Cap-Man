@@ -91,15 +91,17 @@ bool WallHuggingSystem::isElementWallOrInvalid(int element) {
  * left and bottom right points will touch either 1 or 2 tiles. The neighbourElement1 and neighbourElement2 
  * params here represent what element is in those tiles that the entity's physicscomponent's "feet" are touching.
  */
+// TODO: Consider the case where movement speed alternates between 2 and 4 units per second
 void WallHuggingSystem::getNeighbourElementsByDirection(Directions::Direction direction, const Rect& rect, int& neighbourElement1, int& neighbourElement2) const {
+	int buffer = 1;
 	switch (direction) {
 		case Directions::UP: {
 			Point bottomLeft = rect.bottomLeft();
 			Point bottomRight = rect.bottomRight();
-			// Don't overlap with where the next tile starts, on the right/bottom
-			bottomLeft.setY(bottomLeft.y() - 1);
-			bottomRight.setX(bottomRight.x() - 1);
-			bottomRight.setY(bottomRight.y() - 1);
+			bottomLeft.setX(bottomLeft.x() + buffer);
+			bottomLeft.setY(bottomLeft.y() - buffer);
+			bottomRight.setX(bottomRight.x() - buffer);
+			bottomRight.setY(bottomRight.y() - buffer);
 
 			neighbourElement1 = mMap.neighbourElement(bottomLeft, true, direction);
 			neighbourElement2 = mMap.neighbourElement(bottomRight, true, direction);
@@ -108,8 +110,10 @@ void WallHuggingSystem::getNeighbourElementsByDirection(Directions::Direction di
 		case Directions::RIGHT: {
 			Point topLeft = rect.topLeft();
 			Point bottomLeft = rect.bottomLeft();
-			// Don't overlap with where the next tile starts, on the right/bottom
-			bottomLeft.setY(bottomLeft.y() - 1);
+			topLeft.setX(topLeft.x() + buffer);
+			topLeft.setY(topLeft.y() + buffer);
+			bottomLeft.setX(bottomLeft.x() + buffer);
+			bottomLeft.setY(bottomLeft.y() - buffer);
 
 			neighbourElement1 = mMap.neighbourElement(topLeft, true, direction);
 			neighbourElement2 = mMap.neighbourElement(bottomLeft, true, direction);
@@ -118,8 +122,10 @@ void WallHuggingSystem::getNeighbourElementsByDirection(Directions::Direction di
 		case Directions::DOWN: {
 			Point topRight = rect.topRight();
 			Point topLeft = rect.topLeft();
-			// Don't overlap with where the next tile starts, on the right/bottom
-			topRight.setX(topRight.x() - 1);
+			topRight.setX(topRight.x() - buffer);
+			topRight.setY(topRight.y() + buffer);
+			topLeft.setX(topLeft.x() + buffer);
+			topLeft.setY(topLeft.y() + buffer);
 
 			neighbourElement1 = mMap.neighbourElement(topRight, true, direction);
 			neighbourElement2 = mMap.neighbourElement(topLeft, true, direction);
@@ -128,10 +134,10 @@ void WallHuggingSystem::getNeighbourElementsByDirection(Directions::Direction di
 		case Directions::LEFT: {
 			Point topRight = rect.topRight();
 			Point bottomRight = rect.bottomRight();
-			// Don't overlap with where the next tile starts, on the right/bottom
-			topRight.setX(topRight.x() - 1);
-			bottomRight.setX(bottomRight.x() - 1);
-			bottomRight.setY(bottomRight.y() - 1);
+			topRight.setX(topRight.x() - buffer);
+			topRight.setY(topRight.y() + buffer);
+			bottomRight.setX(bottomRight.x() - buffer);
+			bottomRight.setY(bottomRight.y() - buffer);
 
 			neighbourElement1 = mMap.neighbourElement(topRight, true, direction);
 			neighbourElement2 = mMap.neighbourElement(bottomRight, true, direction);
