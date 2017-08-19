@@ -153,7 +153,7 @@ bool Game::createEntities() {
 		Animation stationaryDown;
 		stationaryDown.addSprite(std::move(mSpriteRepository.findSprite("capman_down1")));
 		capManAnimations.insert_or_assign(AnimationStates::STATIONARY_DOWN, stationaryDown);
-		Animation death(GameConstants::ANIMATION_FRAME_INTERVAL);
+		Animation death(GameConstants::CAPMAN_DEATH_ANIMATION_INTERVAL);
 		death.addSprite(std::move(mSpriteRepository.findSprite("capman_death1")));
 		death.addSprite(std::move(mSpriteRepository.findSprite("capman_death2")));
 		death.addSprite(std::move(mSpriteRepository.findSprite("capman_death3")));

@@ -3,6 +3,7 @@
 #include "GraphicsComponent.h"
 #include "LastValidDirectionComponent.h"
 #include "Manager.h"
+#include "EatableComponent.h"
 
 GhostDeathAnimationSystem::GhostDeathAnimationSystem(Manager& manager)
 		: System(manager) {
@@ -10,6 +11,7 @@ GhostDeathAnimationSystem::GhostDeathAnimationSystem(Manager& manager)
 	insertRequiredComponent(GraphicsComponent::ID);
 	insertRequiredComponent(DirectionInputComponent::ID);
 	insertRequiredComponent(LastValidDirectionComponent::ID);
+	insertRequiredComponent(EatableComponent::ID);
 }
 
 GhostDeathAnimationSystem::~GhostDeathAnimationSystem() {

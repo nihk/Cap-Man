@@ -53,6 +53,7 @@
 #include "CollidableComponent.h"
 #include "SpeedChangeWatcherComponent.h"
 #include "SpeedChangedSystem.h"
+#include "CapManDeathAnimationSystem.h"
 
 const int Game::STATE_NORMAL = 1;
 const int Game::STATE_RESET_ALL = 1 << 1;
@@ -169,6 +170,7 @@ bool Game::load() {
 
 	// NB: The systems are updated in the order they are added here!
 	mManager.addSystem(std::make_shared<PauseSystem>(mManager));
+	mManager.addSystem(std::make_shared<ResetSystem>(mManager, mGameState, mConsumedEntities));
 	mManager.addSystem(std::make_shared<SpeedSystem>(mManager));
 	mManager.addSystem(std::make_shared<PseudoRandomDirectionSystem>(mManager, mMap));
 	mManager.addSystem(std::make_shared<PathfindingSystem>(mManager, mMap));
@@ -177,19 +179,19 @@ bool Game::load() {
 	mManager.addSystem(std::make_shared<WallHuggingSystem>(mManager, mMap));
 	mManager.addSystem(std::make_shared<MoveSystem>(mManager));
 	mManager.addSystem(std::make_shared<CollisionSystem>(mManager, mMap));
-	mManager.addSystem(std::make_shared<CapManAttackedSystem>(mManager, mGameState, mLifeEntities, mConsumedEntities));
-	mManager.addSystem(std::make_shared<GhostEatenSystem>(mManager));
+	mManager.addSystem(std::make_shared<CapManAttackedSystem>(mManager, mGameState, mLifeEntities, mConsumedEntities, mPauseEntity));
+	mManager.addSystem(std::make_shared<GhostEatenSystem>(mManager, mPauseEntity));
 	mManager.addSystem(std::make_shared<GhostDeathRetreatSystem>(mManager, mMap));
 	mManager.addSystem(std::make_shared<PelletMonitoringSystem>(mManager, mMap, mPellets, mConsumedEntities, mGameState));
 	mManager.addSystem(std::make_shared<PowerupMonitoringSystem>(mManager, mMap, mPowerups, mConsumedEntities, mGhosts));
 	mManager.addSystem(std::make_shared<SpeedChangedSystem>(mManager, mMap));
 	mManager.addSystem(std::make_shared<ScoreAccumulatorSystem>(mManager));
 	mManager.addSystem(std::make_shared<TeleportSystem>(mManager));
-	mManager.addSystem(std::make_shared<ResetSystem>(mManager, mGameState, mConsumedEntities));
 	mManager.addSystem(std::make_shared<DirectionAnimationSystem>(mManager));
 	mManager.addSystem(std::make_shared<IdleAnimationSystem>(mManager));
 	mManager.addSystem(std::make_shared<VulnerableAnimationSystem>(mManager));
 	mManager.addSystem(std::make_shared<GhostDeathAnimationSystem>(mManager));
+	mManager.addSystem(std::make_shared<CapManDeathAnimationSystem>(mManager));
 	mManager.addSystem(std::make_shared<DrawSystem>(mManager, mRenderer));
 
 	if (!createEntities()) {

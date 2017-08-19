@@ -152,6 +152,7 @@
     <ClCompile Include="BreadcrumbTrailComponent.cpp" />
     <ClCompile Include="BreadcrumbTrailSystem.cpp" />
     <ClCompile Include="CapManAttackedSystem.cpp" />
+    <ClCompile Include="CapManDeathAnimationSystem.cpp" />
     <ClCompile Include="CollidableComponent.cpp" />
     <ClCompile Include="CollisionSystem.cpp" />
     <ClCompile Include="Color.cpp" />
@@ -230,6 +231,7 @@
     <ClInclude Include="BreadcrumbTrailComponent.h" />
     <ClInclude Include="BreadcrumbTrailSystem.h" />
     <ClInclude Include="CapManAttackedSystem.h" />
+    <ClInclude Include="CapManDeathAnimationSystem.h" />
     <ClInclude Include="catch.hpp" />
     <ClInclude Include="CollidableComponent.h" />
     <ClInclude Include="CollisionSystem.h" />

@@ -10,6 +10,12 @@
 #include "WallHuggingSystem.h"
 #include "PseudoRandomDirectionSystem.h"
 #include "ResetSystem.h"
+#include "VulnerableAnimationSystem.h"
+#include "GhostDeathAnimationSystem.h"
+#include "CapManAttackedSystem.h"
+#include "GhostEatenSystem.h"
+#include "PowerupMonitoringSystem.h"
+#include "SpeedChangedSystem.h"
 
 SystemControllerComponent::SystemControllerComponent() {
 	mSystemTypes = {
@@ -18,12 +24,18 @@ SystemControllerComponent::SystemControllerComponent() {
 		typeid(MoveSystem).name(),
 		typeid(PathfindingSystem).name(),
 		typeid(PelletMonitoringSystem).name(),
+		typeid(PowerupMonitoringSystem).name(),
 		typeid(DirectionAnimationSystem).name(),
+		typeid(VulnerableAnimationSystem).name(),
+		typeid(GhostDeathAnimationSystem).name(),
 		typeid(SpeedSystem).name(),
 		typeid(TeleportSystem).name(),
 		typeid(WallHuggingSystem).name(),
 		typeid(PseudoRandomDirectionSystem).name(),
 		typeid(ResetSystem).name(),
+		typeid(CapManAttackedSystem).name(),
+		typeid(GhostEatenSystem).name(),
+		typeid(SpeedChangedSystem).name(),
 	};
 }
 

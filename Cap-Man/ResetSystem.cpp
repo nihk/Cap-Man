@@ -9,7 +9,6 @@
 #include "VelocityComponent.h"
 #include "DeathComponent.h"
 #include "BreadcrumbTrailComponent.h"
-#include "BreadcrumbFollowerComponent.h"
 
 ResetSystem::ResetSystem(Manager& manager, int& state, std::unordered_set<int>& consumedEntities)
 		: System(manager)
@@ -25,6 +24,10 @@ ResetSystem::~ResetSystem() {
 // TODO: Rethink this. It knows too much about other non-required components
 size_t ResetSystem::updateEntities(float delta) {
 	size_t numUpdatedEntities = 0;
+
+	if (!isUpdatable()) {
+		return numUpdatedEntities;
+	}
 
 	if (mGameState != Game::STATE_NORMAL) {
 		if (mGameState & Game::STATE_RESET_ALL) {

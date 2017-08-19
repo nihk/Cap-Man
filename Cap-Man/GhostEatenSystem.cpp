@@ -7,9 +7,11 @@
 #include "VelocityComponent.h"
 #include "PointsCollectorComponent.h"
 #include "SpeedChangeWatcherComponent.h"
+#include "PauseComponent.h"
 
-GhostEatenSystem::GhostEatenSystem(Manager& manager) 
-		: System(manager) {
+GhostEatenSystem::GhostEatenSystem(Manager& manager, int& pauseEntity) 
+		: System(manager)
+		, mPauseEntity(pauseEntity) {
 	insertRequiredComponent(DeathComponent::ID);
 	insertRequiredComponent(VulnerabilityComponent::ID);
 	insertRequiredComponent(PhysicsComponent::ID);
@@ -40,6 +42,8 @@ void GhostEatenSystem::updateEntity(float delta, int entity) {
 
 	Rect rect = physicsComponent.rect();
 	if (rect.containsPoint(eaterCenter)) {
+		PauseComponent& pauseComponent = mManager.getComponent<PauseComponent>(mPauseEntity);
+		pauseComponent.pause(GameConstants::GHOST_EATEN_PAUSE_DURATION);
 		deathComponent.setDead(true);
 		velocityComponent.setCurrentSpeed(/* velocityComponent.defaultSpeed() */ velocityComponent.doubleSpeed());
 		speedChangeWatcherComponent.setSpeedChanged(true);

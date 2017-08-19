@@ -51,12 +51,15 @@ namespace Metadata {
 namespace GameConstants {
 	static const int CHARACTER_UNITS_SPEED = 4;  // units/sec
 	static const int ANIMATION_FRAME_INTERVAL = 66;  // ms
+	static const int CAPMAN_DEATH_ANIMATION_INTERVAL = 132;  // ms
 	static const int POWERUP_BLINKING_INTERVAL = 132;  // ms
 	static const int ONE_UP_BLINKING_INTERVAL = 198;  // ms
 	static const uint8_t NUM_STARTING_LIVES = 2;
 	static const int GHOST_DIRECTION_CHANGE_INTERVAL = 1000;  // ms
-	static const float GHOST_VULNERABILITY_DURATION = 8.0f * 1000.0f;
-	static const float GHOST_EXPIRING_ANIMATION_TIME = 3.0f * 1000.0f;
+	static const float GHOST_VULNERABILITY_DURATION = 8.0f * 1000.0f;  // ms
+	static const float GHOST_EXPIRING_ANIMATION_TIME = 3.0f * 1000.0f;  // ms
+	static const float GHOST_EATEN_PAUSE_DURATION = 650.0f;  // ms
+	static const float CAPMAN_DEATH_ANIMATION_FULL_DURATION = 10 * CAPMAN_DEATH_ANIMATION_INTERVAL;  // 11 - 1 frames
 	static const int EAT_GHOST_POINTS = 200;
 	static const int EAT_PELLET_POINTS = 10;
 }

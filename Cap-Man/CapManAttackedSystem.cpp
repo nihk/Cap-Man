@@ -6,15 +6,18 @@
 #include "ResetComponent.h"
 #include "VulnerabilityComponent.h"
 #include "DeathComponent.h"
+#include "PauseComponent.h"
 
-CapManAttackedSystem::CapManAttackedSystem(Manager& manager, int& state, std::vector<int>& lifeEntities, std::unordered_set<int>& consumedEntities)
+CapManAttackedSystem::CapManAttackedSystem(Manager& manager, int& state, std::vector<int>& lifeEntities, std::unordered_set<int>& consumedEntities, int& pauseEntity)
 		: System(manager)
 		, mGameState(state) 
 		, mLifeEntities(lifeEntities)
-		, mConsumedEntities(consumedEntities) {
+		, mConsumedEntities(consumedEntities)
+		, mPauseEntity(pauseEntity) {
 	insertRequiredComponent(PhysicsComponent::ID);
 	insertRequiredComponent(LifeCollisionComponent::ID);
 	insertRequiredComponent(ResetComponent::ID);
+	insertRequiredComponent(DeathComponent::ID);
 }
 
 CapManAttackedSystem::~CapManAttackedSystem() {
@@ -26,6 +29,7 @@ void CapManAttackedSystem::updateEntity(float delta, int entity) {
 	PhysicsComponent& physicsComponent = mManager.getComponent<PhysicsComponent>(entity);
 	LifeCollisionComponent& lifeCollisionComponent = mManager.getComponent<LifeCollisionComponent>(entity);
 	ResetComponent& resetComponent = mManager.getComponent<ResetComponent>(entity);
+	DeathComponent& deathComponent = mManager.getComponent<DeathComponent>(entity);
 
 	LifeCollisionComponent::Type type = lifeCollisionComponent.type();
 
@@ -54,8 +58,8 @@ void CapManAttackedSystem::updateEntity(float delta, int entity) {
 		}
 
 		auto& vulnerabilityComponent = vulnerabilityStore.getComponent(storeEntity);
-		auto& deathComponent = deathStore.getComponent(storeEntity);
-		if (vulnerabilityComponent.isVulnerable() || deathComponent.isDead()) {
+		auto& enemyDeathComponent = deathStore.getComponent(storeEntity);
+		if (vulnerabilityComponent.isVulnerable() || enemyDeathComponent.isDead()) {
 			// Capman is invulnerable when high on a powerup
 			return;
 		}
@@ -64,6 +68,10 @@ void CapManAttackedSystem::updateEntity(float delta, int entity) {
 		Rect rect = storePhysicsComponent.rect();
 		Point center = rect.center();
 		if (lifeHolderRect.containsPoint(center)) {
+			deathComponent.setDead(true);
+			PauseComponent& pauseComponent = mManager.getComponent<PauseComponent>(mPauseEntity);
+			pauseComponent.pause(GameConstants::CAPMAN_DEATH_ANIMATION_FULL_DURATION);
+
 			// Remove lives and set the game state based on how many are remaining
 			auto rit = mLifeEntities.rbegin();
 			bool hasLivesRemaining = false;
