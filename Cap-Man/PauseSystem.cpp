@@ -31,19 +31,19 @@ void PauseSystem::updateEntity(float delta, int entity) {
 
 	pauseComponent.update(delta);
 	bool shouldPause = pauseComponent.shouldPause();
-	const std::vector<std::type_index>& managerTypes = systemControllerComponent.systemTypes();
+	const std::vector<std::string>& typeNames = systemControllerComponent.systemTypes();
 
 	if (!mAreSystemsPaused && shouldPause) {
-		togglePause(PAUSE, managerTypes);
+		togglePause(PAUSE, typeNames);
 		setSystemsPaused(true);
 	} else if (mAreSystemsPaused && !shouldPause) {
-		togglePause(UNPAUSE, managerTypes);
+		togglePause(UNPAUSE, typeNames);
 		setSystemsPaused(false);
 	}
 }
 
-void PauseSystem::togglePause(bool shouldPause, const std::vector<std::type_index>& managerTypes) const {
-	for (const auto& managerType : managerTypes) {
-		mManager.toggleSystemUpdatability(managerType, shouldPause);
+void PauseSystem::togglePause(bool shouldPause, const std::vector<std::string>& typeNames) const {
+	for (const auto& typeName : typeNames) {
+		mManager.toggleSystemUpdatability(typeName, shouldPause);
 	}
 }

@@ -195,7 +195,7 @@ bool Game::createEntities() {
 			int ghost = mManager.createEntity();
 			mGhosts.insert(ghost);
 
-			std::unordered_map<int, Animation> ghostAnimations;
+			std::unordered_map<AnimationStates::AnimationState, Animation> ghostAnimations;
 			Animation walkLeft(GameConstants::ANIMATION_FRAME_INTERVAL);
 			walkLeft.addSprite(std::move(mSpriteRepository.findSprite(ghostName + "_left1")));
 			walkLeft.addSprite(std::move(mSpriteRepository.findSprite(ghostName + "_left2")));
@@ -242,7 +242,7 @@ bool Game::createEntities() {
 			Animation vulnerable(GameConstants::ANIMATION_FRAME_INTERVAL);
 			vulnerable.addSprite(std::move(mSpriteRepository.findSprite("ghost_blue1")));
 			vulnerable.addSprite(std::move(mSpriteRepository.findSprite("ghost_blue2")));
-			ghostAnimations.insert_or_assign(AnimationStates::VULNERABLE, deathDown);
+			ghostAnimations.insert_or_assign(AnimationStates::VULNERABLE, vulnerable);
 			// TODO: move to constant
 			// TODO: vulnerable expiring faster?
 			Animation vulnerableExpiring(264 /* millis */);

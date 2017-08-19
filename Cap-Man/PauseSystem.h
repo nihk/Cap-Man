@@ -18,7 +18,7 @@ private:
 	const static bool PAUSE;
 	const static bool UNPAUSE;
 
-	void togglePause(bool shouldPause, const std::vector<std::type_index>& managerTypes) const;
+	void togglePause(bool shouldPause, const std::vector<std::string>& managerTypes) const;
 
 	bool mAreSystemsPaused;
 };

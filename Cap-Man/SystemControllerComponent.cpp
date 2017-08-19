@@ -13,17 +13,17 @@
 
 SystemControllerComponent::SystemControllerComponent() {
 	mSystemTypes = {
-		typeid(BreadcrumbFollowerSystem),
-		typeid(BreadcrumbTrailSystem),
-		typeid(MoveSystem),
-		typeid(PathfindingSystem),
-		typeid(PelletMonitoringSystem),
-		typeid(DirectionAnimationSystem),
-		typeid(SpeedSystem),
-		typeid(TeleportSystem),
-		typeid(WallHuggingSystem),
-		typeid(PseudoRandomDirectionSystem),
-		typeid(ResetSystem),
+		typeid(BreadcrumbFollowerSystem).name(),
+		typeid(BreadcrumbTrailSystem).name(),
+		typeid(MoveSystem).name(),
+		typeid(PathfindingSystem).name(),
+		typeid(PelletMonitoringSystem).name(),
+		typeid(DirectionAnimationSystem).name(),
+		typeid(SpeedSystem).name(),
+		typeid(TeleportSystem).name(),
+		typeid(WallHuggingSystem).name(),
+		typeid(PseudoRandomDirectionSystem).name(),
+		typeid(ResetSystem).name(),
 	};
 }
 

@@ -207,6 +207,7 @@
     <ClCompile Include="VelocityComponent.cpp" />
     <ClCompile Include="LastValidDirectionComponent.cpp" />
     <ClCompile Include="VulnerabilityComponent.cpp" />
+    <ClCompile Include="VulnerableAnimationSystem.cpp" />
     <ClCompile Include="WallHuggingSystem.cpp" />
     <ClCompile Include="WinConditionComponent.cpp" />
     <ClCompile Include="Window.cpp" />
@@ -276,6 +277,7 @@
     <ClInclude Include="VelocityComponent.h" />
     <ClInclude Include="LastValidDirectionComponent.h" />
     <ClInclude Include="VulnerabilityComponent.h" />
+    <ClInclude Include="VulnerableAnimationSystem.h" />
     <ClInclude Include="WallHuggingSystem.h" />
     <ClInclude Include="WinConditionComponent.h" />
     <ClInclude Include="Window.h" />

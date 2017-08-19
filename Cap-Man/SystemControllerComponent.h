@@ -10,9 +10,9 @@ public:
 	SystemControllerComponent();
 	~SystemControllerComponent();
 
-	const std::vector<std::type_index>& systemTypes() const { return mSystemTypes; }
+	const std::vector<std::string>& systemTypes() const { return mSystemTypes; }
 
 private:
-	std::vector<std::type_index> mSystemTypes;
+	std::vector<std::string> mSystemTypes;
 };
 

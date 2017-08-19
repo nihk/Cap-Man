@@ -58,6 +58,7 @@ namespace GameConstants {
 	static const uint8_t NUM_STARTING_LIVES = 2;
 	static const int GHOST_DIRECTION_CHANGE_INTERVAL = 1000;  // ms
 	static const float GHOST_VULNERABILITY_DURATION = 8.0f * 1000.0f;
+	static const float GHOST_EXPIRING_ANIMATION_TIME = 3.0f * 1000.0f;
 }
 
 namespace MapLayoutElements {

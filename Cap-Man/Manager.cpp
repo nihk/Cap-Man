@@ -7,13 +7,12 @@ Manager::Manager() {
 Manager::~Manager() {
 }
 
-void Manager::addSystem(std::type_index typeIndex, const std::shared_ptr<System>& system) {
-
+void Manager::addSystem(const std::shared_ptr<System>& system) {
 	if (!system || system->getRequiredComponents().empty()) {
 		throw std::runtime_error("System did not specify required Components");
 	}
 
-	mSystems.insert_or_assign(typeIndex, system);
+	mSystems.push_back(system);
 }
 
 int Manager::createEntity() {
@@ -29,9 +28,8 @@ size_t Manager::registerEntity(int entity) {
 	std::set<int>& entityComponents = findEntityComponents(entity);
 
 	// Cycle through all systems to check which ones can be registered by the entity
-	for (auto& pair : mSystems) {
-		std::shared_ptr<System> system = pair.second;
-		auto systemRequiredComponents = system->getRequiredComponents();
+	for (auto& system : mSystems) {
+		auto& systemRequiredComponents = system->getRequiredComponents();
 
 		// Check if all components required by the system are what the entity uses
 		if (std::includes(entityComponents.begin(), entityComponents.end(),
@@ -48,8 +46,7 @@ size_t Manager::registerEntity(int entity) {
 size_t Manager::unregisterEntity(int entity) {
 	size_t numSystemsUnregisteredFrom = 0;
 
-	for (auto& pair : mSystems) {
-		std::shared_ptr<System> system = pair.second;
+	for (auto& system : mSystems) {
 		numSystemsUnregisteredFrom += system->unregisterEntity(entity);
 	}
 
@@ -65,8 +62,7 @@ void Manager::clear() {
 size_t Manager::updateSystems(float delta) {
 	size_t numUpdatedSystems = 0;
 
-	for (auto& pair : mSystems) {
-		std::shared_ptr<System> system = pair.second;
+	for (auto& system : mSystems) {
 		system->updateEntities(delta);
 		++numUpdatedSystems;
 	}
@@ -74,9 +70,12 @@ size_t Manager::updateSystems(float delta) {
 	return numUpdatedSystems;
 }
 
-void Manager::toggleSystemUpdatability(std::type_index typeIndex, bool shouldUpdate) {
-	std::shared_ptr<System> system = mSystems.at(typeIndex);
-	system->setUpdatable(shouldUpdate);
+void Manager::toggleSystemUpdatability(std::string typeName, bool shouldUpdate) {
+	for (auto& system : mSystems) {
+		if (typeid(*system).name() == typeName) {
+			system->setUpdatable(shouldUpdate);
+		}
+	}
 }
 
 // Finds the set of components that a particular entity uses
