@@ -14,8 +14,6 @@ public:
 	void updateEntity(float delta, int entity) override;
 
 private:
-	static const int PELLET_POINT_VALUE;
-
 	Map& mMap;
 	std::unordered_map<int, int>& mPellets;
 	std::unordered_set<int>& mConsumedEntities;

@@ -5,6 +5,7 @@
 #include "Game.h"
 #include "ResetComponent.h"
 #include "VulnerabilityComponent.h"
+#include "DeathComponent.h"
 
 CapManAttackedSystem::CapManAttackedSystem(Manager& manager, int& state, std::vector<int>& lifeEntities, std::unordered_set<int>& consumedEntities)
 		: System(manager)
@@ -36,6 +37,7 @@ void CapManAttackedSystem::updateEntity(float delta, int entity) {
 	auto& lifeStore = mManager.getComponentStore<LifeCollisionComponent>();
 	auto& physicsStore = mManager.getComponentStore<PhysicsComponent>();
 	auto& vulnerabilityStore = mManager.getComponentStore<VulnerabilityComponent>();
+	auto& deathStore = mManager.getComponentStore<DeathComponent>();
 
 	Rect lifeHolderRect = physicsComponent.rect();
 
@@ -52,7 +54,8 @@ void CapManAttackedSystem::updateEntity(float delta, int entity) {
 		}
 
 		auto& vulnerabilityComponent = vulnerabilityStore.getComponent(storeEntity);
-		if (vulnerabilityComponent.isVulnerable()) {
+		auto& deathComponent = deathStore.getComponent(storeEntity);
+		if (vulnerabilityComponent.isVulnerable() || deathComponent.isDead()) {
 			// Capman is invulnerable when high on a powerup
 			return;
 		}

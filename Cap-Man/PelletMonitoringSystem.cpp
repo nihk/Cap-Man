@@ -7,8 +7,6 @@
 #include "WinConditionComponent.h"
 #include "Game.h"
 
-const int PelletMonitoringSystem::PELLET_POINT_VALUE = 10;
-
 PelletMonitoringSystem::PelletMonitoringSystem(Manager& manager, Map& map, 
 	std::unordered_map<int, int>& pellets, std::unordered_set<int>& consumedEntities,
 	int& gameState)
@@ -48,10 +46,10 @@ void PelletMonitoringSystem::updateEntity(float delta, int entity) {
 				&& !isConsumedPellet) {
 			mManager.unregisterEntity(pelletEntity);
 			mConsumedEntities.insert(pelletEntity);
-			pointsComponent.addPoints(PELLET_POINT_VALUE);
+			pointsComponent.addPoints(GameConstants::EAT_PELLET_POINTS);
+			winConditionComponent.addPelletEaten();
 
-			int totalPelletsEaten = pointsComponent.points() / PELLET_POINT_VALUE;
-			int pelletsEatenThisGame = totalPelletsEaten - winConditionComponent.numGamesWon() * mPellets.size();
+			int pelletsEatenThisGame = winConditionComponent.numPelletsEaten();
 			bool hasWon = pelletsEatenThisGame == mPellets.size();
 
 			// Collected all the pellets. Game is therefore won.

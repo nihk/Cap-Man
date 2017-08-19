@@ -43,6 +43,12 @@
 #include "PowerupMonitoringSystem.h"
 #include "VulnerabilityComponent.h"
 #include "VulnerableAnimationSystem.h"
+#include "DeathComponent.h"
+#include "EatableComponent.h"
+#include "GhostEatenSystem.h"
+#include "GhostDeathAnimationSystem.h"
+#include "RetreatUponDeathComponent.h"
+#include "GhostDeathRetreatSystem.h"
 
 const int Game::STATE_NORMAL = 1;
 const int Game::STATE_RESET_ALL = 1 << 1;
@@ -151,6 +157,9 @@ bool Game::load() {
 	mManager.createComponentStore<ResetComponent>();
 	mManager.createComponentStore<PowerupCollectorComponent>();
 	mManager.createComponentStore<VulnerabilityComponent>();
+	mManager.createComponentStore<DeathComponent>();
+	mManager.createComponentStore<EatableComponent>();
+	mManager.createComponentStore<RetreatUponDeathComponent>();
 
 	// NB: The systems are updated in the order they are added here!
 	mManager.addSystem(std::make_shared<PauseSystem>(mManager));
@@ -162,6 +171,8 @@ bool Game::load() {
 	mManager.addSystem(std::make_shared<WallHuggingSystem>(mManager, mMap));
 	mManager.addSystem(std::make_shared<MoveSystem>(mManager));
 	mManager.addSystem(std::make_shared<CapManAttackedSystem>(mManager, mGameState, mLifeEntities, mConsumedEntities));
+	mManager.addSystem(std::make_shared<GhostEatenSystem>(mManager));
+	mManager.addSystem(std::make_shared<GhostDeathRetreatSystem>(mManager, mMap));
 	mManager.addSystem(std::make_shared<PelletMonitoringSystem>(mManager, mMap, mPellets, mConsumedEntities, mGameState));
 	mManager.addSystem(std::make_shared<PowerupMonitoringSystem>(mManager, mMap, mPowerups, mConsumedEntities, mGhosts));
 	mManager.addSystem(std::make_shared<ScoreAccumulatorSystem>(mManager));
@@ -170,6 +181,7 @@ bool Game::load() {
 	mManager.addSystem(std::make_shared<DirectionAnimationSystem>(mManager));
 	mManager.addSystem(std::make_shared<IdleAnimationSystem>(mManager));
 	mManager.addSystem(std::make_shared<VulnerableAnimationSystem>(mManager));
+	mManager.addSystem(std::make_shared<GhostDeathAnimationSystem>(mManager));
 	mManager.addSystem(std::make_shared<DrawSystem>(mManager, mRenderer));
 
 	if (!createEntities()) {

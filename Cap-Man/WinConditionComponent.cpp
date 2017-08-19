@@ -2,7 +2,8 @@
 
 WinConditionComponent::WinConditionComponent()
 	: mHasWon(false)
-	, mNumGamesWon(0) {
+	, mNumGamesWon(0)
+	, mNumPelletsEaten(0) {
 }
 
 WinConditionComponent::~WinConditionComponent() {
@@ -11,6 +12,7 @@ WinConditionComponent::~WinConditionComponent() {
 void WinConditionComponent::reset() {
 	mHasWon = false;
 	mNumGamesWon = 0;
+	mNumPelletsEaten = 0;
 }
 
 void WinConditionComponent::setWon() {
@@ -20,4 +22,5 @@ void WinConditionComponent::setWon() {
 
 void WinConditionComponent::nextRound() {
 	mHasWon = false;
+	mNumPelletsEaten = 0;
 }

@@ -7,6 +7,7 @@
 #include "GraphicsComponent.h"
 #include "VulnerabilityComponent.h"
 #include "VelocityComponent.h"
+#include "DeathComponent.h"
 
 PowerupMonitoringSystem::PowerupMonitoringSystem(Manager& manager, Map& map, 
 			std::unordered_map<int, int>& powerups, std::unordered_set<int>& consumedEntities, std::unordered_set<int>& ghosts)
@@ -63,7 +64,10 @@ void PowerupMonitoringSystem::turnGhostsVulnerable() const {
 	for (auto ghost : mGhosts) {
 		auto& vulnerabilityComponent = mManager.getComponent<VulnerabilityComponent>(ghost);
 		auto& velocityComponent = mManager.getComponent<VelocityComponent>(ghost);
-		vulnerabilityComponent.makeTemporarilyVulnerable(GameConstants::GHOST_VULNERABILITY_DURATION);
-		velocityComponent.setCurrentSpeed(velocityComponent.halfSpeed());
+		auto& deathComponent = mManager.getComponent<DeathComponent>(ghost);
+		if (!deathComponent.isDead()) {
+			vulnerabilityComponent.makeTemporarilyVulnerable(GameConstants::GHOST_VULNERABILITY_DURATION);
+			velocityComponent.setCurrentSpeed(velocityComponent.halfSpeed());
+		}
 	}
 }
