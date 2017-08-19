@@ -16,6 +16,7 @@ public:
 
 private:
 	void turnGhostsVulnerable() const;
+	void resetGhostVulnerabilitySpeed() const;
 
 	Map& mMap;
 	std::unordered_map<int, int>& mPowerups;

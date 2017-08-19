@@ -6,6 +6,7 @@
 #include "EatableComponent.h"
 #include "VelocityComponent.h"
 #include "PointsCollectorComponent.h"
+#include "SpeedChangeWatcherComponent.h"
 
 GhostEatenSystem::GhostEatenSystem(Manager& manager) 
 		: System(manager) {
@@ -14,6 +15,7 @@ GhostEatenSystem::GhostEatenSystem(Manager& manager)
 	insertRequiredComponent(PhysicsComponent::ID);
 	insertRequiredComponent(EatableComponent::ID);
 	insertRequiredComponent(VelocityComponent::ID);
+	insertRequiredComponent(SpeedChangeWatcherComponent::ID);
 }
 
 GhostEatenSystem::~GhostEatenSystem() {
@@ -25,6 +27,7 @@ void GhostEatenSystem::updateEntity(float delta, int entity) {
 	PhysicsComponent& physicsComponent = mManager.getComponent<PhysicsComponent>(entity);
 	EatableComponent& eatableComponent = mManager.getComponent<EatableComponent>(entity);
 	VelocityComponent& velocityComponent = mManager.getComponent<VelocityComponent>(entity);
+	SpeedChangeWatcherComponent& speedChangeWatcherComponent = mManager.getComponent<SpeedChangeWatcherComponent>(entity);
 
 	if (!vulnerabilityComponent.isVulnerable() || deathComponent.isDead()) {
 		return;
@@ -38,8 +41,8 @@ void GhostEatenSystem::updateEntity(float delta, int entity) {
 	Rect rect = physicsComponent.rect();
 	if (rect.containsPoint(eaterCenter)) {
 		deathComponent.setDead(true);
-		// TODO: Uncomment this once collision system is in place
-		velocityComponent.setCurrentSpeed(velocityComponent.defaultSpeed() /* velocityComponent.doubleSpeed() */);
+		velocityComponent.setCurrentSpeed(/* velocityComponent.defaultSpeed() */ velocityComponent.doubleSpeed());
+		speedChangeWatcherComponent.setSpeedChanged(true);
 		pointsCollectorComponent.addPoints(GameConstants::EAT_GHOST_POINTS);
 	}
 }

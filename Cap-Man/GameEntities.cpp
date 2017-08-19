@@ -26,6 +26,8 @@
 #include "DeathComponent.h"
 #include "EatableComponent.h"
 #include "RetreatUponDeathComponent.h"
+#include "CollidableComponent.h"
+#include "SpeedChangeWatcherComponent.h"
 
 // TODO: Move metadata to XML so this method is less bloated?
 bool Game::createEntities() {
@@ -188,6 +190,7 @@ bool Game::createEntities() {
 		mManager.addComponent(mCapMan, LifeCollisionComponent(LifeCollisionComponent::Type::HOLDER));
 		mManager.addComponent(mCapMan, ResetComponent(startPoint, Game::STATE_RESET_ALL | Game::STATE_RESET_CHARACTERS, startDirection));
 		mManager.addComponent(mCapMan, DeathComponent());
+		mManager.addComponent(mCapMan, CollidableComponent());
 		mManager.registerEntity(mCapMan);
 	}
 
@@ -296,6 +299,8 @@ bool Game::createEntities() {
 			mManager.addComponent(ghost, DeathComponent());
 			mManager.addComponent(ghost, EatableComponent(mCapMan));
 			mManager.addComponent(ghost, RetreatUponDeathComponent(Point(10, 10)));
+			mManager.addComponent(ghost, CollidableComponent());
+			mManager.addComponent(ghost, SpeedChangeWatcherComponent());
 			mManager.registerEntity(ghost);
 		}
 	}

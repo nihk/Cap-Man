@@ -9,10 +9,6 @@ public:
 	~BreadcrumbFollowerComponent();
 
 	int entityToFollow() const { return mEntityToFollow; }
-	bool isFollowing() const { return mIsFollowing; }
-	bool isAvoiding() const { return !isFollowing(); }
-	void setFollowing() { mIsFollowing = true; }
-	void setAvoiding() { mIsFollowing = false; }
 
 private:
 	int mEntityToFollow;

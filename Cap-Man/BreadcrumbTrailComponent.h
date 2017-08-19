@@ -19,6 +19,7 @@ public:
 	//Point previousBreadcrumb(const Point& point) const;
 	//Point previousBreadcrumb(int score) const;
 	int hasBreadcrumb(const Point& point) const;
+	void reset() { mBreadcrumbs.clear(); }
 
 private:
 	static const int MAX_SCORE;

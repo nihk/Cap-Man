@@ -8,6 +8,7 @@
 #include "VulnerabilityComponent.h"
 #include "VelocityComponent.h"
 #include "DeathComponent.h"
+#include "SpeedChangeWatcherComponent.h"
 
 PowerupMonitoringSystem::PowerupMonitoringSystem(Manager& manager, Map& map, 
 			std::unordered_map<int, int>& powerups, std::unordered_set<int>& consumedEntities, std::unordered_set<int>& ghosts)
@@ -32,15 +33,7 @@ void PowerupMonitoringSystem::updateEntity(float delta, int entity) {
 	mMap.scalePixelsToUnits(center);
 	int element = mMap.mapElement(center.x(), center.y());
 
-	// TODO: Extract to method
-	for (auto ghost : mGhosts) {
-		auto& vulnerabilityComponent = mManager.getComponent<VulnerabilityComponent>(ghost);
-		auto& velocityComponent = mManager.getComponent<VelocityComponent>(ghost);
-		float defaultSpeed = static_cast<float>(mMap.unitPixels(GameConstants::CHARACTER_UNITS_SPEED));
-		if (!vulnerabilityComponent.isVulnerable() && velocityComponent.currentSpeed() != defaultSpeed) {
-			velocityComponent.setCurrentSpeed(defaultSpeed);
-		}
-	}
+	resetGhostVulnerabilitySpeed();
 
 	if (element == MapLayoutElements::POWERUP) {
 		int mapLayoutIndex = mMap.mapLocation(center, false);
@@ -65,9 +58,27 @@ void PowerupMonitoringSystem::turnGhostsVulnerable() const {
 		auto& vulnerabilityComponent = mManager.getComponent<VulnerabilityComponent>(ghost);
 		auto& velocityComponent = mManager.getComponent<VelocityComponent>(ghost);
 		auto& deathComponent = mManager.getComponent<DeathComponent>(ghost);
+		auto& speedChangedComponent = mManager.getComponent<SpeedChangeWatcherComponent>(ghost);
 		if (!deathComponent.isDead()) {
 			vulnerabilityComponent.makeTemporarilyVulnerable(GameConstants::GHOST_VULNERABILITY_DURATION);
 			velocityComponent.setCurrentSpeed(velocityComponent.halfSpeed());
+			speedChangedComponent.setSpeedChanged(true);
+		}
+	}
+}
+
+void PowerupMonitoringSystem::resetGhostVulnerabilitySpeed() const {
+	for (auto ghost : mGhosts) {
+		auto& vulnerabilityComponent = mManager.getComponent<VulnerabilityComponent>(ghost);
+		auto& velocityComponent = mManager.getComponent<VelocityComponent>(ghost);
+		auto& speedChangedComponent = mManager.getComponent<SpeedChangeWatcherComponent>(ghost);
+		auto& deathComponent = mManager.getComponent<DeathComponent>(ghost);
+		float defaultSpeed = static_cast<float>(mMap.unitPixels(GameConstants::CHARACTER_UNITS_SPEED));
+		if (!vulnerabilityComponent.isVulnerable() 
+				&& velocityComponent.currentSpeed() != defaultSpeed
+				&& !deathComponent.isDead()) {
+			velocityComponent.setCurrentSpeed(defaultSpeed);
+			speedChangedComponent.setSpeedChanged(true);
 		}
 	}
 }

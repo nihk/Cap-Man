@@ -100,7 +100,7 @@ void WallHuggingSystem::getNeighbourElementsByDirection(Directions::Direction di
 		case Directions::UP: {
 			Point bottomLeft = rect.bottomLeft();
 			Point bottomRight = rect.bottomRight();
-			bottomLeft.setX(bottomLeft.x() + buffer);
+			//bottomLeft.setX(bottomLeft.x() + buffer);
 			bottomLeft.setY(bottomLeft.y() - buffer);
 			bottomRight.setX(bottomRight.x() - buffer);
 			bottomRight.setY(bottomRight.y() - buffer);
@@ -112,9 +112,9 @@ void WallHuggingSystem::getNeighbourElementsByDirection(Directions::Direction di
 		case Directions::RIGHT: {
 			Point topLeft = rect.topLeft();
 			Point bottomLeft = rect.bottomLeft();
-			topLeft.setX(topLeft.x() + buffer);
-			topLeft.setY(topLeft.y() + buffer);
-			bottomLeft.setX(bottomLeft.x() + buffer);
+			//topLeft.setX(topLeft.x() + buffer);
+			//topLeft.setY(topLeft.y() + buffer);
+			//bottomLeft.setX(bottomLeft.x() + buffer);
 			bottomLeft.setY(bottomLeft.y() - buffer);
 
 			neighbourElement1 = mMap.neighbourElement(topLeft, true, direction);
@@ -125,9 +125,9 @@ void WallHuggingSystem::getNeighbourElementsByDirection(Directions::Direction di
 			Point topRight = rect.topRight();
 			Point topLeft = rect.topLeft();
 			topRight.setX(topRight.x() - buffer);
-			topRight.setY(topRight.y() + buffer);
-			topLeft.setX(topLeft.x() + buffer);
-			topLeft.setY(topLeft.y() + buffer);
+			//topRight.setY(topRight.y() + buffer);
+			//topLeft.setX(topLeft.x() + buffer);
+			//topLeft.setY(topLeft.y() + buffer);
 
 			neighbourElement1 = mMap.neighbourElement(topRight, true, direction);
 			neighbourElement2 = mMap.neighbourElement(topLeft, true, direction);

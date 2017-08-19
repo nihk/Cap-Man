@@ -46,6 +46,7 @@ void GhostDeathRetreatSystem::updateEntity(float delta, int entity) {
 		deathComponent.setDead(false);
 		vulnerabilityComponent.reset();
 		velocityComponent.setCurrentSpeed(velocityComponent.defaultSpeed());
+		pathGoalComponent.removeGoal();
 	}
 
 	if (!pathGoalComponent.hasGoal() || pathGoalComponent.goal() != home) {

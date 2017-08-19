@@ -20,6 +20,7 @@ public:
 	bool initialize(std::string fileName);
 
 	int mapElement(int x, int y) const;
+	int mapElement(const Point& point) const;
 	Point startLocation(StartLocation startLocation) const;
 	int mapLocation(Point location, bool scaleUnitsToPixels) const;
 	Point mapLocation(int layoutIndex, bool scaleUnitsToPixels) const;

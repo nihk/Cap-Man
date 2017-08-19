@@ -136,6 +136,10 @@ int Map::mapElement(int x, int y) const {
 	return mLayout.at(index);
 }
 
+int Map::mapElement(const Point& point) const {
+	return mapElement(point.x(), point.y());
+}
+
 Point Map::startLocation(StartLocation startLocation) const {
 	// TODO
 	return Point();

@@ -152,6 +152,8 @@
     <ClCompile Include="BreadcrumbTrailComponent.cpp" />
     <ClCompile Include="BreadcrumbTrailSystem.cpp" />
     <ClCompile Include="CapManAttackedSystem.cpp" />
+    <ClCompile Include="CollidableComponent.cpp" />
+    <ClCompile Include="CollisionSystem.cpp" />
     <ClCompile Include="Color.cpp" />
     <ClCompile Include="ColorGraphicsComponent.cpp" />
     <ClCompile Include="DeathComponent.cpp" />
@@ -173,6 +175,8 @@
     <ClCompile Include="ResetComponent.cpp" />
     <ClCompile Include="ResetSystem.cpp" />
     <ClCompile Include="RetreatUponDeathComponent.cpp" />
+    <ClCompile Include="SpeedChangedSystem.cpp" />
+    <ClCompile Include="SpeedChangeWatcherComponent.cpp" />
     <ClCompile Include="SystemControllerComponent.cpp" />
     <ClCompile Include="NodeWithCost.cpp" />
     <ClCompile Include="PathfindingSystem.cpp" />
@@ -227,6 +231,8 @@
     <ClInclude Include="BreadcrumbTrailSystem.h" />
     <ClInclude Include="CapManAttackedSystem.h" />
     <ClInclude Include="catch.hpp" />
+    <ClInclude Include="CollidableComponent.h" />
+    <ClInclude Include="CollisionSystem.h" />
     <ClInclude Include="Color.h" />
     <ClInclude Include="ColorGraphicsComponent.h" />
     <ClInclude Include="Component.h" />
@@ -250,6 +256,8 @@
     <ClInclude Include="ResetComponent.h" />
     <ClInclude Include="ResetSystem.h" />
     <ClInclude Include="RetreatUponDeathComponent.h" />
+    <ClInclude Include="SpeedChangedSystem.h" />
+    <ClInclude Include="SpeedChangeWatcherComponent.h" />
     <ClInclude Include="SystemControllerComponent.h" />
     <ClInclude Include="NodeWithCost.h" />
     <ClInclude Include="PathfindingSystem.h" />

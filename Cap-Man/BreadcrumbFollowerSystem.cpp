@@ -9,6 +9,7 @@
 #include "VelocityComponent.h"
 #include "AStarComponent.h"
 #include "PathGoalComponent.h"
+#include "DeathComponent.h"
 
 BreadcrumbFollowerSystem::BreadcrumbFollowerSystem(Manager& manager, Map& map) 
 		: System(manager)
@@ -20,6 +21,7 @@ BreadcrumbFollowerSystem::BreadcrumbFollowerSystem(Manager& manager, Map& map)
 	insertRequiredComponent(VelocityComponent::ID);
 	insertRequiredComponent(AStarComponent::ID);
 	insertRequiredComponent(PathGoalComponent::ID);
+	insertRequiredComponent(DeathComponent::ID);
 }
 
 BreadcrumbFollowerSystem::~BreadcrumbFollowerSystem() {
@@ -33,6 +35,7 @@ void BreadcrumbFollowerSystem::updateEntity(float delta, int entity) {
 	VelocityComponent& velocityComponent = mManager.getComponent<VelocityComponent>(entity);
 	AStarComponent& aStarComponent = mManager.getComponent<AStarComponent>(entity);
 	PathGoalComponent& pathGoalComponent = mManager.getComponent<PathGoalComponent>(entity);
+	DeathComponent& deathComponent = mManager.getComponent<DeathComponent>(entity);
 
 	vulnerabilityComponent.update(delta);
 
@@ -55,7 +58,7 @@ void BreadcrumbFollowerSystem::updateEntity(float delta, int entity) {
 	// pseudo random direction that could be the breadcrumb trail, so it would then
 	// just revert back to the last breadcrumb over and over.
 	if (trailComponent.hasBreadcrumb(center)
-			&& vulnerabilityComponent.isVulnerable()
+			&& (vulnerabilityComponent.isVulnerable() || deathComponent.isDead())
 			&& pathGoalComponent.hasGoal()) {
 		Point goal = pathGoalComponent.goal();
 		if (aStarComponent.hasPath()) {

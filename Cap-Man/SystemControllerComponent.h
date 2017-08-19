@@ -1,6 +1,5 @@
 #pragma once
 #include "Component.h"
-#include <typeindex>
 #include <vector>
 
 // TODO: Will I need to ever return other combinations of types?
