@@ -9,6 +9,7 @@
 #include "VelocityComponent.h"
 #include "DeathComponent.h"
 #include "SpeedChangeWatcherComponent.h"
+#include "PointsComboComponent.h"
 
 PowerupMonitoringSystem::PowerupMonitoringSystem(Manager& manager, Map& map, 
 			std::unordered_map<int, int>& powerups, std::unordered_set<int>& consumedEntities, std::unordered_set<int>& ghosts)
@@ -19,6 +20,7 @@ PowerupMonitoringSystem::PowerupMonitoringSystem(Manager& manager, Map& map,
 		, mGhosts(ghosts) {
 	insertRequiredComponent(PowerupCollectorComponent::ID);
 	insertRequiredComponent(PhysicsComponent::ID);
+	insertRequiredComponent(PointsComboComponent::ID);
 }
 
 PowerupMonitoringSystem::~PowerupMonitoringSystem() {
@@ -27,19 +29,28 @@ PowerupMonitoringSystem::~PowerupMonitoringSystem() {
 void PowerupMonitoringSystem::updateEntity(float delta, int entity) {
 	PhysicsComponent& physicsComponent = mManager.getComponent<PhysicsComponent>(entity);
 	PowerupCollectorComponent& powerupCollectorComponent = mManager.getComponent<PowerupCollectorComponent>(entity);
+	PointsComboComponent& pointsComboComponent = mManager.getComponent<PointsComboComponent>(entity);
 
 	Rect rect = physicsComponent.rect();
 	Point center = rect.center();
 	mMap.scalePixelsToUnits(center);
 	int element = mMap.mapElement(center.x(), center.y());
 
-	resetGhostVulnerabilitySpeed();
+	bool didReset = resetGhostVulnerabilitySpeed();
+
+	if (didReset) {
+		// Reset the combo if the vulnerability timer ran out
+		pointsComboComponent.resetCombo();
+	}
 
 	if (element == MapLayoutElements::POWERUP) {
 		int mapLayoutIndex = mMap.mapLocation(center, false);
 		int powerupEntity = mPowerups.at(mapLayoutIndex);
 		auto& physicsComponentStore = mManager.getComponentStore<PhysicsComponent>();
 		auto& graphicsComponentStore = mManager.getComponentStore<GraphicsComponent>();
+
+		// Reset the combo if a new powerup was eaten
+		pointsComboComponent.resetCombo();
 
 		bool isConsumedPowerup = mConsumedEntities.find(powerupEntity) != mConsumedEntities.end();
 
@@ -67,7 +78,9 @@ void PowerupMonitoringSystem::turnGhostsVulnerable() const {
 	}
 }
 
-void PowerupMonitoringSystem::resetGhostVulnerabilitySpeed() const {
+bool PowerupMonitoringSystem::resetGhostVulnerabilitySpeed() const {
+	bool didReset = false;
+
 	for (auto ghost : mGhosts) {
 		auto& vulnerabilityComponent = mManager.getComponent<VulnerabilityComponent>(ghost);
 		auto& velocityComponent = mManager.getComponent<VelocityComponent>(ghost);
@@ -79,6 +92,9 @@ void PowerupMonitoringSystem::resetGhostVulnerabilitySpeed() const {
 				&& !deathComponent.isDead()) {
 			velocityComponent.setCurrentSpeed(defaultSpeed);
 			speedChangedComponent.setSpeedChanged(true);
+			didReset = true;
 		}
 	}
+
+	return didReset;
 }

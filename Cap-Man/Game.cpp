@@ -56,6 +56,7 @@
 #include "CapManDeathAnimationSystem.h"
 #include "TemporaryExistenceComponent.h"
 #include "TemporaryExistenceSystem.h"
+#include "PointsComboComponent.h"
 
 const int Game::STATE_NORMAL = 1;
 const int Game::STATE_RESET_ALL = 1 << 1;
@@ -170,6 +171,7 @@ bool Game::load() {
 	mManager.createComponentStore<CollidableComponent>();
 	mManager.createComponentStore<SpeedChangeWatcherComponent>();
 	mManager.createComponentStore<TemporaryExistenceComponent>();
+	mManager.createComponentStore<PointsComboComponent>();
 
 	// NB: The systems are updated in the order they are added here!
 	mManager.addSystem(std::make_shared<PauseSystem>(mManager));

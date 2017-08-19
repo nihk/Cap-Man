@@ -11,5 +11,6 @@ public:
 
 private:
 	int& mPauseEntity;
+	int mEatenMultiplier;
 };
 

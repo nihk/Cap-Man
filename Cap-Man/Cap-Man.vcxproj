@@ -171,6 +171,7 @@
     <ClCompile Include="GraphicsComponent.cpp" />
     <ClCompile Include="IdleAnimationSystem.cpp" />
     <ClCompile Include="LifeCollisionComponent.cpp" />
+    <ClCompile Include="PointsComboComponent.cpp" />
     <ClCompile Include="PowerupCollectorComponent.cpp" />
     <ClCompile Include="PowerupMonitoringSystem.cpp" />
     <ClCompile Include="PseudoRandomDirectionSystem.cpp" />
@@ -255,6 +256,7 @@
     <ClInclude Include="GhostEatenSystem.h" />
     <ClInclude Include="IdleAnimationSystem.h" />
     <ClInclude Include="LifeCollisionComponent.h" />
+    <ClInclude Include="PointsComboComponent.h" />
     <ClInclude Include="PowerupCollectorComponent.h" />
     <ClInclude Include="PowerupMonitoringSystem.h" />
     <ClInclude Include="PseudoRandomDirectionSystem.h" />

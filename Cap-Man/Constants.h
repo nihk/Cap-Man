@@ -100,4 +100,8 @@ namespace AnimationStates {
 	static const AnimationState STATIONARY_RIGHT = 1 << 12;
 	static const AnimationState STATIONARY_DOWN = 1 << 13;
 	static const AnimationState STATIONARY_UP = 1 << 14;
+	static const AnimationState EATEN_200 = 1 << 15;
+	static const AnimationState EATEN_400 = 1 << 16;
+	static const AnimationState EATEN_800 = 1 << 17;
+	static const AnimationState EATEN_1600 = 1 << 18;
 }

@@ -29,6 +29,7 @@
 #include "CollidableComponent.h"
 #include "SpeedChangeWatcherComponent.h"
 #include "TemporaryExistenceComponent.h"
+#include "PointsComboComponent.h"
 
 // TODO: Move metadata to XML so this method is less bloated?
 bool Game::createEntities() {
@@ -192,6 +193,7 @@ bool Game::createEntities() {
 		mManager.addComponent(mCapMan, ResetComponent(startPoint, Game::STATE_RESET_ALL | Game::STATE_RESET_CHARACTERS, startDirection));
 		mManager.addComponent(mCapMan, DeathComponent());
 		mManager.addComponent(mCapMan, CollidableComponent());
+		mManager.addComponent(mCapMan, PointsComboComponent());
 		mManager.registerEntity(mCapMan);
 	}
 
@@ -233,6 +235,19 @@ bool Game::createEntities() {
 			Animation stationaryDown;
 			stationaryDown.addSprite(std::move(mSpriteRepository.findSprite(ghostName + "_down1")));
 			ghostAnimations.insert_or_assign(AnimationStates::STATIONARY_DOWN, stationaryDown);
+
+			Animation eatenFor200Points;
+			eatenFor200Points.addSprite(std::move(mSpriteRepository.findSprite("text_points_200")));
+			ghostAnimations.insert_or_assign(AnimationStates::EATEN_200, eatenFor200Points);
+			Animation eatenFor400Points;
+			eatenFor400Points.addSprite(std::move(mSpriteRepository.findSprite("text_points_400")));
+			ghostAnimations.insert_or_assign(AnimationStates::EATEN_400, eatenFor400Points);
+			Animation eatenFor800Points;
+			eatenFor800Points.addSprite(std::move(mSpriteRepository.findSprite("text_points_800")));
+			ghostAnimations.insert_or_assign(AnimationStates::EATEN_800, eatenFor800Points);
+			Animation eatenFor1600Points;
+			eatenFor1600Points.addSprite(std::move(mSpriteRepository.findSprite("text_points_1600")));
+			ghostAnimations.insert_or_assign(AnimationStates::EATEN_1600, eatenFor1600Points);
 
 			Animation deathLeft;
 			deathLeft.addSprite(std::move(mSpriteRepository.findSprite("ghost_death_left")));

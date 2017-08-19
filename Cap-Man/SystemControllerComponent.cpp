@@ -11,7 +11,6 @@
 #include "PseudoRandomDirectionSystem.h"
 #include "ResetSystem.h"
 #include "VulnerableAnimationSystem.h"
-#include "GhostDeathAnimationSystem.h"
 #include "CapManAttackedSystem.h"
 #include "GhostEatenSystem.h"
 #include "PowerupMonitoringSystem.h"
@@ -27,7 +26,6 @@ SystemControllerComponent::SystemControllerComponent() {
 		typeid(PowerupMonitoringSystem).name(),
 		typeid(DirectionAnimationSystem).name(),
 		typeid(VulnerableAnimationSystem).name(),
-		typeid(GhostDeathAnimationSystem).name(),
 		typeid(SpeedSystem).name(),
 		typeid(TeleportSystem).name(),
 		typeid(WallHuggingSystem).name(),

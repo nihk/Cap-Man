@@ -9,7 +9,7 @@
 #include "VelocityComponent.h"
 #include "DeathComponent.h"
 #include "BreadcrumbTrailComponent.h"
-#include "GraphicsComponent.h"
+#include "PointsComboComponent.h"
 
 ResetSystem::ResetSystem(Manager& manager, int& state, std::unordered_set<int>& consumedEntities)
 		: System(manager)
@@ -71,7 +71,7 @@ size_t ResetSystem::updateEntities(float delta) {
 		auto& velocityStore = mManager.getComponentStore<VelocityComponent>();
 		auto& deathStore = mManager.getComponentStore<DeathComponent>();
 		auto& breadCrumbTrailStore = mManager.getComponentStore<BreadcrumbTrailComponent>();
-		auto& graphicsStore = mManager.getComponentStore<GraphicsComponent>();
+		auto& pointsComboStore = mManager.getComponentStore<PointsComboComponent>();
 		for (auto& pair : resetStore.getStore()) {
 			int entity = pair.first;
 			auto& physicsComponent = physicsStore.getComponent(entity);
@@ -111,6 +111,10 @@ size_t ResetSystem::updateEntities(float delta) {
 				if (breadCrumbTrailStore.hasComponent(entity)) {
 					auto& bread = breadCrumbTrailStore.getComponent(entity);
 					bread.reset();
+				}
+				if (pointsComboStore.hasComponent(entity)) {
+					auto& combo = pointsComboStore.getComponent(entity);
+					combo.resetCombo();
 				}
 
 				++numUpdatedEntities;
