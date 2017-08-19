@@ -9,6 +9,7 @@
 #include "VelocityComponent.h"
 #include "DeathComponent.h"
 #include "BreadcrumbTrailComponent.h"
+#include "GraphicsComponent.h"
 
 ResetSystem::ResetSystem(Manager& manager, int& state, std::unordered_set<int>& consumedEntities)
 		: System(manager)
@@ -70,6 +71,7 @@ size_t ResetSystem::updateEntities(float delta) {
 		auto& velocityStore = mManager.getComponentStore<VelocityComponent>();
 		auto& deathStore = mManager.getComponentStore<DeathComponent>();
 		auto& breadCrumbTrailStore = mManager.getComponentStore<BreadcrumbTrailComponent>();
+		auto& graphicsStore = mManager.getComponentStore<GraphicsComponent>();
 		for (auto& pair : resetStore.getStore()) {
 			int entity = pair.first;
 			auto& physicsComponent = physicsStore.getComponent(entity);

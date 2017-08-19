@@ -60,6 +60,8 @@ namespace GameConstants {
 	static const float GHOST_EXPIRING_ANIMATION_TIME = 3.0f * 1000.0f;  // ms
 	static const float GHOST_EATEN_PAUSE_DURATION = 650.0f;  // ms
 	static const float CAPMAN_DEATH_ANIMATION_FULL_DURATION = 10 * CAPMAN_DEATH_ANIMATION_INTERVAL;  // 11 - 1 frames
+	static const float GAME_INTRO_DURATION = 2 * 1000.0f;  // ms
+	static const float GHOST_EATEN_SCORE_MARKER_DURATION = 2 * 1000.0f;  // ms
 	static const int EAT_GHOST_POINTS = 200;
 	static const int EAT_PELLET_POINTS = 10;
 }

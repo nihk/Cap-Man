@@ -54,6 +54,8 @@
 #include "SpeedChangeWatcherComponent.h"
 #include "SpeedChangedSystem.h"
 #include "CapManDeathAnimationSystem.h"
+#include "TemporaryExistenceComponent.h"
+#include "TemporaryExistenceSystem.h"
 
 const int Game::STATE_NORMAL = 1;
 const int Game::STATE_RESET_ALL = 1 << 1;
@@ -167,6 +169,7 @@ bool Game::load() {
 	mManager.createComponentStore<RetreatUponDeathComponent>();
 	mManager.createComponentStore<CollidableComponent>();
 	mManager.createComponentStore<SpeedChangeWatcherComponent>();
+	mManager.createComponentStore<TemporaryExistenceComponent>();
 
 	// NB: The systems are updated in the order they are added here!
 	mManager.addSystem(std::make_shared<PauseSystem>(mManager));
@@ -192,6 +195,7 @@ bool Game::load() {
 	mManager.addSystem(std::make_shared<VulnerableAnimationSystem>(mManager));
 	mManager.addSystem(std::make_shared<GhostDeathAnimationSystem>(mManager));
 	mManager.addSystem(std::make_shared<CapManDeathAnimationSystem>(mManager));
+	mManager.addSystem(std::make_shared<TemporaryExistenceSystem>(mManager));
 	mManager.addSystem(std::make_shared<DrawSystem>(mManager, mRenderer));
 
 	if (!createEntities()) {

@@ -25,5 +25,7 @@ void DrawSystem::updateEntity(float delta, int entity) {
 	PhysicsComponent& physicsComponent = mManager.getComponent<PhysicsComponent>(entity);
 	GraphicsComponent& graphicsComponent = mManager.getComponent<GraphicsComponent>(entity);
 
-	graphicsComponent.draw(mRenderer, physicsComponent.rect());
+	if (graphicsComponent.shouldDraw()) {
+		graphicsComponent.draw(mRenderer, physicsComponent.rect());
+	}
 }

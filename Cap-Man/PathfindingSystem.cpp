@@ -38,12 +38,6 @@ void PathfindingSystem::updateEntity(float delta, int entity) {
 
 	Point nextStep = aStarComponent.peekCurrentPathStep();
 
-	// TODO: Resolve this workaround for a bug. Ghosts won't follow thru teleporters with this uncommented
-	//if (!nextStep.isAdjacentToOrOn(current)) {
-	//	aStarComponent.purgePath();
-	//	aStarComponent.findPath(current, goal);
-	//}
-
 	if (current == nextStep) {
 		aStarComponent.popNextPathStep();
 

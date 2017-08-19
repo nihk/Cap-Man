@@ -28,6 +28,7 @@
 #include "RetreatUponDeathComponent.h"
 #include "CollidableComponent.h"
 #include "SpeedChangeWatcherComponent.h"
+#include "TemporaryExistenceComponent.h"
 
 // TODO: Move metadata to XML so this method is less bloated?
 bool Game::createEntities() {
@@ -404,11 +405,33 @@ bool Game::createEntities() {
 	// Pause entity
 	{
 		mPauseEntity = mManager.createEntity();
-		// TODO: Match this duration up with the intro music + a small delay
-		float gameIntroDurationMillis = 1.0f * 1000.0f;
-		mManager.addComponent(mPauseEntity, PauseComponent(true, gameIntroDurationMillis));
+		mManager.addComponent(mPauseEntity, PauseComponent(true, GameConstants::GAME_INTRO_DURATION));
 		mManager.addComponent(mPauseEntity, SystemControllerComponent());
 		mManager.registerEntity(mPauseEntity);
+	}
+
+	// "READY!" entity
+	{
+		int ready = mManager.createEntity();
+
+		Sprite readySprite = std::move(mSpriteRepository.findSprite("text_ready"));
+		int padding = mMap.singleUnitPixels() / 4;
+		int marginLeft = 9 * mMap.singleUnitPixels();
+		int marginTop = 12 * mMap.singleUnitPixels() + padding;
+		int w = readySprite.width() * mMap.scaleMultiplier();
+		int h = readySprite.height() * mMap.scaleMultiplier();
+		Rect rect = Rect(marginLeft, marginTop, w, h);
+
+		std::unordered_map<int, Animation> readyAnimations;
+		Animation readyAnimation;
+		readyAnimation.addSprite(std::move(readySprite));
+		readyAnimations.insert_or_assign(AnimationStates::DEFAULT, std::move(readyAnimation));
+
+		mManager.addComponent(ready, PhysicsComponent(rect));
+		mManager.addComponent(ready, AnimationGraphicsComponent(std::move(readyAnimations), AnimationStates::DEFAULT));
+		mManager.addComponent(ready, IdleAnimationComponent());
+		mManager.addComponent(ready, TemporaryExistenceComponent(GameConstants::GAME_INTRO_DURATION));
+		mManager.registerEntity(ready);
 	}
 
 	return true;
