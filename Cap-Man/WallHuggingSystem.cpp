@@ -91,9 +91,11 @@ bool WallHuggingSystem::isElementWallOrInvalid(int element) {
  * left and bottom right points will touch either 1 or 2 tiles. The neighbourElement1 and neighbourElement2 
  * params here represent what element is in those tiles that the entity's physicscomponent's "feet" are touching.
  */
-// TODO: Consider the case where movement speed alternates between 2 and 4 units per second
 void WallHuggingSystem::getNeighbourElementsByDirection(Directions::Direction direction, const Rect& rect, int& neighbourElement1, int& neighbourElement2) const {
+	
+	// A buffer so that wallhugging is facilitated. This permits different unit speeds causing different pixel movements
 	int buffer = 1;
+
 	switch (direction) {
 		case Directions::UP: {
 			Point bottomLeft = rect.bottomLeft();

@@ -36,8 +36,8 @@ void PowerupMonitoringSystem::updateEntity(float delta, int entity) {
 		auto& vulnerabilityComponent = mManager.getComponent<VulnerabilityComponent>(ghost);
 		auto& velocityComponent = mManager.getComponent<VelocityComponent>(ghost);
 		float defaultSpeed = static_cast<float>(mMap.unitPixels(GameConstants::CHARACTER_UNITS_SPEED));
-		if (!vulnerabilityComponent.isVulnerable() && velocityComponent.speed() != defaultSpeed) {
-			velocityComponent.setSpeed(defaultSpeed);
+		if (!vulnerabilityComponent.isVulnerable() && velocityComponent.currentSpeed() != defaultSpeed) {
+			velocityComponent.setCurrentSpeed(defaultSpeed);
 		}
 	}
 
@@ -64,6 +64,6 @@ void PowerupMonitoringSystem::turnGhostsVulnerable() const {
 		auto& vulnerabilityComponent = mManager.getComponent<VulnerabilityComponent>(ghost);
 		auto& velocityComponent = mManager.getComponent<VelocityComponent>(ghost);
 		vulnerabilityComponent.makeTemporarilyVulnerable(GameConstants::GHOST_VULNERABILITY_DURATION);
-		velocityComponent.setSpeed(velocityComponent.halfSpeed());
+		velocityComponent.setCurrentSpeed(velocityComponent.halfSpeed());
 	}
 }

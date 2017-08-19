@@ -92,7 +92,7 @@ size_t ResetSystem::updateEntities(float delta) {
 				}
 				if (velocityStore.hasComponent(entity)) {
 					auto& velComponent = velocityStore.getComponent(entity);
-					velComponent.setSpeed(velComponent.halfSpeed() * 2.0f);
+					velComponent.setCurrentSpeed(velComponent.defaultSpeed());
 				}
 
 				++numUpdatedEntities;

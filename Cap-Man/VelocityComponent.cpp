@@ -7,7 +7,9 @@ VelocityComponent::VelocityComponent(float vx, float vy, float speed)
 VelocityComponent::VelocityComponent(Velocity velocity, float speed)
 	: mVelocity(velocity)
 	, mSpeed(speed)
-	, mHalfSpeed(speed * 0.5f) {
+	, mCurrentSpeed(speed)
+	, mHalfSpeed(speed * 0.5f)
+	, mDoubleSpeed(speed * 2.0f) {
 }
 
 VelocityComponent::~VelocityComponent() {
@@ -18,11 +20,11 @@ void VelocityComponent::setVelocityFromDirection(Directions::Direction direction
 	float vy = 0.0f;
 
 	switch (direction) {
-		case Directions::UP:		vy -= mSpeed;	break;
-		case Directions::DOWN:		vy += mSpeed;	break;
-		case Directions::LEFT:		vx -= mSpeed;	break;
-		case Directions::RIGHT:		vx += mSpeed;	break;
-		default:					/* nothing */	break;
+		case Directions::UP:		vy -= mCurrentSpeed;	break;
+		case Directions::DOWN:		vy += mCurrentSpeed;	break;
+		case Directions::LEFT:		vx -= mCurrentSpeed;	break;
+		case Directions::RIGHT:		vx += mCurrentSpeed;	break;
+		default:					/* do nothing */		break;
 	}
 
 	setVelocity(vx, vy);
