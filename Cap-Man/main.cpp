@@ -7,17 +7,17 @@
 #include "Constants.h"
 
 int main(int argc, char** argv) {
-	if (Testing::IS_UNIT_TESTING) {
-		int result = Catch::Session().run(argc, argv);
-		return (result < 0xff ? result : 0xff);
-	} else {
-		srand(static_cast<unsigned>(time(nullptr)));
-		Game game;
+    if (Testing::IS_UNIT_TESTING) {
+        int result = Catch::Session().run(argc, argv);
+        return (result < 0xff ? result : 0xff);
+    } else {
+        srand(static_cast<unsigned>(time(nullptr)));
+        Game game;
 
-		if (!game.run()) {
-			std::cerr << "Error: Game failed to run" << std::endl;
-			return 1;
-		}
-		return 0;
-	}
+        if (!game.run()) {
+            std::cerr << "Error: Game failed to run" << std::endl;
+            return 1;
+        }
+        return 0;
+    }
 }

@@ -1,11 +1,11 @@
 #include "GraphicsComponent.h"
 
 GraphicsComponent::GraphicsComponent() 
-	: GraphicsComponent(true) {
+    : GraphicsComponent(true) {
 }
 
 GraphicsComponent::GraphicsComponent(bool shouldDraw)
-	: mShouldDraw(shouldDraw) {
+    : mShouldDraw(shouldDraw) {
 }
 
 GraphicsComponent::~GraphicsComponent() {

@@ -3,14 +3,14 @@
 #include "Map.h"
 
 class GhostDeathRetreatSystem 
-	: public System {
+    : public System {
 public:
-	GhostDeathRetreatSystem(Manager& manager, Map& map);
-	~GhostDeathRetreatSystem();
+    GhostDeathRetreatSystem(Manager& manager, Map& map);
+    ~GhostDeathRetreatSystem();
 
-	void updateEntity(float delta, int entity) override;
+    void updateEntity(float delta, int entity) override;
 
 private:
-	Map& mMap;
+    Map& mMap;
 };
 

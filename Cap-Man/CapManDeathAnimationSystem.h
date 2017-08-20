@@ -2,11 +2,11 @@
 #include "System.h"
 
 class CapManDeathAnimationSystem 
-	: public System {
+    : public System {
 public:
-	CapManDeathAnimationSystem(Manager& manager);
-	~CapManDeathAnimationSystem();
+    CapManDeathAnimationSystem(Manager& manager);
+    ~CapManDeathAnimationSystem();
 
-	void updateEntity(float delta, int entity) override;
+    void updateEntity(float delta, int entity) override;
 };
 

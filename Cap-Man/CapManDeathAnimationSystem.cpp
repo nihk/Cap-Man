@@ -6,29 +6,29 @@
 #include "AnimationGraphicsComponent.h"
 
 CapManDeathAnimationSystem::CapManDeathAnimationSystem(Manager& manager) 
-		: System(manager) {
-	insertRequiredComponent(DeathComponent::ID);
-	insertRequiredComponent(AnimationGraphicsComponent::ID);
-	// Hack: I just added this required component so that only Cap-man will be updated within this system
-	insertRequiredComponent(WinConditionComponent::ID);
+        : System(manager) {
+    insertRequiredComponent(DeathComponent::ID);
+    insertRequiredComponent(AnimationGraphicsComponent::ID);
+    // Hack: I just added this required component so that only Cap-man will be updated within this system
+    insertRequiredComponent(WinConditionComponent::ID);
 }
 
 CapManDeathAnimationSystem::~CapManDeathAnimationSystem() {
 }
 
 void CapManDeathAnimationSystem::updateEntity(float delta, int entity) {
-	DeathComponent& deathComponent = mManager.getComponent<DeathComponent>(entity);
-	AnimationGraphicsComponent& graphicsComponent = mManager.getComponent<AnimationGraphicsComponent>(entity);
+    DeathComponent& deathComponent = mManager.getComponent<DeathComponent>(entity);
+    AnimationGraphicsComponent& graphicsComponent = mManager.getComponent<AnimationGraphicsComponent>(entity);
 
-	if (!deathComponent.isDead()) {
-		return;
-	}
+    if (!deathComponent.isDead()) {
+        return;
+    }
 
-	AnimationStates::AnimationState animationState = graphicsComponent.state();
+    AnimationStates::AnimationState animationState = graphicsComponent.state();
 
-	if (animationState != AnimationStates::DEATH) {
-		graphicsComponent.resetAccumulatedTime(AnimationStates::DEATH);
-	}
+    if (animationState != AnimationStates::DEATH) {
+        graphicsComponent.resetAccumulatedTime(AnimationStates::DEATH);
+    }
 
-	graphicsComponent.update(delta, AnimationStates::DEATH);
+    graphicsComponent.update(delta, AnimationStates::DEATH);
 }

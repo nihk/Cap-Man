@@ -4,16 +4,16 @@
 #include "Color.h"
 
 class ColorGraphicsComponent
-	: public GraphicsComponent {
+    : public GraphicsComponent {
 public:
-	ColorGraphicsComponent(Color color);
-	~ColorGraphicsComponent();
+    ColorGraphicsComponent(Color color);
+    ~ColorGraphicsComponent();
 
-	Color color() const { return mColor; }
-	void setColor(Color color) { mColor = color; }
-	void draw(const Renderer& renderer, const Rect& dest) override;
+    Color color() const { return mColor; }
+    void setColor(Color color) { mColor = color; }
+    void draw(const Renderer& renderer, const Rect& dest) override;
 
 private:
-	Color mColor;
+    Color mColor;
 };
 

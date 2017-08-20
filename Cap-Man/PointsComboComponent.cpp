@@ -5,12 +5,12 @@ const int PointsComboComponent::MAX_MULTIPLIER = 8;  // i.e. 8 * 200 = 1600, the
 const int PointsComboComponent::MIN_MULTIPLIER = 1;
 
 PointsComboComponent::PointsComboComponent()
-	: mCurrentCombo(MIN_MULTIPLIER) {
+    : mCurrentCombo(MIN_MULTIPLIER) {
 }
 
 PointsComboComponent::~PointsComboComponent() {
 }
 
 void PointsComboComponent::addCombo() {
-	mCurrentCombo = std::min(MAX_MULTIPLIER, mCurrentCombo * 2);
+    mCurrentCombo = std::min(MAX_MULTIPLIER, mCurrentCombo * 2);
 }

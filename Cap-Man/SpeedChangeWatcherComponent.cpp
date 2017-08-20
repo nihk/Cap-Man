@@ -1,7 +1,7 @@
 #include "SpeedChangeWatcherComponent.h"
 
 SpeedChangeWatcherComponent::SpeedChangeWatcherComponent() 
-	: mSpeedChanged(false) {
+    : mSpeedChanged(false) {
 }
 
 SpeedChangeWatcherComponent::~SpeedChangeWatcherComponent() {

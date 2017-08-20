@@ -2,21 +2,21 @@
 #include "Component.h"
 
 class PauseComponent 
-	: public Component<PauseComponent> {
+    : public Component<PauseComponent> {
 public:
-	PauseComponent();
-	PauseComponent(bool initialPauseState, float initialPauseDurationMillis);
-	~PauseComponent();
+    PauseComponent();
+    PauseComponent(bool initialPauseState, float initialPauseDurationMillis);
+    ~PauseComponent();
 
-	bool shouldPause() const;
-	void pause(float pauseDuration);
-	void update(float delta);
+    bool shouldPause() const;
+    void pause(float pauseDuration);
+    void update(float delta);
 
 private:
-	void reset();
+    void reset();
 
-	bool mShouldPause;
-	float mPauseDurationMillis;
-	float mAccumulatedPauseTimeMillis;
+    bool mShouldPause;
+    float mPauseDurationMillis;
+    float mAccumulatedPauseTimeMillis;
 };
 

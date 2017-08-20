@@ -2,11 +2,11 @@
 #include "System.h"
 
 class VulnerableAnimationSystem 
-	: public System {
+    : public System {
 public:
-	VulnerableAnimationSystem(Manager& manager);
-	~VulnerableAnimationSystem();
+    VulnerableAnimationSystem(Manager& manager);
+    ~VulnerableAnimationSystem();
 
-	void updateEntity(float delta, int entity) override;
+    void updateEntity(float delta, int entity) override;
 };
 

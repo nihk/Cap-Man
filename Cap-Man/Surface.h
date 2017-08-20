@@ -6,20 +6,20 @@
 class Color;
 
 class Surface 
-	: Wrapper<SDL_Surface> {
+    : Wrapper<SDL_Surface> {
 public:
-	Surface();
-	~Surface();
+    Surface();
+    ~Surface();
 
-	bool initialize(const std::string& filePath);
-	void setColorKey(const Color& color) const;
-	int width() const;
-	int height() const;
+    bool initialize(const std::string& filePath);
+    void setColorKey(const Color& color) const;
+    int width() const;
+    int height() const;
 
-	const SDL_Surface* data() const override { return mSdlSurface; }
-	SDL_Surface* mutableData() override { return mSdlSurface; }
+    const SDL_Surface* data() const override { return mSdlSurface; }
+    SDL_Surface* mutableData() override { return mSdlSurface; }
 
 private:
-	SDL_Surface* mSdlSurface;
+    SDL_Surface* mSdlSurface;
 };
 

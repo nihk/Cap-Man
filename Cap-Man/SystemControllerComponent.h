@@ -4,14 +4,14 @@
 
 // TODO: Will I need to ever return other combinations of types?
 class SystemControllerComponent 
-	: public Component<SystemControllerComponent> {
+    : public Component<SystemControllerComponent> {
 public:
-	SystemControllerComponent();
-	~SystemControllerComponent();
+    SystemControllerComponent();
+    ~SystemControllerComponent();
 
-	const std::vector<std::string>& systemTypes() const { return mSystemTypes; }
+    const std::vector<std::string>& systemTypes() const { return mSystemTypes; }
 
 private:
-	std::vector<std::string> mSystemTypes;
+    std::vector<std::string> mSystemTypes;
 };
 

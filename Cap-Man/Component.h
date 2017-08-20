@@ -3,7 +3,7 @@
 
 class ComponentBase {
 public:
-	virtual ~ComponentBase() = default;
+    virtual ~ComponentBase() = default;
 };
 
 // CRTP to ensure that immediate derived classes of ComponentBase will have their own 
@@ -14,9 +14,9 @@ public:
 // https://en.wikipedia.org/wiki/Curiously_recurring_template_pattern
 template<class Derived>
 class Component
-	: public ComponentBase {
+    : public ComponentBase {
 public:
-	static const int ID;
+    static const int ID;
 };
 
 template<class Derived>

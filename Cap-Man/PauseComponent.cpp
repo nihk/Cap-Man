@@ -1,40 +1,40 @@
 #include "PauseComponent.h"
 
 PauseComponent::PauseComponent() 
-	: PauseComponent(false, 0.0f) {
+    : PauseComponent(false, 0.0f) {
 }
 
 PauseComponent::PauseComponent(bool initialPauseState, float initialPauseDuration)
-	: mShouldPause(initialPauseState)
-	, mPauseDurationMillis(initialPauseDuration)
-	, mAccumulatedPauseTimeMillis(0.0f) {
+    : mShouldPause(initialPauseState)
+    , mPauseDurationMillis(initialPauseDuration)
+    , mAccumulatedPauseTimeMillis(0.0f) {
 }
 
 PauseComponent::~PauseComponent() {
 }
 
 bool PauseComponent::shouldPause() const {
-	return mShouldPause && mAccumulatedPauseTimeMillis < mPauseDurationMillis;
+    return mShouldPause && mAccumulatedPauseTimeMillis < mPauseDurationMillis;
 }
 
 void PauseComponent::pause(float pauseDuration) {
-	mShouldPause = true;
-	mPauseDurationMillis = pauseDuration;
-	mAccumulatedPauseTimeMillis = 0.0f;
+    mShouldPause = true;
+    mPauseDurationMillis = pauseDuration;
+    mAccumulatedPauseTimeMillis = 0.0f;
 }
 
 void PauseComponent::update(float delta) {
-	if (mShouldPause) {
-		mAccumulatedPauseTimeMillis += delta * 1000;
+    if (mShouldPause) {
+        mAccumulatedPauseTimeMillis += delta * 1000;
 
-		if (mAccumulatedPauseTimeMillis >= mPauseDurationMillis) {
-			reset();
-		}
-	}
+        if (mAccumulatedPauseTimeMillis >= mPauseDurationMillis) {
+            reset();
+        }
+    }
 }
 
 void PauseComponent::reset() {
-	mShouldPause = false;
-	mAccumulatedPauseTimeMillis = 0.0f;
-	mPauseDurationMillis = 0.0f;
+    mShouldPause = false;
+    mAccumulatedPauseTimeMillis = 0.0f;
+    mPauseDurationMillis = 0.0f;
 }

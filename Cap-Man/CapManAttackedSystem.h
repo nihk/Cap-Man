@@ -4,17 +4,17 @@
 #include <unordered_set>
 
 class CapManAttackedSystem 
-	: public System {
+    : public System {
 public:
-	CapManAttackedSystem(Manager& manager, int& state, std::vector<int>& lifeEntities, std::unordered_set<int>& consumedEntities, int& pauseEntity);
-	~CapManAttackedSystem();
+    CapManAttackedSystem(Manager& manager, int& state, std::vector<int>& lifeEntities, std::unordered_set<int>& consumedEntities, int& pauseEntity);
+    ~CapManAttackedSystem();
 
-	void updateEntity(float delta, int entity) override;
+    void updateEntity(float delta, int entity) override;
 
 private:
-	int& mGameState;
-	std::vector<int>& mLifeEntities;
-	std::unordered_set<int>& mConsumedEntities;
-	int& mPauseEntity;
+    int& mGameState;
+    std::vector<int>& mLifeEntities;
+    std::unordered_set<int>& mConsumedEntities;
+    int& mPauseEntity;
 };
 

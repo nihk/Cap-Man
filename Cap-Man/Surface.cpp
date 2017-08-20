@@ -3,26 +3,26 @@
 #include "Color.h"
 
 Surface::Surface()
-	: mSdlSurface(nullptr) {
+    : mSdlSurface(nullptr) {
 }
 
 Surface::~Surface() {
-	SDL_FreeSurface(mSdlSurface);
+    SDL_FreeSurface(mSdlSurface);
 }
 
 bool Surface::initialize(const std::string& filePath) {
-	mSdlSurface = IMG_Load(filePath.data());
-	return mSdlSurface != nullptr;
+    mSdlSurface = IMG_Load(filePath.data());
+    return mSdlSurface != nullptr;
 }
 
 void Surface::setColorKey(const Color& color) const {
-	SDL_SetColorKey(mSdlSurface, SDL_TRUE, SDL_MapRGB(mSdlSurface->format, color.r(), color.g(), color.b()));
+    SDL_SetColorKey(mSdlSurface, SDL_TRUE, SDL_MapRGB(mSdlSurface->format, color.r(), color.g(), color.b()));
 }
 
 int Surface::width() const {
-	return mSdlSurface->w;
+    return mSdlSurface->w;
 }
 
 int Surface::height() const {
-	return mSdlSurface->h;
+    return mSdlSurface->h;
 }

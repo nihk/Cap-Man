@@ -1,11 +1,11 @@
 #include "IdleAnimationComponent.h"
 
 IdleAnimationComponent::IdleAnimationComponent() 
-	: IdleAnimationComponent(0) {
+    : IdleAnimationComponent(0) {
 }
 
 IdleAnimationComponent::IdleAnimationComponent(int state)
-	: mState(state) {
+    : mState(state) {
 }
 
 IdleAnimationComponent::~IdleAnimationComponent() {

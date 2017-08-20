@@ -7,23 +7,23 @@ class Rect;
 class Renderer;
 
 class Animation 
-	: public Drawable {
+    : public Drawable {
 public:
-	Animation();
-	Animation(int spriteIntervalMillis);
-	~Animation();
+    Animation();
+    Animation(int spriteIntervalMillis);
+    ~Animation();
 
-	void addSprite(Sprite sprite) { mSprites.push_back(sprite); }
+    void addSprite(Sprite sprite) { mSprites.push_back(sprite); }
 
-	void reset();
-	void update(float delta);
-	void draw(const Renderer& renderer, const Rect& dest) override;
+    void reset();
+    void update(float delta);
+    void draw(const Renderer& renderer, const Rect& dest) override;
 
 private:
-	// Ideally this should be some factor of the delta update millis
-	unsigned mSpriteIntervalMillis;
-	float mTimeSpentBetweenSpriteChange;
-	unsigned mCurrentSpriteIndex;
-	std::vector<Sprite> mSprites;
+    // Ideally this should be some factor of the delta update millis
+    unsigned mSpriteIntervalMillis;
+    float mTimeSpentBetweenSpriteChange;
+    unsigned mCurrentSpriteIndex;
+    std::vector<Sprite> mSprites;
 };
 

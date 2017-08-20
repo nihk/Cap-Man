@@ -1,11 +1,11 @@
 #include "DeathComponent.h"
 
 DeathComponent::DeathComponent()
-	: DeathComponent(false) {
+    : DeathComponent(false) {
 }
 
 DeathComponent::DeathComponent(bool isDead)
-	: mIsDead(isDead) {
+    : mIsDead(isDead) {
 }
 
 DeathComponent::~DeathComponent() {

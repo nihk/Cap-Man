@@ -11,153 +11,153 @@ BreadcrumbTrailComponent::~BreadcrumbTrailComponent() {
 }
 
 void BreadcrumbTrailComponent::addBreadcrumb(Point point) {
-	// No current breadcrumbs or already sitting on the highest scoring breadcrumb, 
-	// so return
-	if (!mBreadcrumbs.empty() && mBreadcrumbs.back() == point) {
-		return;
-	}
+    // No current breadcrumbs or already sitting on the highest scoring breadcrumb, 
+    // so return
+    if (!mBreadcrumbs.empty() && mBreadcrumbs.back() == point) {
+        return;
+    }
 
-	// Otherwise if the trailblazer revisited an old point, e.g. walking in a circle 
-	// under 15 points in length. So remove it, enabling it to be inserted again as 
-	// the highest scoring Point
-	if (hasBreadcrumb(point)) {
-		removeBreadcrumb(point);
-	}
+    // Otherwise if the trailblazer revisited an old point, e.g. walking in a circle 
+    // under 15 points in length. So remove it, enabling it to be inserted again as 
+    // the highest scoring Point
+    if (hasBreadcrumb(point)) {
+        removeBreadcrumb(point);
+    }
 
-	mBreadcrumbs.emplace_back(point);
+    mBreadcrumbs.emplace_back(point);
 
-	if (mBreadcrumbs.size() == MAX_SCORE) {
-		mBreadcrumbs.pop_front();
-	}
+    if (mBreadcrumbs.size() == MAX_SCORE) {
+        mBreadcrumbs.pop_front();
+    }
 }
 
 int BreadcrumbTrailComponent::breadcrumbScore(const Point& point) const {
-	int score = MIN_SCORE;
+    int score = MIN_SCORE;
 
-	if (!mBreadcrumbs.empty()) {
-		for (const auto& p : mBreadcrumbs) {
-			if (point == p) {
-				return score;
-			}
-			++score;
-		}
-	}
+    if (!mBreadcrumbs.empty()) {
+        for (const auto& p : mBreadcrumbs) {
+            if (point == p) {
+                return score;
+            }
+            ++score;
+        }
+    }
 
-	return NO_SCORE;
+    return NO_SCORE;
 }
 
 Point BreadcrumbTrailComponent::nextBreadcrumb(const Point& point) const {
-	if (!hasBreadcrumb(point)) {
-		return point;
-	}
+    if (!hasBreadcrumb(point)) {
+        return point;
+    }
 
-	auto it = mBreadcrumbs.begin();
+    auto it = mBreadcrumbs.begin();
 
-	while (it != mBreadcrumbs.end() && *it != point) {
-		// Increment the iterator to the current Point position
-		++it;
-	}
+    while (it != mBreadcrumbs.end() && *it != point) {
+        // Increment the iterator to the current Point position
+        ++it;
+    }
 
-	// If the next element past the given point param was the end, 
-	// there's nowhere else to go but where you are
-	if (it == mBreadcrumbs.end()) {
-		return point;
-	}
+    // If the next element past the given point param was the end, 
+    // there's nowhere else to go but where you are
+    if (it == mBreadcrumbs.end()) {
+        return point;
+    }
 
-	// Increment to the next Point position based on score;
-	++it;
+    // Increment to the next Point position based on score;
+    ++it;
 
-	// One last check...
-	if (it == mBreadcrumbs.end()) {
-		return point;
-	}
+    // One last check...
+    if (it == mBreadcrumbs.end()) {
+        return point;
+    }
 
-	return *it;
+    return *it;
 }
 
 Point BreadcrumbTrailComponent::nextBreadcrumb(int score) const {
-	if (score == MAX_SCORE) {
-		// Can't get a higher score than the last element
-		return mBreadcrumbs.back();
-	}
+    if (score == MAX_SCORE) {
+        // Can't get a higher score than the last element
+        return mBreadcrumbs.back();
+    }
 
-	int counter = 0;
-	auto it = mBreadcrumbs.begin();
+    int counter = 0;
+    auto it = mBreadcrumbs.begin();
 
-	while (counter != score) {
-		// Increment the iterator to the current Point position
-		++it;
-		++counter;
-	}
-	
-	// Increment to the next Point position based on score;
-	++it;
+    while (counter != score) {
+        // Increment the iterator to the current Point position
+        ++it;
+        ++counter;
+    }
+    
+    // Increment to the next Point position based on score;
+    ++it;
 
-	return *it;
+    return *it;
 }
 
 //Point BreadcrumbTrailComponent::previousBreadcrumb(const Point& point) const {
-//	if (!hasBreadcrumb(point)) {
-//		return point;
-//	}
+//  if (!hasBreadcrumb(point)) {
+//      return point;
+//  }
 //
-//	auto rit = mBreadcrumbs.rbegin();
+//  auto rit = mBreadcrumbs.rbegin();
 //
-//	while (rit != mBreadcrumbs.rend() && *rit != point) {
-//		// Increment the iterator to the current Point position
-//		++rit;
-//	}
+//  while (rit != mBreadcrumbs.rend() && *rit != point) {
+//      // Increment the iterator to the current Point position
+//      ++rit;
+//  }
 //
-//	// If the next element past the given point param was the end, 
-//	// there's nowhere else to go but where you are
-//	if (rit == mBreadcrumbs.rend()) {
-//		return point;
-//	}
+//  // If the next element past the given point param was the end, 
+//  // there's nowhere else to go but where you are
+//  if (rit == mBreadcrumbs.rend()) {
+//      return point;
+//  }
 //
-//	// Increment to the next Point position based on score;
-//	++rit;
+//  // Increment to the next Point position based on score;
+//  ++rit;
 //
-//	// One last check...
-//	if (rit == mBreadcrumbs.rend()) {
-//		return point;
-//	}
+//  // One last check...
+//  if (rit == mBreadcrumbs.rend()) {
+//      return point;
+//  }
 //
-//	return *rit;
+//  return *rit;
 //}
 //
 //Point BreadcrumbTrailComponent::previousBreadcrumb(int score) const {
-//	if (score == MIN_SCORE) {
-//		// Can't get a lower score than the first element
-//		return mBreadcrumbs.front();
-//	}
-//	
-//	int counter = MAX_SCORE;
-//	auto rit = mBreadcrumbs.rbegin();
+//  if (score == MIN_SCORE) {
+//      // Can't get a lower score than the first element
+//      return mBreadcrumbs.front();
+//  }
+//  
+//  int counter = MAX_SCORE;
+//  auto rit = mBreadcrumbs.rbegin();
 //
-//	while (counter != score) {
-//		// Increment the iterator to the current Point position
-//		++rit;
-//		--counter;
-//	}
+//  while (counter != score) {
+//      // Increment the iterator to the current Point position
+//      ++rit;
+//      --counter;
+//  }
 //
-//	// Increment to the next Point position based on score;
-//	++rit;
+//  // Increment to the next Point position based on score;
+//  ++rit;
 //
-//	return *rit;
+//  return *rit;
 //}
 
 int BreadcrumbTrailComponent::hasBreadcrumb(const Point& point) const {
-	return breadcrumbScore(point) > NO_SCORE;
+    return breadcrumbScore(point) > NO_SCORE;
 }
 
 void BreadcrumbTrailComponent::removeBreadcrumb(const Point& point) {
-	auto it = mBreadcrumbs.begin();
+    auto it = mBreadcrumbs.begin();
 
-	while (it != mBreadcrumbs.end()) {
-		if (*it == point) {
-			mBreadcrumbs.erase(it);
-			break;
-		}
-		++it;
-	}
+    while (it != mBreadcrumbs.end()) {
+        if (*it == point) {
+            mBreadcrumbs.erase(it);
+            break;
+        }
+        ++it;
+    }
 }

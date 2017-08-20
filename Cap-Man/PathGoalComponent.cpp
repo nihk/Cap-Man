@@ -1,11 +1,11 @@
 #include "PathGoalComponent.h"
 
 PathGoalComponent::PathGoalComponent() 
-	: PathGoalComponent(Point(-1, -1)) {
+    : PathGoalComponent(Point(-1, -1)) {
 }
 
 PathGoalComponent::PathGoalComponent(const Point& initialGoal)
-	: mGoal(initialGoal) {
+    : mGoal(initialGoal) {
 }
 
 PathGoalComponent::~PathGoalComponent() {

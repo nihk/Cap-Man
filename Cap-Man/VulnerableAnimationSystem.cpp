@@ -5,28 +5,28 @@
 #include "Manager.h"
 
 VulnerableAnimationSystem::VulnerableAnimationSystem(Manager& manager) 
-		: System(manager) {
-	insertRequiredComponent(VulnerabilityComponent::ID);
-	insertRequiredComponent(GraphicsComponent::ID);
+        : System(manager) {
+    insertRequiredComponent(VulnerabilityComponent::ID);
+    insertRequiredComponent(GraphicsComponent::ID);
 }
 
 VulnerableAnimationSystem::~VulnerableAnimationSystem() {
 }
 
 void VulnerableAnimationSystem::updateEntity(float delta, int entity) {
-	GraphicsComponent& graphicsComponent = mManager.getComponent<GraphicsComponent>(entity);
-	VulnerabilityComponent& vulnerabilityComponent = mManager.getComponent<VulnerabilityComponent>(entity);
+    GraphicsComponent& graphicsComponent = mManager.getComponent<GraphicsComponent>(entity);
+    VulnerabilityComponent& vulnerabilityComponent = mManager.getComponent<VulnerabilityComponent>(entity);
 
-	if (vulnerabilityComponent.isVulnerable()) {
-		AnimationStates::AnimationState animationState;
+    if (vulnerabilityComponent.isVulnerable()) {
+        AnimationStates::AnimationState animationState;
 
-		if (vulnerabilityComponent.timeRemainingVulnerable() <= GameConstants::GHOST_EXPIRING_ANIMATION_TIME) {
-			animationState = AnimationStates::VULNERABLE_EXPIRING;
-		} else {
-			animationState = AnimationStates::VULNERABLE;
-		}
+        if (vulnerabilityComponent.timeRemainingVulnerable() <= GameConstants::GHOST_EXPIRING_ANIMATION_TIME) {
+            animationState = AnimationStates::VULNERABLE_EXPIRING;
+        } else {
+            animationState = AnimationStates::VULNERABLE;
+        }
 
-		// The graphics component will have already passed a delta update from the DirectionAnimationSystem
-		graphicsComponent.update(delta, animationState);
-	}
+        // The graphics component will have already passed a delta update from the DirectionAnimationSystem
+        graphicsComponent.update(delta, animationState);
+    }
 }

@@ -16,34 +16,34 @@ const bool PauseSystem::PAUSE = false;
 const bool PauseSystem::UNPAUSE = true;
 
 PauseSystem::PauseSystem(Manager& manager) 
-		: System(manager)
-		, mAreSystemsPaused(false) {
-	insertRequiredComponent(PauseComponent::ID);
-	insertRequiredComponent(SystemControllerComponent::ID);
+        : System(manager)
+        , mAreSystemsPaused(false) {
+    insertRequiredComponent(PauseComponent::ID);
+    insertRequiredComponent(SystemControllerComponent::ID);
 }
 
 PauseSystem::~PauseSystem() {
 }
 
 void PauseSystem::updateEntity(float delta, int entity) {
-	PauseComponent& pauseComponent = mManager.getComponent<PauseComponent>(entity);
-	SystemControllerComponent& systemControllerComponent = mManager.getComponent<SystemControllerComponent>(entity);
+    PauseComponent& pauseComponent = mManager.getComponent<PauseComponent>(entity);
+    SystemControllerComponent& systemControllerComponent = mManager.getComponent<SystemControllerComponent>(entity);
 
-	pauseComponent.update(delta);
-	bool shouldPause = pauseComponent.shouldPause();
-	const std::vector<std::string>& typeNames = systemControllerComponent.systemTypes();
+    pauseComponent.update(delta);
+    bool shouldPause = pauseComponent.shouldPause();
+    const std::vector<std::string>& typeNames = systemControllerComponent.systemTypes();
 
-	if (!mAreSystemsPaused && shouldPause) {
-		togglePause(PAUSE, typeNames);
-		setSystemsPaused(true);
-	} else if (mAreSystemsPaused && !shouldPause) {
-		togglePause(UNPAUSE, typeNames);
-		setSystemsPaused(false);
-	}
+    if (!mAreSystemsPaused && shouldPause) {
+        togglePause(PAUSE, typeNames);
+        setSystemsPaused(true);
+    } else if (mAreSystemsPaused && !shouldPause) {
+        togglePause(UNPAUSE, typeNames);
+        setSystemsPaused(false);
+    }
 }
 
 void PauseSystem::togglePause(bool shouldPause, const std::vector<std::string>& typeNames) const {
-	for (const auto& typeName : typeNames) {
-		mManager.toggleSystemUpdatability(typeName, shouldPause);
-	}
+    for (const auto& typeName : typeNames) {
+        mManager.toggleSystemUpdatability(typeName, shouldPause);
+    }
 }

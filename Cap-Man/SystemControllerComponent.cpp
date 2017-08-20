@@ -17,24 +17,24 @@
 #include "SpeedChangedSystem.h"
 
 SystemControllerComponent::SystemControllerComponent() {
-	mSystemTypes = {
-		typeid(BreadcrumbFollowerSystem).name(),
-		typeid(BreadcrumbTrailSystem).name(),
-		typeid(MoveSystem).name(),
-		typeid(PathfindingSystem).name(),
-		typeid(PelletMonitoringSystem).name(),
-		typeid(PowerupMonitoringSystem).name(),
-		typeid(DirectionAnimationSystem).name(),
-		typeid(VulnerableAnimationSystem).name(),
-		typeid(SpeedSystem).name(),
-		typeid(TeleportSystem).name(),
-		typeid(WallHuggingSystem).name(),
-		typeid(PseudoRandomDirectionSystem).name(),
-		typeid(ResetSystem).name(),
-		typeid(CapManAttackedSystem).name(),
-		typeid(GhostEatenSystem).name(),
-		typeid(SpeedChangedSystem).name(),
-	};
+    mSystemTypes = {
+        typeid(BreadcrumbFollowerSystem).name(),
+        typeid(BreadcrumbTrailSystem).name(),
+        typeid(MoveSystem).name(),
+        typeid(PathfindingSystem).name(),
+        typeid(PelletMonitoringSystem).name(),
+        typeid(PowerupMonitoringSystem).name(),
+        typeid(DirectionAnimationSystem).name(),
+        typeid(VulnerableAnimationSystem).name(),
+        typeid(SpeedSystem).name(),
+        typeid(TeleportSystem).name(),
+        typeid(WallHuggingSystem).name(),
+        typeid(PseudoRandomDirectionSystem).name(),
+        typeid(ResetSystem).name(),
+        typeid(CapManAttackedSystem).name(),
+        typeid(GhostEatenSystem).name(),
+        typeid(SpeedChangedSystem).name(),
+    };
 }
 
 SystemControllerComponent::~SystemControllerComponent() {

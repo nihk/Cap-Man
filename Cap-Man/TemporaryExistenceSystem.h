@@ -2,11 +2,11 @@
 #include "System.h"
 
 class TemporaryExistenceSystem 
-	: public System {
+    : public System {
 public:
-	TemporaryExistenceSystem(Manager& manager);
-	~TemporaryExistenceSystem();
+    TemporaryExistenceSystem(Manager& manager);
+    ~TemporaryExistenceSystem();
 
-	void updateEntity(float delta, int entity) override;
+    void updateEntity(float delta, int entity) override;
 };
 

@@ -2,15 +2,15 @@
 #include "Component.h"
 
 class SpeedChangeWatcherComponent 
-	: public Component<SpeedChangeWatcherComponent> {
+    : public Component<SpeedChangeWatcherComponent> {
 public:
-	SpeedChangeWatcherComponent();
-	~SpeedChangeWatcherComponent();
+    SpeedChangeWatcherComponent();
+    ~SpeedChangeWatcherComponent();
 
-	bool speedChanged() const { return mSpeedChanged; }
-	void setSpeedChanged(bool changed) { mSpeedChanged = changed; }
+    bool speedChanged() const { return mSpeedChanged; }
+    void setSpeedChanged(bool changed) { mSpeedChanged = changed; }
 
 private:
-	bool mSpeedChanged;
+    bool mSpeedChanged;
 };
 

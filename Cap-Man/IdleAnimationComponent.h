@@ -3,17 +3,17 @@
 
 // Used on entities that don't have velocities but still animate sprites
 class IdleAnimationComponent
-	: public Component<IdleAnimationComponent> {
+    : public Component<IdleAnimationComponent> {
 public:
-	IdleAnimationComponent();
-	IdleAnimationComponent(int state);
-	~IdleAnimationComponent();
+    IdleAnimationComponent();
+    IdleAnimationComponent(int state);
+    ~IdleAnimationComponent();
 
-	int state() const { return mState; }
-	void setState(int state) { mState = state; }
+    int state() const { return mState; }
+    void setState(int state) { mState = state; }
 
 private:
-	// The state its animation should be in
-	int mState;
+    // The state its animation should be in
+    int mState;
 };
 

@@ -2,9 +2,9 @@
 #include "Component.h"
 
 class CollidableComponent 
-	: public Component<CollidableComponent> {
+    : public Component<CollidableComponent> {
 public:
-	CollidableComponent();
-	~CollidableComponent();
+    CollidableComponent();
+    ~CollidableComponent();
 };
 

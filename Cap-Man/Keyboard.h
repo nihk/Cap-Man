@@ -6,16 +6,16 @@
 // it's mKeys member via an SDL function
 class Keyboard {
 public:
-	Keyboard();
-	~Keyboard();
+    Keyboard();
+    ~Keyboard();
 
-	bool initialize();
-	bool isKeyBeingPressed(Keys::Key key) const;
-	int getRecentKeyDown() const { return mRecentKeyDown; }
-	void setRecentKeyDown(int key) { mRecentKeyDown = key; }
+    bool initialize();
+    bool isKeyBeingPressed(Keys::Key key) const;
+    int getRecentKeyDown() const { return mRecentKeyDown; }
+    void setRecentKeyDown(int key) { mRecentKeyDown = key; }
 
 private:
-	int mRecentKeyDown;
-	const uint8_t* mKeys;
+    int mRecentKeyDown;
+    const uint8_t* mKeys;
 };
 

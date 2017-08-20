@@ -2,11 +2,11 @@
 #include "Map.h"
 
 LastValidDirectionComponent::LastValidDirectionComponent()
-	: LastValidDirectionComponent(Directions::NONE) {
+    : LastValidDirectionComponent(Directions::NONE) {
 }
 
 LastValidDirectionComponent::LastValidDirectionComponent(Directions::Direction initialValidDirection)
-	: mLastKnownValidDirection(initialValidDirection) {
+    : mLastKnownValidDirection(initialValidDirection) {
 }
 
 LastValidDirectionComponent::~LastValidDirectionComponent() {

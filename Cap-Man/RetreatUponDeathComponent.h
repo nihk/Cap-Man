@@ -3,15 +3,15 @@
 #include "Point.h"
 
 class RetreatUponDeathComponent 
-	: public Component<RetreatUponDeathComponent> {
+    : public Component<RetreatUponDeathComponent> {
 public:
-	RetreatUponDeathComponent(Point home);
-	~RetreatUponDeathComponent();
+    RetreatUponDeathComponent(Point home);
+    ~RetreatUponDeathComponent();
 
-	bool isHome(Point& point) const { return point == mHome; }
-	const Point& home() const { return mHome; }
+    bool isHome(Point& point) const { return point == mHome; }
+    const Point& home() const { return mHome; }
 
 private: 
-	Point mHome;  // in units, not pixels
+    Point mHome;  // in units, not pixels
 };
 

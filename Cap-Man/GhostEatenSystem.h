@@ -2,14 +2,14 @@
 #include "System.h"
 
 class GhostEatenSystem 
-	: public System {
+    : public System {
 public:
-	GhostEatenSystem(Manager& manager, int& pauseEntity);
-	~GhostEatenSystem();
+    GhostEatenSystem(Manager& manager, int& pauseEntity);
+    ~GhostEatenSystem();
 
-	void updateEntity(float delta, int entity) override;
+    void updateEntity(float delta, int entity) override;
 
 private:
-	int& mPauseEntity;
+    int& mPauseEntity;
 };
 

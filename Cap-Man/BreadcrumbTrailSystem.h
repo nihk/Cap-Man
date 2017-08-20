@@ -5,14 +5,14 @@
 class Map;
 
 class BreadcrumbTrailSystem 
-	: public System {
+    : public System {
 public:
-	BreadcrumbTrailSystem(Manager& manager, Map& map);
-	~BreadcrumbTrailSystem();
+    BreadcrumbTrailSystem(Manager& manager, Map& map);
+    ~BreadcrumbTrailSystem();
 
-	void updateEntity(float delta, int entity) override;
+    void updateEntity(float delta, int entity) override;
 
 private:
-	Map& mMap;
+    Map& mMap;
 };
 

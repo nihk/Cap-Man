@@ -4,14 +4,14 @@
 class Map;
 
 class PathfindingSystem 
-	: public System {
+    : public System {
 public:
-	PathfindingSystem(Manager& manager, Map& map);
-	~PathfindingSystem();
+    PathfindingSystem(Manager& manager, Map& map);
+    ~PathfindingSystem();
 
-	void updateEntity(float delta, int entity) override;
+    void updateEntity(float delta, int entity) override;
 
 private:
-	Map& mMap;
+    Map& mMap;
 };
 

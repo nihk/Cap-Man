@@ -3,14 +3,14 @@
 #include "Map.h"
 
 class PseudoRandomDirectionSystem
-	: public System {
+    : public System {
 public:
-	PseudoRandomDirectionSystem(Manager& manager, Map& map);
-	~PseudoRandomDirectionSystem();
+    PseudoRandomDirectionSystem(Manager& manager, Map& map);
+    ~PseudoRandomDirectionSystem();
 
-	void updateEntity(float delta, int entity) override;
+    void updateEntity(float delta, int entity) override;
 
 private:
-	Map& mMap;
+    Map& mMap;
 };
 

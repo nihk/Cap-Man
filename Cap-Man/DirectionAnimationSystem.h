@@ -2,11 +2,11 @@
 #include "System.h"
 
 class DirectionAnimationSystem 
-	: public System {
+    : public System {
 public:
-	DirectionAnimationSystem(Manager& manager);
-	~DirectionAnimationSystem();
+    DirectionAnimationSystem(Manager& manager);
+    ~DirectionAnimationSystem();
 
-	void updateEntity(float delta, int entity) override;
+    void updateEntity(float delta, int entity) override;
 };
 

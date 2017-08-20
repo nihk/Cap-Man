@@ -6,19 +6,19 @@
 #include "Drawable.h"
 
 class GraphicsComponent
-	: public Component<GraphicsComponent>
-	, public Drawable {
+    : public Component<GraphicsComponent>
+    , public Drawable {
 public:
-	GraphicsComponent();
-	GraphicsComponent(bool shouldDraw);
-	~GraphicsComponent();
+    GraphicsComponent();
+    GraphicsComponent(bool shouldDraw);
+    ~GraphicsComponent();
 
-	virtual void update(float delta, int state) { /* do nothing */}
-	void draw(const Renderer& renderer, const Rect& dest) override { /* do nothing */ }
-	bool shouldDraw() const { return mShouldDraw; }
-	void setShouldDraw(bool shouldDraw) { mShouldDraw = shouldDraw; }
+    virtual void update(float delta, int state) { /* do nothing */}
+    void draw(const Renderer& renderer, const Rect& dest) override { /* do nothing */ }
+    bool shouldDraw() const { return mShouldDraw; }
+    void setShouldDraw(bool shouldDraw) { mShouldDraw = shouldDraw; }
 
 private:
-	bool mShouldDraw;
+    bool mShouldDraw;
 };
 

@@ -7,14 +7,14 @@
 class Rect;
 
 class TeleportSystem 
-	: public System {
+    : public System {
 public:
-	TeleportSystem(Manager& manager);
-	~TeleportSystem();
+    TeleportSystem(Manager& manager);
+    ~TeleportSystem();
 
-	void updateEntity(float delta, int entity) override;
+    void updateEntity(float delta, int entity) override;
 
 private:
-	static void emerge(::Rect& rect /* out */, const Point& center, const Rect& emergantPortPad, Directions::Direction emergingSide);
+    static void emerge(::Rect& rect /* out */, const Point& center, const Rect& emergantPortPad, Directions::Direction emergingSide);
 };
 

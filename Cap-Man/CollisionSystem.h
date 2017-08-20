@@ -4,14 +4,14 @@
 class Map;
 
 class CollisionSystem 
-	: public System {
+    : public System {
 public:
-	CollisionSystem(Manager& manager, Map& map);
-	~CollisionSystem();
+    CollisionSystem(Manager& manager, Map& map);
+    ~CollisionSystem();
 
-	void updateEntity(float delta, int entity) override;
+    void updateEntity(float delta, int entity) override;
 
 private:
-	Map& mMap;
+    Map& mMap;
 };
 
