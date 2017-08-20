@@ -18,7 +18,11 @@ const std::string Map::ITEM_VALUE_ATTR = "value";
 
 Map::Map()
     : mUnitPixelSize(-1)
+<<<<<<< HEAD
     , mActiveScale(Scale::LARGE)
+=======
+    , mActiveScale(Scale::SMALL)
+>>>>>>> Tabs --> spaces
     , mRows(-1)
     , mColumns(-1) {
 }

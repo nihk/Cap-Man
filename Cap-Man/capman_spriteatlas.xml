@@ -1,98 +1,98 @@
 <sprites>
-	<texture name="background_walls" 		x="336" 	y="0" 	w="336" 	h="368" />
+  <texture name="background_walls"  x="336" 	y="0" 	w="336" 	h="368" />
   
-	<texture name="capman_left1" 		x="0" 	y="0" 	w="16" 	h="16" />
-	<texture name="capman_left2" 		x="20" 	y="0" 	w="16" 	h="16" />
-	<texture name="capman_right1" 		x="0" 	y="20" 	w="16" 	h="16" />
-	<texture name="capman_right2" 		x="20" 	y="20" 	w="16" 	h="16" />
-	<texture name="capman_up1" 			x="0" 	y="40" 	w="16" 	h="16" />
-	<texture name="capman_up2" 			x="20" 	y="40" 	w="16" 	h="16" />
-	<texture name="capman_down1" 		x="0" 	y="60" 	w="16" 	h="16" />
-	<texture name="capman_down2" 		x="20" 	y="60" 	w="16" 	h="16" />
-	<texture name="capman_closed" 		x="40" 	y="0" 	w="16" 	h="16" />
-	
-	<texture name="capman_death1" 	x="0" 	y="240" w="16" 	h="16" />
-	<texture name="capman_death2" 	x="20" 	y="240" w="16" 	h="16" />
-	<texture name="capman_death3" 	x="40" 	y="240" w="16" 	h="16" />
-	<texture name="capman_death4" 	x="60" 	y="240" w="16" 	h="16" />
-	<texture name="capman_death5" 	x="80" 	y="240" w="16" 	h="16" />
-	<texture name="capman_death6" 	x="100"	y="240" w="16" 	h="16" />
-	<texture name="capman_death7" 	x="120"	y="240" w="16" 	h="16" />
-	<texture name="capman_death8" 	x="140" y="240" w="16" 	h="16" />
-	<texture name="capman_death9" 	x="160"	y="240" w="16" 	h="16" />
-	<texture name="capman_death10" 	x="180"	y="240" w="16" 	h="16" />
-	<texture name="capman_death11" 	x="200"	y="240" w="16" 	h="16" />
-	
-	<texture name="capman_life" 	x="80"	y="160" w="16" 	h="16" />
+  <texture name="capman_left1" 		x="0" 	y="0" 	w="16" 	h="16" />
+  <texture name="capman_left2" 		x="20" 	y="0" 	w="16" 	h="16" />
+  <texture name="capman_right1" 	x="0" 	y="20" 	w="16" 	h="16" />
+  <texture name="capman_right2" 	x="20" 	y="20" 	w="16" 	h="16" />
+  <texture name="capman_up1" 			x="0" 	y="40" 	w="16" 	h="16" />
+  <texture name="capman_up2" 			x="20" 	y="40" 	w="16" 	h="16" />
+  <texture name="capman_down1" 		x="0" 	y="60" 	w="16" 	h="16" />
+  <texture name="capman_down2" 		x="20" 	y="60" 	w="16" 	h="16" />
+  <texture name="capman_closed" 	x="40" 	y="0" 	w="16" 	h="16" />
+  
+  <texture name="capman_death1" 	x="0" 	y="240" w="16" 	h="16" />
+  <texture name="capman_death2" 	x="20" 	y="240" w="16" 	h="16" />
+  <texture name="capman_death3" 	x="40" 	y="240" w="16" 	h="16" />
+  <texture name="capman_death4" 	x="60" 	y="240" w="16" 	h="16" />
+  <texture name="capman_death5" 	x="80" 	y="240" w="16" 	h="16" />
+  <texture name="capman_death6" 	x="100"	y="240" w="16" 	h="16" />
+  <texture name="capman_death7" 	x="120"	y="240" w="16" 	h="16" />
+  <texture name="capman_death8" 	x="140" y="240" w="16" 	h="16" />
+  <texture name="capman_death9" 	x="160"	y="240" w="16" 	h="16" />
+  <texture name="capman_death10" 	x="180"	y="240" w="16" 	h="16" />
+  <texture name="capman_death11" 	x="200"	y="240" w="16" 	h="16" />
+  
+  <texture name="capman_life" 	x="80"	y="160" w="16" 	h="16" />
   <texture name="cherry" 	      x="168"	y="160" w="16" 	h="16" />
 
-	<texture name="blinky_up1" 		x="0" 	y="80" 	w="16" 	h="16" />
-	<texture name="blinky_up2" 		x="20" 	y="80" 	w="16" 	h="16" />
-	<texture name="blinky_down1" 	x="40" 	y="80" 	w="16" 	h="16" />
-	<texture name="blinky_down2" 	x="60" 	y="80" 	w="16" 	h="16" />
-	<texture name="blinky_left1" 	x="80" 	y="80" 	w="16" 	h="16" />
-	<texture name="blinky_left2" 	x="100" y="80" 	w="16" 	h="16" />
-	<texture name="blinky_right1" 	x="120" y="80" 	w="16" 	h="16" />
-	<texture name="blinky_right2" 	x="140" y="80" 	w="16" 	h="16" />
+  <texture name="blinky_up1" 		x="0" 	y="80" 	w="16" 	h="16" />
+  <texture name="blinky_up2" 		x="20" 	y="80" 	w="16" 	h="16" />
+  <texture name="blinky_down1" 	x="40" 	y="80" 	w="16" 	h="16" />
+  <texture name="blinky_down2" 	x="60" 	y="80" 	w="16" 	h="16" />
+  <texture name="blinky_left1" 	x="80" 	y="80" 	w="16" 	h="16" />
+  <texture name="blinky_left2" 	x="100" y="80" 	w="16" 	h="16" />
+  <texture name="blinky_right1" x="120" y="80" 	w="16" 	h="16" />
+  <texture name="blinky_right2" x="140" y="80" 	w="16" 	h="16" />
 
-	<texture name="pinky_up1" 		x="0" 	y="100" w="16" 	h="16" />
-	<texture name="pinky_up2" 		x="20" 	y="100" w="16" 	h="16" />
-	<texture name="pinky_down1" 	x="40" 	y="100" w="16" 	h="16" />
-	<texture name="pinky_down2" 	x="60" 	y="100" w="16" 	h="16" />
-	<texture name="pinky_left1" 	x="80" 	y="100" w="16" 	h="16" />
-	<texture name="pinky_left2" 	x="100" y="100" w="16" 	h="16" />
-	<texture name="pinky_right1" 	x="120" y="100" w="16" 	h="16" />
-	<texture name="pinky_right2" 	x="140" y="100" w="16" 	h="16" />
+  <texture name="pinky_up1" 		x="0" 	y="100" w="16" 	h="16" />
+  <texture name="pinky_up2" 		x="20" 	y="100" w="16" 	h="16" />
+  <texture name="pinky_down1" 	x="40" 	y="100" w="16" 	h="16" />
+  <texture name="pinky_down2" 	x="60" 	y="100" w="16" 	h="16" />
+  <texture name="pinky_left1" 	x="80" 	y="100" w="16" 	h="16" />
+  <texture name="pinky_left2" 	x="100" y="100" w="16" 	h="16" />
+  <texture name="pinky_right1" 	x="120" y="100" w="16" 	h="16" />
+  <texture name="pinky_right2" 	x="140" y="100" w="16" 	h="16" />
 
-	<texture name="inky_up1" 		x="0" 	y="120" w="16" 	h="16" />
-	<texture name="inky_up2" 		x="20" 	y="120" w="16" 	h="16" />
-	<texture name="inky_down1" 		x="40" 	y="120" w="16" 	h="16" />
-	<texture name="inky_down2" 		x="60" 	y="120" w="16" 	h="16" />
-	<texture name="inky_left1" 		x="80" 	y="120" w="16" 	h="16" />
-	<texture name="inky_left2" 		x="100" y="120" w="16" 	h="16" />
-	<texture name="inky_right1" 	x="120" y="120" w="16" 	h="16" />
-	<texture name="inky_right2" 	x="140" y="120" w="16" 	h="16" />
+  <texture name="inky_up1" 		  x="0" 	y="120" w="16" 	h="16" />
+  <texture name="inky_up2" 		  x="20" 	y="120" w="16" 	h="16" />
+  <texture name="inky_down1" 		x="40" 	y="120" w="16" 	h="16" />
+  <texture name="inky_down2" 		x="60" 	y="120" w="16" 	h="16" />
+  <texture name="inky_left1" 		x="80" 	y="120" w="16" 	h="16" />
+  <texture name="inky_left2" 		x="100" y="120" w="16" 	h="16" />
+  <texture name="inky_right1" 	x="120" y="120" w="16" 	h="16" />
+  <texture name="inky_right2" 	x="140" y="120" w="16" 	h="16" />
 
-	<texture name="clyde_up1" 		x="0" 	y="140" w="16" 	h="16" />
-	<texture name="clyde_up2" 		x="20" 	y="140" w="16" 	h="16" />
-	<texture name="clyde_down1" 	x="40" 	y="140" w="16" 	h="16" />
-	<texture name="clyde_down2" 	x="60" 	y="140" w="16" 	h="16" />
-	<texture name="clyde_left1" 	x="80" 	y="140" w="16" 	h="16" />
-	<texture name="clyde_left2" 	x="100" y="140" w="16" 	h="16" />
-	<texture name="clyde_right1" 	x="120" y="140" w="16" 	h="16" />
-	<texture name="clyde_right2" 	x="140" y="140" w="16" 	h="16" />
+  <texture name="clyde_up1" 		x="0" 	y="140" w="16" 	h="16" />
+  <texture name="clyde_up2" 		x="20" 	y="140" w="16" 	h="16" />
+  <texture name="clyde_down1" 	x="40" 	y="140" w="16" 	h="16" />
+  <texture name="clyde_down2" 	x="60" 	y="140" w="16" 	h="16" />
+  <texture name="clyde_left1" 	x="80" 	y="140" w="16" 	h="16" />
+  <texture name="clyde_left2" 	x="100" y="140" w="16" 	h="16" />
+  <texture name="clyde_right1" 	x="120" y="140" w="16" 	h="16" />
+  <texture name="clyde_right2" 	x="140" y="140" w="16" 	h="16" />
 
-	<texture name="powerup"	    x="0" 	y="180" w="8" 	h="8" />
+  <texture name="powerup"	    x="0" 	y="180" w="8" 	h="8" />
   <texture name="powerup_off"	x="0" 	y="190" w="8" 	h="8" />
 
-	<texture name="ghost_blue1" 	x="0" 	y="160" w="16" 	h="16" />
-	<texture name="ghost_blue2" 	x="20" 	y="160" w="16" 	h="16" />
-	<texture name="ghost_white1"	x="40" 	y="160" w="16" 	h="16" />
-	<texture name="ghost_white2"	x="60" 	y="160" w="16" 	h="16" />
-	
-	<texture name="ghost_death_up" 		x="0" 	y="200" w="16" 	h="16" />
-	<texture name="ghost_death_down" 	x="20" 	y="200" w="16" 	h="16" />
-	<texture name="ghost_death_left"	x="40" 	y="200" w="16" 	h="16" />
-	<texture name="ghost_death_right"	x="60" 	y="200" w="16" 	h="16" />
+  <texture name="ghost_blue1" 	x="0" 	y="160" w="16" 	h="16" />
+  <texture name="ghost_blue2" 	x="20" 	y="160" w="16" 	h="16" />
+  <texture name="ghost_white1"	x="40" 	y="160" w="16" 	h="16" />
+  <texture name="ghost_white2"	x="60" 	y="160" w="16" 	h="16" />
+  
+  <texture name="ghost_death_up" 		x="0" 	y="200" w="16" 	h="16" />
+  <texture name="ghost_death_down" 	x="20" 	y="200" w="16" 	h="16" />
+  <texture name="ghost_death_left"	x="40" 	y="200" w="16" 	h="16" />
+  <texture name="ghost_death_right"	x="60" 	y="200" w="16" 	h="16" />
 
-	<texture name="text_game_over" x="10" y="190" w="80" h="8" />
+  <texture name="text_game_over" x="10" y="190" w="80" h="8" />
   <texture name="text_ready"     x="200" y="0" w="48" h="8" />
   <texture name="text_1up"       x="212" y="70" w="24" h="8" />
   <texture name="text_1up_off"   x="212" y="60" w="24" h="8" />
-	
-	<texture name="text_0"	x="10" 	y="180" w="8" 	h="8" />
-	<texture name="text_1"	x="20" 	y="180" w="8" 	h="8" />
-	<texture name="text_2"	x="30" 	y="180" w="8" 	h="8" />
-	<texture name="text_3"	x="40" 	y="180" w="8" 	h="8" />
-	<texture name="text_4"	x="50" 	y="180" w="8" 	h="8" />
-	<texture name="text_5"	x="60" 	y="180" w="8" 	h="8" />
-	<texture name="text_6"	x="70" 	y="180" w="8" 	h="8" />
-	<texture name="text_7"	x="80" 	y="180" w="8" 	h="8" />
-	<texture name="text_8"	x="90" 	y="180" w="8" 	h="8" />
-	<texture name="text_9"	x="100" y="180" w="8" 	h="8" />
-	
-	<texture name="text_points_200"		x="0" 	y="220" w="16" 	h="16" />
-	<texture name="text_points_400"		x="20" 	y="220" w="16" 	h="16" />
-	<texture name="text_points_800"		x="40" 	y="220" w="16" 	h="16" />
-	<texture name="text_points_1600"	x="60" 	y="220" w="16" 	h="16" />
+  
+  <texture name="text_0"	x="10" 	y="180" w="8" 	h="8" />
+  <texture name="text_1"	x="20" 	y="180" w="8" 	h="8" />
+  <texture name="text_2"	x="30" 	y="180" w="8" 	h="8" />
+  <texture name="text_3"	x="40" 	y="180" w="8" 	h="8" />
+  <texture name="text_4"	x="50" 	y="180" w="8" 	h="8" />
+  <texture name="text_5"	x="60" 	y="180" w="8" 	h="8" />
+  <texture name="text_6"	x="70" 	y="180" w="8" 	h="8" />
+  <texture name="text_7"	x="80" 	y="180" w="8" 	h="8" />
+  <texture name="text_8"	x="90" 	y="180" w="8" 	h="8" />
+  <texture name="text_9"	x="100" y="180" w="8" 	h="8" />
+  
+  <texture name="text_points_200"		x="0" 	y="220" w="16" 	h="16" />
+  <texture name="text_points_400"		x="20" 	y="220" w="16" 	h="16" />
+  <texture name="text_points_800"		x="40" 	y="220" w="16" 	h="16" />
+  <texture name="text_points_1600"	x="60" 	y="220" w="16" 	h="16" />
 </sprites>
