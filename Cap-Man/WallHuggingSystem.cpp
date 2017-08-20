@@ -137,7 +137,7 @@ void WallHuggingSystem::getNeighbourElementsByDirection(Directions::Direction di
 			Point topRight = rect.topRight();
 			Point bottomRight = rect.bottomRight();
 			topRight.setX(topRight.x() - buffer);
-			topRight.setY(topRight.y() + buffer);
+			//topRight.setY(topRight.y() + buffer);
 			bottomRight.setX(bottomRight.x() - buffer);
 			bottomRight.setY(bottomRight.y() - buffer);
 

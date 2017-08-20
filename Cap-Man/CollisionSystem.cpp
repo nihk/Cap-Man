@@ -46,6 +46,9 @@ void CollisionSystem::updateEntity(float delta, int entity) {
 	mMap.scalePixelsToUnits(bottomLeft);
 	mMap.scalePixelsToUnits(bottomRight);
 
+	// The right and bottom sides of any tile overlap with the left and top sides
+	// of the adjacent tile. This value compensates for that when checking for collisions
+	int tileOverlapCompensation = 1;
 
 	if (mMap.mapElement(topLeft) == MapLayoutElements::WALL) {
 		Point wallElement = topLeft;
@@ -64,7 +67,7 @@ void CollisionSystem::updateEntity(float delta, int entity) {
 		Rect wallTile = Rect(wallElement.x(), wallElement.y(), mMap.singleUnitPixels(), mMap.singleUnitPixels());
 
 		if (center.x() < topRight.x()) {
-			rect.setRight(wallTile.left());
+			rect.setRight(wallTile.left() - tileOverlapCompensation);
 		} else if (topRight.y() < center.y()) {
 			rect.setTop(wallTile.bottom());
 		}
@@ -77,7 +80,7 @@ void CollisionSystem::updateEntity(float delta, int entity) {
 		if (bottomLeft.x() < center.x()) {
 			rect.setLeft(wallTile.right());
 		} else if (center.y() < bottomLeft.y()) {
-			rect.setBottom(wallTile.top());
+			rect.setBottom(wallTile.top() - tileOverlapCompensation);
 		}
 
 	} else if (mMap.mapElement(bottomRight) == MapLayoutElements::WALL) {
@@ -87,9 +90,9 @@ void CollisionSystem::updateEntity(float delta, int entity) {
 		rect.setLeft(wallTile.left());
 
 		if (center.x() < bottomRight.x()) {
-			rect.setRight(wallTile.left());
+			rect.setRight(wallTile.left() - tileOverlapCompensation);
 		} else if (center.y() < bottomRight.y()) {
-			rect.setBottom(wallTile.top());
+			rect.setBottom(wallTile.top() - tileOverlapCompensation);
 		}
 	}
 
