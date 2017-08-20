@@ -61,11 +61,7 @@ void CapManAttackedSystem::updateEntity(float delta, int entity) {
 		auto& enemyDeathComponent = deathStore.getComponent(storeEntity);
 		if (vulnerabilityComponent.isVulnerable() || enemyDeathComponent.isDead()) {
 			// Capman is invulnerable when high on a powerup
-<<<<<<< HEAD
-			continue;;
-=======
 			continue;
->>>>>>> Fix bug with ghosts not being able to attack cap-man after reviving
 		}
 
 		auto& storePhysicsComponent = physicsStore.getComponent(storeEntity);

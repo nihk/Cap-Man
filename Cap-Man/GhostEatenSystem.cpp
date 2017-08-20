@@ -12,8 +12,7 @@
 
 GhostEatenSystem::GhostEatenSystem(Manager& manager, int& pauseEntity) 
 		: System(manager)
-		, mPauseEntity(pauseEntity)
-		, mEatenMultiplier(1) {
+		, mPauseEntity(pauseEntity) {
 	insertRequiredComponent(DeathComponent::ID);
 	insertRequiredComponent(VulnerabilityComponent::ID);
 	insertRequiredComponent(PhysicsComponent::ID);
