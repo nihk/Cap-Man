@@ -9,5 +9,4 @@ Entity-Component-System adopted from: https://github.com/SRombauts/ecs <br />
 Sprites shamelessly stolen from: https://github.com/macek/google_pacman <br />
 <br />
 
-[![Cap-Man](https://github.com/nihk/Cap-Man/blob/master/cap-man.png)](https://youtu.be/oM5D24--X1k "Cap-Man")
-
+![Cap-Man](https://thumbs.gfycat.com/DesertedUnimportantAmericancurl-size_restricted.gif)
