@@ -9,5 +9,5 @@ Sprites shamelessly stolen from: https://github.com/macek/google_pacman <br />
 Click the screenshot for a video! <br />
 <br />
 
-[![Cap-Man](https://github.com/nihk/Cap-Man/blob/master/cap-man.png)](https://youtu.be/oM5D24--X1k")
+[![Cap-Man](https://github.com/nihk/Cap-Man/blob/master/cap-man.png)](https://youtu.be/oM5D24--X1k "Cap-Man")
 
