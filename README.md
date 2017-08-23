@@ -7,4 +7,6 @@ Entity-Component-System adopted from: https://github.com/SRombauts/ecs <br />
 Sprites shamelessly stolen from: https://github.com/macek/google_pacman <br />
 <br />
 
-![Cap-Man](https://github.com/nihk/Cap-Man/blob/master/cap-man.gif)
+![GIF Demo: Cap-Man](https://github.com/nihk/Cap-Man/blob/master/cap-man.gif)
+
+Video demo: https://www.youtube.com/watch?v=oM5D24--X1k
