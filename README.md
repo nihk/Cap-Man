@@ -1,5 +1,5 @@
 # Cap-Man
-A clone of the similarly titled, copyrighted 1980s arcade game <br />
+A school project to build the similarly titled, copyrighted 1980s arcade game <br />
 
 Made with C/C++ <br />
 Libraries used: SDL2, tinyxml2, catch <br />
